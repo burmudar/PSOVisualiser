@@ -8,8 +8,6 @@
 #include <GL/glu.h>
 #include "SDL.h"
 
-#define SCREEN_WIDTH 1024
-#define SCREEN_HEIGHT 768
 #define SCREEN_BPP 16
 #define PARTICLES 10000
 #define TRUE 1
@@ -17,18 +15,31 @@
 
 using namespace std;
 //Global variables
-vector<Particle> pswarm = vector<Particle>(PARTICLES);
-ParticleBest gbest;
+
+GraphicalPSO pso = GraphicalPSO(10000,5,0.41,0.52);
 bool draw = true;
-bool showBest = true;
-bool showPosition = true;
+
 float xrot = 0.0f;
 float yrot = 0.0f;
 float zrot = 0.0f;
-float dist = 5.0f;
-int selectObjectUID = -1;
+float xtrans = 0.0f;
+float ytrans = 0.0f;
+float dist = 40.0f;
+
+const bool FULLSCREEN = FALSE;
+const int SCREEN_WIDTH = 1024;
+const int SCREEN_HEIGHT = 768;
+int shape =1;
+
+GLuint base;
+GLuint texture[1];
+
 SDL_Surface *surface;
-void updateSwarm(vector<Particle> &swarm,ParticleBest &gbest);
+
+GLvoid KillFont()
+{
+	glDeleteLists(base,256);
+}
 
 void Quit(int returnCode)
 {
@@ -54,79 +65,77 @@ void ReSizeGLScene(int width,int height)
 
 }
 
-void keyPressed(SDL_keysym *keysym)
+bool LoadFontTexture()
 {
-	switch(keysym->sym)
+	SDL_Surface *TextureImage[1];
+	bool status = false;
+	TextureImage[0] = SDL_LoadBMP("font/font.bmp");
+	if (TextureImage[0] != NULL)
 	{
-		case SDLK_ESCAPE:
-			Quit(0);
-			break;
-		case SDLK_F1:
-			draw = !draw;	
-			selectObjectUID = -1;
-			break;
-		case SDLK_F2:
-			showBest = !showBest;
-			break;
-		case SDLK_F3:
-			showPosition = !showPosition;
-			break;
-		default:
-			break;
+		status = true;
+		glGenTextures(1,&texture[0]);
+
+		glBindTexture(GL_TEXTURE_2D, texture[0]);
+
+	    glTexImage2D( GL_TEXTURE_2D, 0, 3, TextureImage[0]->w,
+			  TextureImage[0]->h, 0, GL_BGR,
+			  GL_UNSIGNED_BYTE, TextureImage[0]->pixels );
+
+
+		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 	}
-	return;
+	if (TextureImage[0]!=NULL)
+		SDL_FreeSurface(TextureImage[0]);
+	return status;
 }
 
-void initRandomParticle(vector<Particle>& swarm,const unsigned int& population)
+GLvoid BuildFont()
 {
-	boost::mt19937 rng;
-	boost::uniform_real<double> u(-5.14,5.14);
-	boost::variate_generator<boost::mt19937&, boost::uniform_real<double> > gen(rng, u);
-	for(unsigned int i =0; i < population;i++)
+	float cx;
+	float cy;
+
+	base = glGenLists(256);
+
+	glBindTexture(GL_TEXTURE_2D, texture[0]);
+	for(unsigned int i=0; i < 256; i++)
 	{
-		double x = gen();
-		double y = gen();
-		double z = gen();
-		swarm[i] = Particle(Vector3d(x,y,z),i);
+		//We move from bottom right to left, since the BMP data is RAW loaded
+		cx = 1 - (float)(i % 16) / 16.0f;
+		cy = 1 - (float)(i / 16) / 16.0f;
+
+		glNewList(base + (255 - i), GL_COMPILE);
+		/* Use A Quad for each character 1/16 (1 character of 16x16 pixels) = 0.0625 */
+		glBegin(GL_QUADS);
+			//Texture coorid bottom left
+			glTexCoord2d(cx - 0.0625, cy);
+			//Vertex coord bottom left
+			glVertex2i(0,0);
+			//Texture coord bottom right
+			glTexCoord2d(cx,cy);
+			//Vertex coord bottom right
+			glVertex2i(16,0);
+			//Texture coord Top right
+			glTexCoord2d(cx,cy - 0.0625);
+			//Vertex coord Top right
+			glVertex2i(16,16);
+			//Texture coord Top Left
+			glTexCoord2d(cx - 0.0625, cy - 0.0625);
+			//Vertex coord Top left
+			glVertex2i(0,16);
+		glEnd();
+		glTranslatef(10,0,0);
+		glEndList();
 	}
 }
 
-void evaluateSwarm(vector<Particle>& swarm,ParticleBest& cgbest)
-{
-	for(unsigned int i = 0;i < swarm.size();i++)
-	{
-		if(swarm[i].getBestFitness() < cgbest.fitness)
-		{
-			cgbest = swarm[i].getParticleBest();
-		}
-	}
-	cout <<"Current best fitness is : " << cgbest.fitness << endl;
-}
 
-void updateSwarm(vector<Particle> &swarm,ParticleBest &gbest)
-{	
-	double c1 = 0.41;
-	double c2 = 0.52;
-	boost::mt19937 rng;
-	boost::uniform_real<double> u(0.00,1.00);
-	boost::variate_generator<boost::mt19937&, boost::uniform_real<double> > gen(rng, u);	
-	for(unsigned int i =0; i < swarm.size();i++)
-	{
-		swarm[i].velocity = swarm[i].velocity + c1 * gen() * (swarm[i].getBestPosition() - swarm[i].getPosition()) + c2 * (gbest.pos - swarm[i].getPosition());
-		swarm[i].move();
-	}
-	evaluateSwarm(swarm,gbest);
-}
-
-void setupPSO(vector<Particle> &swarm,const int& population,ParticleBest &gbest)
-{
-	initRandomParticle(swarm,population);
-	gbest = swarm[0].getParticleBest();
-	evaluateSwarm(swarm,gbest);
-}
 
 int InitGL()
 {
+	if (!LoadFontTexture()) return -1;
+
+	BuildFont();
 	glClearColor(0.0f,0.0f,0.0f,0.0f);
 
 	glClearDepth(1.0f);
@@ -134,6 +143,7 @@ int InitGL()
 	glDepthFunc(GL_LESS);
 	glEnable(GL_DEPTH_TEST);
 
+    glBlendFunc( GL_SRC_ALPHA, GL_ONE );
 	glShadeModel(GL_SMOOTH);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -146,13 +156,209 @@ int InitGL()
 	return TRUE;
 }
 
-void DrawGLScene(int hitUID)
+void keyPressed(SDL_keysym *keysym)
 {
-	static GLint Frames = 0;
+	double tick = 0.5;
+	switch(keysym->sym)
+	{
+		case SDLK_ESCAPE:
+			Quit(0);
+			break;
+		case SDLK_F1:
+			draw = !draw;	
+			break;
+		case SDLK_F2:
+			pso.draw_best = !pso.draw_best;
+			break;
+		case SDLK_F3:
+			pso.draw_normal = !pso.draw_normal;
+			break;
+		case SDLK_F12:
+			{
+				if (shape == 2) shape = 1;
+				else shape++;
+			}
+			break;
+		case SDLK_a:
+			{
+				xtrans -= tick;
+			}
+			break;
+		case SDLK_d:
+			{
+				xtrans += tick;
+			}
+			break;
+		case SDLK_w:
+			{
+				ytrans += tick;
+			}
+			break;
+		case SDLK_s:
+			{
+				ytrans -= tick;
+			}
+			break;
+		default:
+			break;
+	}
+	return;
+}
+
+
+void HUDMode(bool flag)
+{
+	if (flag)
+	{
+		glMatrixMode(GL_PROJECTION);
+		glPushMatrix();
+		glLoadIdentity();
+		gluOrtho2D(0,SCREEN_WIDTH,0,SCREEN_HEIGHT);
+		glMatrixMode(GL_MODELVIEW);
+		glPushMatrix();
+		glLoadIdentity();
+		glDisable(GL_DEPTH_TEST);
+	}
+	else
+	{
+		glMatrixMode(GL_PROJECTION);
+		glPopMatrix();
+		glMatrixMode(GL_MODELVIEW);
+		glPopMatrix();
+		glEnable(GL_DEPTH_TEST);
+	}
+}
+
+void glPrintHUDInfo(GLint xbound, GLint ybound,int fps, int index)
+{
+	glColor3f(1.0,1.0,1.0);
+	glBindTexture(GL_TEXTURE_2D, texture[0]);
+	glListBase(base -32 + (128 * 0));
+	glTranslated(0,ybound-2-16,0);
+	ostringstream out;
+	string msg;
+	out << "FPS:";
+	msg = out.str();
+	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
+	out.str("");
+	out << fps;
+	msg = out.str();
+	glColor3f(0.0,0.0,1.0);
+	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
+	glLoadIdentity();
+	glTranslated(5*16,ybound-2-16,0);//*16 -> each character is 16 pixels, so multiply the size of hte string with the pixel amount to get the next draw pos
+	out.str("");
+	out << "Particles:";
+	msg = out.str();
+	glColor3f(1.0,1.0,1.0);
+	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
+	out.str("");
+	out << PARTICLES;
+	msg = out.str();
+	glColor3f(0.0,0.0,1.0);
+	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
+	glLoadIdentity();
+	glTranslated(15*16,ybound-2-16,0);//*16 -> each character is 16 pixels, so multiply the size of hte string with the pixel amount to get the next draw pos
+	out.str("");
+	out << "Swarm Best Fitness:";
+	msg = out.str();
+	glColor3f(1.0,1.0,1.0);
+	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
+	out.str("");
+	out << pso.global_best.fitness;
+	msg = out.str();
+	glColor3f(0.0,0.0,1.0);
+	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
+	glLoadIdentity();
+	glTranslated(34*16,ybound-2-(16*1),0);//*16 -> each character is 16 pixels, so multiply the size of hte string with the pixel amount to get the next draw pos
+	out.str("");
+	out << "Show Best(F2):";
+	msg = out.str();
+	glColor3f(1.0,1.0,1.0);
+	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
+	out.str("");
+	if(pso.draw_best == true) out << "Yes";
+	else out << "No";
+	msg = out.str();
+	glColor3f(0.0,0.0,1.0);
+	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
+	out.str("");
+	out << " Show Normal(F3):";
+	msg = out.str();
+	glColor3f(1.0,1.0,1.0);
+	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
+	out.str("");
+	if(pso.draw_normal == true) out << "Yes";
+	else out << "No";
+	msg = out.str();
+	glColor3f(0.0,0.0,1.0);
+	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
+	glLoadIdentity();
+	glTranslated(0*16,ybound-2-(16*2),0);//*16 -> each character is 16 pixels, so multiply the size of hte string with the pixel amount to get the next draw pos
+	out.str("");
+	out << "Selected Particle ID:";
+	msg = out.str();
+	glColor3f(1.0,1.0,1.0);
+	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
+	out.str("");
+	if (index < 0)
+		out << "NONE";
+	else out <<"NOT AVAILABLE" ;
+	msg = out.str();
+	glColor3f(0.0,1.0,0.0);
+	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
+	glLoadIdentity();
+	glTranslated(17*16,ybound-2-(16*2),0);//*16 -> each character is 16 pixels, so multiply the size of hte string with the pixel amount to get the next draw pos
+	out.str("");
+	out << "Best Fitness:";
+	msg = out.str();
+	glColor3f(1.0,1.0,1.0);
+	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
+	out.str("");
+	if (index < 0)
+		out << "NONE";
+	else out << "NOT AVAILABLE";
+	msg = out.str();
+	glColor3f(0.0,1.0,0.0);
+	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
+	glLoadIdentity();
+	glTranslated(33*16,ybound-2-(16*2),0);//*16 -> each character is 16 pixels, so multiply the size of hte string with the pixel amount to get the next draw pos
+	out.str("");
+	out << "Current Fitness:";
+	msg = out.str();
+	glColor3f(1.0,1.0,1.0);
+	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
+	out.str("");
+	if (index < 0)
+		out << "NONE";
+	else out << "NOT AVAILABLE";
+	msg = out.str();
+	glColor3f(0.0,1.0,0.0);
+	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
+	glLoadIdentity();
+	glTranslated(0*16,ybound-2-(16*3),0);
+	out.str("");
+	out.str("STATE:");
+	msg = out.str();
+	glColor3f(1.0,1.0,1.0);
+	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
+	out.str("");
+	if(draw == true) out << "PAUSED (Press <F1> to RUN)";
+	else out << "RUNNING (Press <F1> to PAUSE)";
+	msg = out.str();
+	glColor3f(1.0,1.0,0.0);
+	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
+}
+
+void DrawGLScene()
+{
+	static GLint Frames;
+	static GLint T0;
+	static GLfloat fps;
 	GLint mode;
 	GLfloat sizes[2];
 	GLfloat step;
-	GLfloat curSize;
+	int index = -1;
 
 	glGetIntegerv(GL_RENDER_MODE,&mode);
 	glGetFloatv(GL_POINT_SIZE_RANGE,sizes);
@@ -160,9 +366,10 @@ void DrawGLScene(int hitUID)
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	glDisable(GL_BLEND);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	gluLookAt(0.0,0.0,dist,0.0,0.0,0.0,0.0,1.0,0.0);
+	gluLookAt(xtrans,ytrans,dist,xtrans,ytrans,0.0,0.0,1.0,0.0);
 	glRotatef(xrot,1.0,0.0,0.0);
 	glRotatef(yrot,0.0,1.0,0.0);
 	//Set point size
@@ -170,98 +377,54 @@ void DrawGLScene(int hitUID)
 	//glPointSize(curSize);
 	//Draw minimum point
 	glBegin(GL_QUADS);
-	glColor3f(0.5,0.5,0.5);
-	GLfloat point = 0.015;
-	glVertex3f(-point,point,-0);
-	glVertex3f(point,point,-0);
-	glVertex3f(point,-point,-0);
-	glVertex3f(-point,-point,-0);
+		glColor3f(0.5,0.5,0.5);
+		GLfloat point = 0.005;
+		glVertex3f(-point,point,-0);
+		glVertex3f(point,point,-0);
+		glVertex3f(point,-point,-0);
+		glVertex3f(-point,-point,-0);
 	glEnd();
 	//Draw the particles
-	point = 0.005;
-	for (unsigned int i =0; i < pswarm.size();i++)
+	pso.draw(mode,shape);	
+	//draw HUD
+	if (mode == GL_RENDER)
 	{
-		Vector3d pos;
-		if (mode == GL_SELECT) glLoadName(pswarm[i].getUID());
-		if (showBest  == true)
-		{
-			pos = pswarm[i].getBestPosition();
-			glColor3f(1.0,1.0,1.0);
+		HUDMode(true);
+		glColor3f(0.0,0.0,1.0);
 		glBegin(GL_QUADS);
-			//front face
-			glVertex3f(pos.x-point,pos.y+point,pos.z+point);
-			glVertex3f(pos.x+point,pos.y+point,pos.z+point);
-			glVertex3f(pos.x+point,pos.y-point,pos.z+point);
-			glVertex3f(pos.x-point,pos.y-point,pos.z+point);
-			//backface
-			glVertex3f(pos.x-point,pos.y+point,pos.z-point);
-			glVertex3f(pos.x+point,pos.y+point,pos.z-point);
-			glVertex3f(pos.x+point,pos.y-point,pos.z-point);
-			glVertex3f(pos.x-point,pos.y-point,pos.z-point);
-			//right face
-			glVertex3f(pos.x+point,pos.y+point,pos.z-point);
-			glVertex3f(pos.x+point,pos.y+point,pos.z+point);
-			glVertex3f(pos.x+point,pos.y-point,pos.z+point);
-			glVertex3f(pos.x+point,pos.y-point,pos.z-point);
-			//Left face	
-			glVertex3f(pos.x-point,pos.y+point,pos.z-point);
-			glVertex3f(pos.x-point,pos.y+point,pos.z+point);
-			glVertex3f(pos.x-point,pos.y-point,pos.z+point);
-			glVertex3f(pos.x-point,pos.y-point,pos.z-point);
-			//Top face	
-			glVertex3f(pos.x-point,pos.y+point,pos.z-point);
-			glVertex3f(pos.x-point,pos.y+point,pos.z+point);
-			glVertex3f(pos.x-point,pos.y+point,pos.z+point);
-			glVertex3f(pos.x-point,pos.y+point,pos.z-point);
-			//Bottom face	
-			glVertex3f(pos.x-point,pos.y-point,pos.z-point);
-			glVertex3f(pos.x-point,pos.y-point,pos.z+point);
-			glVertex3f(pos.x-point,pos.y-point,pos.z+point);
-			glVertex3f(pos.x-point,pos.y-point,pos.z-point);
+			glVertex2f(0,SCREEN_HEIGHT*0.10);
+			glVertex2f(SCREEN_WIDTH,SCREEN_HEIGHT*0.10);
+			glVertex2f(SCREEN_WIDTH,0);
+			glVertex2f(0,0);
+		glEnd(); //End of Blue line
+		glColor3f(0,0,0);
+		int boundaryThickness = 4;
+		glBegin(GL_QUADS);
+			glVertex2f(boundaryThickness,SCREEN_HEIGHT*0.10-boundaryThickness);
+			glVertex2f(SCREEN_WIDTH-boundaryThickness,SCREEN_HEIGHT*0.10-boundaryThickness);
+			glVertex2f(SCREEN_WIDTH-boundaryThickness,boundaryThickness);
+			glVertex2f(boundaryThickness,boundaryThickness);
 		glEnd();
-		}
-		if (showPosition == true)
-		{
-			pos = pswarm[i].getPosition();
-			glColor3f(1 - pos.x,1 - pos.y,1 - pos.z);
-			glBegin(GL_QUADS);
-			//front face
-			glVertex3f(pos.x-point,pos.y+point,pos.z+point);
-			glVertex3f(pos.x+point,pos.y+point,pos.z+point);
-			glVertex3f(pos.x+point,pos.y-point,pos.z+point);
-			glVertex3f(pos.x-point,pos.y-point,pos.z+point);
-			//backface
-			glVertex3f(pos.x-point,pos.y+point,pos.z-point);
-			glVertex3f(pos.x+point,pos.y+point,pos.z-point);
-			glVertex3f(pos.x+point,pos.y-point,pos.z-point);
-			glVertex3f(pos.x-point,pos.y-point,pos.z-point);
-			//right face
-			glVertex3f(pos.x+point,pos.y+point,pos.z-point);
-			glVertex3f(pos.x+point,pos.y+point,pos.z+point);
-			glVertex3f(pos.x+point,pos.y-point,pos.z+point);
-			glVertex3f(pos.x+point,pos.y-point,pos.z-point);
-			//Left face	
-			glVertex3f(pos.x-point,pos.y+point,pos.z-point);
-			glVertex3f(pos.x-point,pos.y+point,pos.z+point);
-			glVertex3f(pos.x-point,pos.y-point,pos.z+point);
-			glVertex3f(pos.x-point,pos.y-point,pos.z-point);
-			//Top face	
-			glVertex3f(pos.x-point,pos.y+point,pos.z-point);
-			glVertex3f(pos.x-point,pos.y+point,pos.z+point);
-			glVertex3f(pos.x-point,pos.y+point,pos.z+point);
-			glVertex3f(pos.x-point,pos.y+point,pos.z-point);
-			//Bottom face	
-			glVertex3f(pos.x-point,pos.y-point,pos.z-point);
-			glVertex3f(pos.x-point,pos.y-point,pos.z+point);
-			glVertex3f(pos.x-point,pos.y-point,pos.z+point);
-			glVertex3f(pos.x-point,pos.y-point,pos.z-point);
-			glEnd();
-		}
-		glEnd();
-		if (mode == GL_SELECT) glPopName();
+		glEnable(GL_BLEND);
+		glEnable(GL_TEXTURE_2D);
+		glPrintHUDInfo(SCREEN_WIDTH - boundaryThickness, SCREEN_HEIGHT*0.10 - boundaryThickness,fps,index);
+		glDisable(GL_TEXTURE_2D);
+		glDisable(GL_BLEND);
+		HUDMode(false);
 	}
-	if (mode == GL_RENDER) SDL_GL_SwapBuffers();
-
+	SDL_GL_SwapBuffers();
+    /* Gather our frames per second */
+    Frames++;
+    {
+		GLint t = SDL_GetTicks();
+		if (t - T0 >= 5000)
+			{
+				GLfloat seconds = (t - T0) / 1000.0;
+				fps = Frames / seconds;
+				T0 = t;
+				Frames = 0;
+			}
+    }
 }
 
 int doSelect(const double &x,const double &y)
@@ -281,26 +444,23 @@ int doSelect(const double &x,const double &y)
 		glLoadIdentity();
 
 		glGetIntegerv(GL_VIEWPORT,view);
-		gluPickMatrix(x,y,50.0,50.0,view);//gl (0,0) bottom left, window (0,0) top left, that is why view[3] -y
+		gluPickMatrix(x,view[3] - y,5.0,5.0,view);//gl (0,0) bottom left, window (0,0) top left, that is why view[3] -y
 		gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH /(GLfloat) SCREEN_HEIGHT,0.1f,100.0f);
 
-		DrawGLScene(-1);//-1 indicates ignore special UID rendering
+		DrawGLScene();
 		glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 
     hits = glRenderMode(GL_RENDER);	
 	//get nearest hit
-	GLuint *hitptr = buff;
-	float minz = hitptr[0 * 4 + 1];	
-	int ruid = hitptr[0 * 4];
-	cout << "HITS:" << hits<< endl;
+	float minz = buff[0*4+1];	
+	int ruid = buff[0*4+3];   
 	for(int i = 0; i < hits;i++)
 	{
-		cout << hitptr[0 * 4] << endl;
-		if (hitptr[i * 4 + 1] < minz)
+		if (minz > buff[i*4+1])
 		{
-			minz = hitptr[i * 4 + 1];
-			ruid = hitptr[i * 4];
+			minz = buff[i*4+1];
+			ruid = buff[i*4+3];
 		}
 	}
 	return ruid;
@@ -308,8 +468,9 @@ int doSelect(const double &x,const double &y)
 
 int main(int argc, char** argv)
 {
-	setupPSO(pswarm,PARTICLES,gbest);
+	cout << "Before setupPSO" << endl;
 	int videoFlags;
+	int selectObjectUID = 0;
 	float tick = 0.25;
 	bool done=false;
 	bool calcRotation = false;
@@ -332,8 +493,6 @@ int main(int argc, char** argv)
 	videoFlags = SDL_OPENGL;
 	videoFlags |= SDL_GL_DOUBLEBUFFER;
 	videoFlags |= SDL_HWPALETTE;
-	videoFlags |= SDL_RESIZABLE;
-
 	//Check to see if the surfaces can be stored in memory
 	if(videoInfo->hw_available)
 	{
@@ -348,10 +507,20 @@ int main(int argc, char** argv)
 	{
 		videoFlags |= SDL_HWACCEL;
 	}
+	SDL_WM_SetCaption("William Bezuidenhout Particle Swarm 2009","William PSO 2009");
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
-
-	surface = SDL_SetVideoMode(SCREEN_WIDTH,SCREEN_HEIGHT,SCREEN_BPP,videoFlags);
-
+	if(FULLSCREEN)
+	{
+		//Define a pointer to get the list of supported modes
+		SDL_Rect** modes;
+		//If Modes == (SDL_Rect**)-1 All modes supported | If Modes == (SDL_Rect**)0 No modes supported
+		modes = SDL_ListModes(NULL,SDL_FULLSCREEN | SDL_HWSURFACE);
+		surface = SDL_SetVideoMode(modes[0]->w,modes[0]->h,SCREEN_BPP,videoFlags);
+		//Toggle Fullscreen
+		SDL_WM_ToggleFullScreen(surface);
+		delete modes;
+	}
+	else surface = SDL_SetVideoMode(SCREEN_WIDTH,SCREEN_HEIGHT,SCREEN_BPP,videoFlags);
 	if(InitGL() != TRUE)
 	{
 		cout << "Error initializing OpenGL" << endl;
@@ -372,7 +541,13 @@ int main(int argc, char** argv)
 					break;
 				case SDL_MOUSEBUTTONDOWN:
 					if(event.button.button == SDL_BUTTON_RIGHT)
-						selectObjectUID = doSelect(event.button.x,event.button.y);
+					{
+						int temp = doSelect(event.button.x,event.button.y);
+						if (temp > -1)
+						{
+							selectObjectUID = temp;
+						}
+					}
 					if(event.button.button == SDL_BUTTON_LEFT)
 						calcRotation=true;
 					if(event.button.button == SDL_BUTTON_WHEELUP)
@@ -398,11 +573,12 @@ int main(int argc, char** argv)
 					break;
 			}
 		}
-		DrawGLScene(selectObjectUID);
+		DrawGLScene();
 		if (draw == false)
 		{
-			updateSwarm(pswarm,gbest);	
+			pso.updateSwarmMovement();
 		}
 	}
+	delete surface;
 	return(0);
 }
