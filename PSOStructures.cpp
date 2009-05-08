@@ -259,7 +259,7 @@ void ConsolePSO::initializeSwarm(const int func)
 			break;
 		case 5:
 			{
-				boost::uniform_real<double> u(-6.6,6.6);
+				boost::uniform_real<double> u(-65356,65356);
 				boost::variate_generator<boost::mt19937&, boost::uniform_real<double> > gen(rng, u);
 				double x,y,z;
 				for(unsigned int i =0; i < population;i++)
@@ -282,6 +282,7 @@ void ConsolePSO::evaluateSwarm()
 	{
 		answ = function->evaluate(swarm[i].getPosition());
 		swarm[i].setFitness(answ);
+		swarm[i].setPosition(swarm[i].getPosition().x,swarm[i].getPosition().y,answ);
 		if(global_best.fitness == -1.00) global_best.fitness = answ;
 		if(swarm[i].getBestFitness() < global_best.fitness || global_best.uid == -1)
 		{
@@ -364,14 +365,14 @@ void GraphicalPSO::initializeSwarm(const int &func)
 			break;
 		case 5:
 			{
-				boost::uniform_real<double> u(-6.6,6.6);
+				boost::uniform_real<double> u(-65356,65356);
 				boost::variate_generator<boost::mt19937&, boost::uniform_real<double> > gen(rng, u);
 				double x,y,z;
 				for(unsigned int i =0; i < population;i++)
 				{
 					x = gen();
 					y = gen();
-					z = gen();
+					z = 0;
 					swarm[i] = gfxParticle(Vector3d(x,y,z),i);
 				}
 			}
@@ -392,6 +393,7 @@ void GraphicalPSO::evaluateSwarm()
 			global_best = swarm[i].getParticleBest();
 		}
 	}
+	cout << global_best.pos << endl;
 }
 
 void GraphicalPSO::updateSwarmMovement()

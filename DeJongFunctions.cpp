@@ -32,10 +32,11 @@ DeJongF5::DeJongF5()
 				{
 					a[row][col] = value;
 					value = value + 16;
-					if ((col%5)==0)
+					if (value == 48)
 					{
 						value = -32;
 					}
+					cout << a[row][col] << endl;
 				}
 				break;
 				case 1:
@@ -43,9 +44,10 @@ DeJongF5::DeJongF5()
 					a[row][col] = value;
 					if((((col+1)%5)==0)&&(col  != 0))
 					{
-						value = value - 16;
-						if (value == -48) value = 32;
+						value = value + 16;
+						if (value == 48) value = 32;
 					}
+					cout << a[row][col] << endl;
 				}
 				break;
 			}
@@ -60,19 +62,19 @@ const string DeJongF5::functionDef()
 
 double DeJongF5::evaluate(const Vector3d& pos)
 {
-	double numerator;
-	double total=0;
+	double sumi;
+	double sumj=0;
 	for(unsigned int j = 0; j < 25; j++)
 	{
-		numerator = j;
+		sumi = 0;
 		for(unsigned int i = 0; i < 2; i++)
 		{
-			if (i == 0) numerator += pow(pos.x - a[i][j],6);
-			else numerator += pow(pos.y - a[i][j],6);
+			if (i == 0) sumi += pow(pos.x - a[i][j],6);
+			else sumi += pow(pos.y - a[i][j],6);
 		}
-		total += 1.0/numerator;
+		sumj += 1.0/(j + sumi);
 	}
-	return 1.0/(1.0/500 + total);
+	return 1.0/(1.0/500 + sumj);
 }
 
 DeJong * createFunction(const int& f)
@@ -84,4 +86,5 @@ DeJong * createFunction(const int& f)
 		case 5:
 			return new DeJongF5;
 	}
+	return new DeJongF1;
 }

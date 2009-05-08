@@ -16,7 +16,6 @@
 using namespace std;
 //Global variables
 
-GraphicalPSO pso = GraphicalPSO(10000,5,0.41,0.52);
 bool draw = true;
 
 float xrot = 0.0f;
@@ -26,10 +25,12 @@ float xtrans = 0.0f;
 float ytrans = 0.0f;
 float dist = 40.0f;
 
+const int FUNCTION = 5;
 const bool FULLSCREEN = FALSE;
 const int SCREEN_WIDTH = 1024;
 const int SCREEN_HEIGHT = 768;
 int shape =1;
+GraphicalPSO pso = GraphicalPSO(10000,FUNCTION,0.41,0.52);
 
 GLuint base;
 GLuint texture[1];
@@ -147,8 +148,20 @@ int InitGL()
 	glShadeModel(GL_SMOOTH);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-
-	gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,100.0f);
+	switch(FUNCTION)
+	{
+		case 1:
+			{
+				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,100.0f);
+			}
+			break;
+		case 5:
+			{
+				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,10000.0f);
+				dist = 5000;
+			}
+			break;
+	}
 	
 	glMatrixMode(GL_MODELVIEW);
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
@@ -471,7 +484,8 @@ int main(int argc, char** argv)
 	cout << "Before setupPSO" << endl;
 	int videoFlags;
 	int selectObjectUID = 0;
-	float tick = 0.25;
+	float tick = 0.15;
+	if(FUNCTION ==5) tick = 20;
 	bool done=false;
 	bool calcRotation = false;
 	SDL_Event event;
