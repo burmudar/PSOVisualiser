@@ -65,6 +65,7 @@ public:
 	ConsolePSO(const int &pop,const int &func,const double &c1,const double &c2);
 	~ConsolePSO();
 	void evaluateSwarm();
+	void evaluateParticle(const int &index);
 	void updateSwarmMovement();
 	void print();
 	ParticleBest global_best;
@@ -84,8 +85,10 @@ public:
 	GraphicalPSO(const int &pop,const int &func,const double &c1,const double &c2);
 	~GraphicalPSO();
 	void evaluateSwarm();
+	void evaluateParticle(const int &index);
 	void updateSwarmMovement();
-	const Particle& getSelectedParticle();
+	const gfxParticle& getSelectedParticle();
+	void selectParticle(const int &uid);
 	void draw(int renderMode,int drawShape);
 	bool draw_normal;
 	bool draw_best;

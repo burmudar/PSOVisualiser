@@ -82,17 +82,14 @@ const string Particle::info()
 	return outstr.str(); 
 }
 
-//evaluate gets called in the constructor and both the setPositions because we need to 
-//evaluate our position each time it changes to determine how good our fitness is.
+/*
+	pbest.fitness is initialized to -1 in the contructor, so we just check for the base case
+	when we don't have a base fitness yet as well (Particle was just initialized}
+*/
 void Particle::setFitness(double &fitness)
 {
 	curFitness = fitness;
-	if (pbest.fitness < EPSILON)
-	{
-		pbest.fitness = fitness;
-		pbest.pos = position;
-	}
-	else if (curFitness < pbest.fitness) 
+	if (curFitness < pbest.fitness || pbest.fitness == -1) 
 	{
 		pbest.fitness = fitness;
 		pbest.pos = position;
@@ -219,18 +216,19 @@ ConsolePSO::ConsolePSO()
 	initializeSwarm(1);
 	function = createFunction(1);
 	evaluateSwarm();
+	global_best = swarm[0].getParticleBest();
 }
 
 ConsolePSO::ConsolePSO(const int &pop,const int &func,const double &c1,const double &c2)
 {
 	population = pop;
-	this->c1 = 0.41;
-	this->c2 = 0.52;
+	this->c1 = c1;
+	this->c2 = c2;
 	swarm = vector<Particle>(population);
 	initializeSwarm(func);
 	function = createFunction(func);
-	global_best.fitness = -1.00;
 	evaluateSwarm();
+	global_best = swarm[0].getParticleBest();
 }
 
 ConsolePSO::~ConsolePSO()
@@ -277,17 +275,24 @@ void ConsolePSO::initializeSwarm(const int func)
 
 void ConsolePSO::evaluateSwarm()
 {
-	double answ = 0;
 	for(unsigned int i = 0;i < population;i++)
 	{
-		answ = function->evaluate(swarm[i].getPosition());
-		swarm[i].setFitness(answ);
-		swarm[i].setPosition(swarm[i].getPosition().x,swarm[i].getPosition().y,answ);
-		if(global_best.fitness == -1.00) global_best.fitness = answ;
-		if(swarm[i].getBestFitness() < global_best.fitness || global_best.uid == -1)
-		{
-			global_best = swarm[i].getParticleBest();
-		}
+		evaluateParticle(i);
+	}
+}
+
+/*
+   Evaluate the particle at given index with the current set DeJong Function. Also check
+   if the evaluated particle fitness is beter than the global best fitness
+*/
+void ConsolePSO::evaluateParticle(const int &index)
+{
+	double answ;
+	answ = function->evaluate(swarm[index].getPosition());
+	swarm[index].setFitness(answ);
+	if(swarm[index].getBestFitness() < global_best.fitness || global_best.uid == -1)
+	{
+		global_best = swarm[index].getParticleBest();
 	}
 }
 
@@ -300,8 +305,8 @@ void ConsolePSO::updateSwarmMovement()
 	{
 		swarm[i].velocity = swarm[i].velocity + c1 * gen() * (swarm[i].getBestPosition() - swarm[i].getPosition()) + c2 * (global_best.pos - swarm[i].getPosition());
 		swarm[i].move();
+		evaluateParticle(i);
 	}
-	evaluateSwarm();
 }
 
 void ConsolePSO::print()
@@ -322,21 +327,24 @@ GraphicalPSO::GraphicalPSO()
 	function = createFunction(1);
 	draw_normal = true;
 	draw_best = true;
+	selectedParticleUID = 0;
 	evaluateSwarm();
+	global_best = swarm[0].getParticleBest();
 }
 
 GraphicalPSO::GraphicalPSO(const int &pop,const int &func,const double &c1,const double &c2)
 {
 	population = pop;
-	this->c1 = 0.41;
-	this->c2 = 0.52;
+	this->c1 = c1;
+	this->c2 = c2;
 	swarm = vector<gfxParticle>(population);
 	initializeSwarm(func);
 	function = createFunction(func);
-	global_best.fitness = -1.00;
 	draw_normal = true;
 	draw_best = true;
+	selectedParticleUID = 0;
 	evaluateSwarm();
+	global_best = swarm[0].getParticleBest();
 }
 
 GraphicalPSO::~GraphicalPSO()
@@ -366,6 +374,7 @@ void GraphicalPSO::initializeSwarm(const int &func)
 		case 5:
 			{
 				boost::uniform_real<double> u(-65356,65356);
+				//boost::uniform_real<double> u(-6.6,6.6);
 				boost::variate_generator<boost::mt19937&, boost::uniform_real<double> > gen(rng, u);
 				double x,y,z;
 				for(unsigned int i =0; i < population;i++)
@@ -382,18 +391,25 @@ void GraphicalPSO::initializeSwarm(const int &func)
 
 void GraphicalPSO::evaluateSwarm()
 {
-	double answ = 0;
 	for(unsigned int i = 0;i < population;i++)
 	{
-		answ = function->evaluate(swarm[i].getPosition());
-		swarm[i].setFitness(answ);
-		if(global_best.fitness == -1.00) global_best.fitness = answ;
-		if(swarm[i].getBestFitness() < global_best.fitness)
-		{
-			global_best = swarm[i].getParticleBest();
-		}
+		evaluateParticle(i);	
 	}
-	cout << global_best.pos << endl;
+}
+
+/*
+   Evaluate the particle at given index with the current set DeJong Function. Also check
+   if the evaluated particle fitness is beter than the global best fitness
+*/
+void GraphicalPSO::evaluateParticle(const int &index)
+{
+	double answ;
+	answ = function->evaluate(swarm[index].getPosition());
+	swarm[index].setFitness(answ);
+	if(swarm[index].getBestFitness() < global_best.fitness)
+	{
+		global_best = swarm[index].getParticleBest();
+	}
 }
 
 void GraphicalPSO::updateSwarmMovement()
@@ -405,23 +421,28 @@ void GraphicalPSO::updateSwarmMovement()
 	{
 		swarm[i].velocity = swarm[i].velocity + c1 * gen() * (swarm[i].getBestPosition() - swarm[i].getPosition()) + c2 * (global_best.pos - swarm[i].getPosition());
 		swarm[i].move();
+		evaluateParticle(i);
 	}
-	evaluateSwarm();
 }
 
-const Particle& GraphicalPSO::getSelectedParticle()
+const gfxParticle& GraphicalPSO::getSelectedParticle()
 {
 	if(selectedParticleUID < 0)
 		return swarm[0];
 	return swarm[selectedParticleUID];
 }
 
+void GraphicalPSO::selectParticle(const int &uid)
+{
+	swarm[selectedParticleUID].selected = false;
+	selectedParticleUID = uid;
+	swarm[selectedParticleUID].selected = true;
+}
+
 void GraphicalPSO::draw(const int renderMode,const int drawShape)
 {
 	for (unsigned int i =0; i < population;i++)
 	{
-		if (swarm[i].selected == true)
-			selectedParticleUID = i;
 		if (draw_normal)
 			swarm[i].draw(renderMode,drawShape);
 		if (draw_best)

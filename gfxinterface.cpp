@@ -242,7 +242,7 @@ void HUDMode(bool flag)
 	}
 }
 
-void glPrintHUDInfo(GLint xbound, GLint ybound,int fps, int index)
+void glPrintHUDInfo(GLint xbound, GLint ybound,int fps)
 {
 	glColor3f(1.0,1.0,1.0);
 	glBindTexture(GL_TEXTURE_2D, texture[0]);
@@ -309,14 +309,13 @@ void glPrintHUDInfo(GLint xbound, GLint ybound,int fps, int index)
 	glLoadIdentity();
 	glTranslated(0*16,ybound-2-(16*2),0);//*16 -> each character is 16 pixels, so multiply the size of hte string with the pixel amount to get the next draw pos
 	out.str("");
+	gfxParticle particle = pso.getSelectedParticle();
 	out << "Selected Particle ID:";
 	msg = out.str();
 	glColor3f(1.0,1.0,1.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
 	out.str("");
-	if (index < 0)
-		out << "NONE";
-	else out <<"NOT AVAILABLE" ;
+	out << particle.getUID();
 	msg = out.str();
 	glColor3f(0.0,1.0,0.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
@@ -328,9 +327,7 @@ void glPrintHUDInfo(GLint xbound, GLint ybound,int fps, int index)
 	glColor3f(1.0,1.0,1.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
 	out.str("");
-	if (index < 0)
-		out << "NONE";
-	else out << "NOT AVAILABLE";
+	out << particle.getBestFitness();
 	msg = out.str();
 	glColor3f(0.0,1.0,0.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
@@ -342,9 +339,7 @@ void glPrintHUDInfo(GLint xbound, GLint ybound,int fps, int index)
 	glColor3f(1.0,1.0,1.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
 	out.str("");
-	if (index < 0)
-		out << "NONE";
-	else out << "NOT AVAILABLE";
+	out << particle.getCurrentFitness();
 	msg = out.str();
 	glColor3f(0.0,1.0,0.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
@@ -420,7 +415,7 @@ void DrawGLScene()
 		glEnd();
 		glEnable(GL_BLEND);
 		glEnable(GL_TEXTURE_2D);
-		glPrintHUDInfo(SCREEN_WIDTH - boundaryThickness, SCREEN_HEIGHT*0.10 - boundaryThickness,fps,index);
+		glPrintHUDInfo(SCREEN_WIDTH - boundaryThickness, SCREEN_HEIGHT*0.10 - boundaryThickness,fps);
 		glDisable(GL_TEXTURE_2D);
 		glDisable(GL_BLEND);
 		HUDMode(false);
@@ -458,16 +453,16 @@ int doSelect(const double &x,const double &y)
 
 		glGetIntegerv(GL_VIEWPORT,view);
 		gluPickMatrix(x,view[3] - y,5.0,5.0,view);//gl (0,0) bottom left, window (0,0) top left, that is why view[3] -y
-		gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH /(GLfloat) SCREEN_HEIGHT,0.1f,100.0f);
+		gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH /(GLfloat) SCREEN_HEIGHT,0.1f,10000.0f);
 
 		DrawGLScene();
 		glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
-
     hits = glRenderMode(GL_RENDER);	
 	//get nearest hit
 	float minz = buff[0*4+1];	
 	int ruid = buff[0*4+3];   
+	cout << hits << endl;
 	for(int i = 0; i < hits;i++)
 	{
 		if (minz > buff[i*4+1])
@@ -483,7 +478,6 @@ int main(int argc, char** argv)
 {
 	cout << "Before setupPSO" << endl;
 	int videoFlags;
-	int selectObjectUID = 0;
 	float tick = 0.15;
 	if(FUNCTION ==5) tick = 20;
 	bool done=false;
@@ -559,7 +553,8 @@ int main(int argc, char** argv)
 						int temp = doSelect(event.button.x,event.button.y);
 						if (temp > -1)
 						{
-							selectObjectUID = temp;
+							cout << temp<<endl;
+							pso.selectParticle(temp);
 						}
 					}
 					if(event.button.button == SDL_BUTTON_LEFT)
