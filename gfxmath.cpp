@@ -111,7 +111,7 @@ Vector3d  Vector3d::operator^ (const Vector3d& right) const
 
 ostream& operator<< (ostream& out,const Vector3d& b)
 {
-	return out << "{" << b.x << "," << b.y << "," << b.z << "," << b.w << "}";
+	return out << setprecision(3) << "{" << b.x << "," << b.y << "," << b.z << "," << b.w << "}";
 }
 
 double Vector3d::norm()

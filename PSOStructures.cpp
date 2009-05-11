@@ -374,14 +374,14 @@ void GraphicalPSO::initializeSwarm(const int &func)
 		case 5:
 			{
 				boost::uniform_real<double> u(-65356,65356);
-				//boost::uniform_real<double> u(-6.6,6.6);
+				//boost::uniform_real<double> u(-10.6,10.6);
 				boost::variate_generator<boost::mt19937&, boost::uniform_real<double> > gen(rng, u);
 				double x,y,z;
 				for(unsigned int i =0; i < population;i++)
 				{
 					x = gen();
 					y = gen();
-					z = 0;
+					z = 1;
 					swarm[i] = gfxParticle(Vector3d(x,y,z),i);
 				}
 			}
@@ -423,6 +423,11 @@ void GraphicalPSO::updateSwarmMovement()
 		swarm[i].move();
 		evaluateParticle(i);
 	}
+}
+
+string GraphicalPSO::functionName() const
+{
+	return function->name();
 }
 
 const gfxParticle& GraphicalPSO::getSelectedParticle()

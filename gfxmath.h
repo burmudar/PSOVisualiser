@@ -2,6 +2,7 @@
 #define GFXMATH_H
 
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <sstream>
 #include <cmath>

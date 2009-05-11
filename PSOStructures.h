@@ -87,6 +87,7 @@ public:
 	void evaluateSwarm();
 	void evaluateParticle(const int &index);
 	void updateSwarmMovement();
+	std::string functionName() const;
 	const gfxParticle& getSelectedParticle();
 	void selectParticle(const int &uid);
 	void draw(int renderMode,int drawShape);

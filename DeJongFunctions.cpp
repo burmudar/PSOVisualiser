@@ -13,9 +13,9 @@ double DeJongF1::evaluate(const Vector3d& pos)
 	return pow(pos.x,2) + pow(pos.y,2) + pow(pos.z,2);
 }
 
-const string DeJongF1::functionDef()
+const string DeJongF1::name()
 {
-	return "X^2 + Y^2 + Z^3";
+	return "DeJong Function F1";
 }
 
 DeJongF5::DeJongF5()
@@ -55,9 +55,9 @@ DeJongF5::DeJongF5()
 	}
 }
 
-const string DeJongF5::functionDef()
+const string DeJongF5::name()
 {
-	return "0.002 + SUM<1 - 25>j + 1 / (j+(Xi + Aij)^6) where Aij is a 2 by 25 matrix with values in the following set {-32,-16,0,16,32}";
+	return "DeJong Function F5 Shekel's Foxhole";
 }
 
 double DeJongF5::evaluate(const Vector3d& pos)

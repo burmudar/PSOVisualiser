@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include "gfxmath.h"
 #include "PSOStructures.h"
 #include <sstream>
@@ -26,7 +27,7 @@ float ytrans = 0.0f;
 float dist = 40.0f;
 
 const int FUNCTION = 5;
-const bool FULLSCREEN = FALSE;
+const bool FULLSCREEN = TRUE;
 const int SCREEN_WIDTH = 1024;
 const int SCREEN_HEIGHT = 768;
 int shape =1;
@@ -157,8 +158,8 @@ int InitGL()
 			break;
 		case 5:
 			{
-				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,10000.0f);
-				dist = 5000;
+				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,8000.0f);
+				dist = 2000;
 			}
 			break;
 	}
@@ -278,31 +279,19 @@ void glPrintHUDInfo(GLint xbound, GLint ybound,int fps)
 	glColor3f(1.0,1.0,1.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
 	out.str("");
-	out << pso.global_best.fitness;
+	out <<setprecision(5) <<pso.global_best.fitness;
 	msg = out.str();
 	glColor3f(0.0,0.0,1.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
 	glLoadIdentity();
-	glTranslated(34*16,ybound-2-(16*1),0);//*16 -> each character is 16 pixels, so multiply the size of hte string with the pixel amount to get the next draw pos
+	glTranslated(33*16,ybound-2-(16),0);//*16 -> each character is 16 pixels, so multiply the size of hte string with the pixel amount to get the next draw pos
 	out.str("");
-	out << "Show Best(F2):";
+	out << "Swarm Best Position:";
 	msg = out.str();
 	glColor3f(1.0,1.0,1.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
 	out.str("");
-	if(pso.draw_best == true) out << "Yes";
-	else out << "No";
-	msg = out.str();
-	glColor3f(0.0,0.0,1.0);
-	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
-	out.str("");
-	out << " Show Normal(F3):";
-	msg = out.str();
-	glColor3f(1.0,1.0,1.0);
-	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
-	out.str("");
-	if(pso.draw_normal == true) out << "Yes";
-	else out << "No";
+	out << pso.global_best.pos;
 	msg = out.str();
 	glColor3f(0.0,0.0,1.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
@@ -310,7 +299,7 @@ void glPrintHUDInfo(GLint xbound, GLint ybound,int fps)
 	glTranslated(0*16,ybound-2-(16*2),0);//*16 -> each character is 16 pixels, so multiply the size of hte string with the pixel amount to get the next draw pos
 	out.str("");
 	gfxParticle particle = pso.getSelectedParticle();
-	out << "Selected Particle ID:";
+	out << "Particle ID:";
 	msg = out.str();
 	glColor3f(1.0,1.0,1.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
@@ -320,26 +309,26 @@ void glPrintHUDInfo(GLint xbound, GLint ybound,int fps)
 	glColor3f(0.0,1.0,0.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
 	glLoadIdentity();
-	glTranslated(17*16,ybound-2-(16*2),0);//*16 -> each character is 16 pixels, so multiply the size of hte string with the pixel amount to get the next draw pos
+	glTranslated(15*16,ybound-2-(16*2),0);//*16 -> each character is 16 pixels, so multiply the size of hte string with the pixel amount to get the next draw pos
 	out.str("");
 	out << "Best Fitness:";
 	msg = out.str();
 	glColor3f(1.0,1.0,1.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
 	out.str("");
-	out << particle.getBestFitness();
+	out <<setprecision(5)<< particle.getBestFitness();
 	msg = out.str();
 	glColor3f(0.0,1.0,0.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
 	glLoadIdentity();
 	glTranslated(33*16,ybound-2-(16*2),0);//*16 -> each character is 16 pixels, so multiply the size of hte string with the pixel amount to get the next draw pos
 	out.str("");
-	out << "Current Fitness:";
+	out << "Best Position:";
 	msg = out.str();
 	glColor3f(1.0,1.0,1.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
 	out.str("");
-	out << particle.getCurrentFitness();
+	out << particle.getBestPosition();
 	msg = out.str();
 	glColor3f(0.0,1.0,0.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
@@ -356,6 +345,40 @@ void glPrintHUDInfo(GLint xbound, GLint ybound,int fps)
 	msg = out.str();
 	glColor3f(1.0,1.0,0.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
+	out.str("");
+	out << "Show Best(F2):";
+	msg = out.str();
+	glColor3f(1.0,1.0,1.0);
+	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
+	out.str("");
+	if(pso.draw_best == true) out << "Yes";
+	else out << "No";
+	msg = out.str();
+	glColor3f(1.0,1.0,0.0);
+	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
+	out.str("");
+	out << " Show Normal(F3):";
+	msg = out.str();
+	glColor3f(1.0,1.0,1.0);
+	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
+	out.str("");
+	if(pso.draw_normal == true) out << "Yes";
+	else out << "No";
+	msg = out.str();
+	glColor3f(1.0,1.0,0.0);
+	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
+	glLoadIdentity();
+	glTranslated(0,ybound-2-(16*4),0);
+	out.str("");
+	out<< "Optimzing Function:";
+	msg = out.str();
+	glColor3f(1.0,1.0,1.0);
+	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
+	out.str("");
+	out << pso.functionName();
+	msg = out.str();
+	glColor3f(1.0,0.0,0.0);
+	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
 }
 
 void DrawGLScene()
@@ -366,7 +389,6 @@ void DrawGLScene()
 	GLint mode;
 	GLfloat sizes[2];
 	GLfloat step;
-	int index = -1;
 
 	glGetIntegerv(GL_RENDER_MODE,&mode);
 	glGetFloatv(GL_POINT_SIZE_RANGE,sizes);
