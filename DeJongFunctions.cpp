@@ -67,11 +67,8 @@ double DeJongF5::evaluate(const Vector3d& pos)
 	for(unsigned int j = 0; j < 25; j++)
 	{
 		sumi = 0;
-		for(unsigned int i = 0; i < 2; i++)
-		{
-			if (i == 0) sumi += pow(pos.x - a[i][j],6);
-			else sumi += pow(pos.y - a[i][j],6);
-		}
+		sumi += pow(pos.x - a[0][j],6);
+		sumi += pow(pos.y - a[1][j],6);
 		sumj += 1.0/(j + sumi);
 	}
 	return 1.0/(1.0/500 + sumj);
@@ -84,6 +81,8 @@ DeJong * createFunction(const int& f)
 		case 1:
 			return new DeJongF1;
 		case 5:
+			return new DeJongF5;
+		case 6:
 			return new DeJongF5;
 	}
 	return new DeJongF1;

@@ -169,7 +169,7 @@ void gfxParticle::draw(int mode,int shape)
 	}
 	else
 	{
-		glColor3f(1 - position.x/pbest.fitness,1 - position.y/pbest.fitness,1 - position.z/pbest.fitness);
+		glColor3f(1-position.x/pbest.fitness,1-position.y/pbest.fitness,1-position.z/pbest.fitness);
 	}
 	switch(shape)
 	{
@@ -269,13 +269,28 @@ void ConsolePSO::initializeSwarm(const int func)
 				}
 			}
 			break;
+		case 6:
+			{
+				boost::uniform_real<double> u(-10.6,10.6);
+				boost::variate_generator<boost::mt19937&, boost::uniform_real<double> > gen(rng, u);
+				double x,y,z;
+				for(unsigned int i =0; i < population;i++)
+				{
+					x = gen();
+					y = gen();
+					z = 1;
+					swarm[i] = Particle(Vector3d(x,y,z),i);
+				}
+			}
+			break;
+
 	}
 	
 }
 
 void ConsolePSO::evaluateSwarm()
 {
-	for(unsigned int i = 0;i < population;i++)
+	for(int i = 0;i < population;i++)
 	{
 		evaluateParticle(i);
 	}
@@ -311,7 +326,7 @@ void ConsolePSO::updateSwarmMovement()
 
 void ConsolePSO::print()
 {
-	for(unsigned int i = 0;i < population;i++)
+	for(int i = 0;i < population;i++)
 	{
 		std::cout << swarm[i].info() << endl;	
 	}
@@ -362,7 +377,7 @@ void GraphicalPSO::initializeSwarm(const int &func)
 				boost::uniform_real<double> u(-5.14,5.14);
 				boost::variate_generator<boost::mt19937&, boost::uniform_real<double> > gen(rng, u);
 				double x,y,z;
-				for(unsigned int i =0; i < population;i++)
+				for(int i =0; i < population;i++)
 				{
 					x = gen();
 					y = gen();
@@ -377,7 +392,21 @@ void GraphicalPSO::initializeSwarm(const int &func)
 				//boost::uniform_real<double> u(-10.6,10.6);
 				boost::variate_generator<boost::mt19937&, boost::uniform_real<double> > gen(rng, u);
 				double x,y,z;
-				for(unsigned int i =0; i < population;i++)
+				for(int i =0; i < population;i++)
+				{
+					x = gen();
+					y = gen();
+					z = 0;
+					swarm[i] = gfxParticle(Vector3d(x,y,z),i);
+				}
+			}
+			break;
+		case 6:
+			{
+				boost::uniform_real<double> u(-6.6,6.6);
+				boost::variate_generator<boost::mt19937&, boost::uniform_real<double> > gen(rng, u);
+				double x,y,z;
+				for(int i =0; i < population;i++)
 				{
 					x = gen();
 					y = gen();
@@ -386,12 +415,13 @@ void GraphicalPSO::initializeSwarm(const int &func)
 				}
 			}
 			break;
+
 	}
 }
 
 void GraphicalPSO::evaluateSwarm()
 {
-	for(unsigned int i = 0;i < population;i++)
+	for(int i = 0;i < population;i++)
 	{
 		evaluateParticle(i);	
 	}
@@ -446,7 +476,7 @@ void GraphicalPSO::selectParticle(const int &uid)
 
 void GraphicalPSO::draw(const int renderMode,const int drawShape)
 {
-	for (unsigned int i =0; i < population;i++)
+	for (int i =0; i < population;i++)
 	{
 		if (draw_normal)
 			swarm[i].draw(renderMode,drawShape);

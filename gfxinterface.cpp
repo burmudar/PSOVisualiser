@@ -162,6 +162,13 @@ int InitGL()
 				dist = 2000;
 			}
 			break;
+		case 6:
+			{
+				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,8000.0f);
+				dist = 1000;
+			}
+			break;
+
 	}
 	
 	glMatrixMode(GL_MODELVIEW);
@@ -284,7 +291,7 @@ void glPrintHUDInfo(GLint xbound, GLint ybound,int fps)
 	glColor3f(0.0,0.0,1.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
 	glLoadIdentity();
-	glTranslated(33*16,ybound-2-(16),0);//*16 -> each character is 16 pixels, so multiply the size of hte string with the pixel amount to get the next draw pos
+	glTranslated(33.5*16,ybound-2-(16),0);//*16 -> each character is 16 pixels, so multiply the size of hte string with the pixel amount to get the next draw pos
 	out.str("");
 	out << "Swarm Best Position:";
 	msg = out.str();
@@ -321,7 +328,7 @@ void glPrintHUDInfo(GLint xbound, GLint ybound,int fps)
 	glColor3f(0.0,1.0,0.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
 	glLoadIdentity();
-	glTranslated(33*16,ybound-2-(16*2),0);//*16 -> each character is 16 pixels, so multiply the size of hte string with the pixel amount to get the next draw pos
+	glTranslated(33.5*16,ybound-2-(16*2),0);//*16 -> each character is 16 pixels, so multiply the size of hte string with the pixel amount to get the next draw pos
 	out.str("");
 	out << "Best Position:";
 	msg = out.str();
@@ -500,8 +507,8 @@ int main(int argc, char** argv)
 {
 	cout << "Before setupPSO" << endl;
 	int videoFlags;
-	float tick = 0.15;
-	if(FUNCTION ==5) tick = 20;
+	float tick = 0.05;
+	if(FUNCTION >=5) tick = 20;
 	bool done=false;
 	bool calcRotation = false;
 	SDL_Event event;
@@ -575,7 +582,6 @@ int main(int argc, char** argv)
 						int temp = doSelect(event.button.x,event.button.y);
 						if (temp > -1)
 						{
-							cout << temp<<endl;
 							pso.selectParticle(temp);
 						}
 					}
