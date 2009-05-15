@@ -10,7 +10,6 @@
 #include "SDL.h"
 
 #define SCREEN_BPP 16
-#define PARTICLES 10000
 #define TRUE 1
 #define FALSE 0
 
@@ -25,13 +24,16 @@ float zrot = 0.0f;
 float xtrans = 0.0f;
 float ytrans = 0.0f;
 float dist = 40.0f;
-
-const int FUNCTION = 5;
+float tick = 0.05f;
+const int PARTICLES = 10000;
 const bool FULLSCREEN = TRUE;
 const int SCREEN_WIDTH = 1024;
 const int SCREEN_HEIGHT = 768;
+enum movement{STOP=0,LEFT=1,RIGHT=2,UP=3,DOWN=4};
+movement KEY;
 int shape =1;
-GraphicalPSO pso = GraphicalPSO(10000,FUNCTION,0.41,0.52);
+int FUNCTION = 1;
+GraphicalPSO pso = GraphicalPSO(PARTICLES,FUNCTION,0.41,0.52); 
 
 GLuint base;
 GLuint texture[1];
@@ -131,9 +133,69 @@ GLvoid BuildFont()
 	}
 }
 
+void setPerspective(const int FUNCTION)
+{
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	switch(FUNCTION)
+	{
+		case 1:
+			{
+				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,100.0f);
+				dist =40;
+				tick = 0.05;
+			}
+			break;
+		case 2:
+			{
+				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,8000.0f);
+				dist = 200;
+				tick = 20;
+			}
+			break;
+		case 3:
+			{
+				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,8000.0f);
+				dist = 100;
+				tick = 1;
+			}
+			break;
+		case 4:
+			{
+				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,100.0f);
+				dist = 40;
+				tick = 0.05;
+			}
+			break;
+		case 5:
+			{
+				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,5000.0f);
+				dist = 1000;
+				tick = 20;
+			}
+			break;
+		case 6:
+			{
+				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,5000.0f);
+				dist = 1000;
+				tick = 20;
+			}
+			break;
+		case 7:
+			{
+				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,5000.0f);
+				dist = 1000;
+				tick = 20;
+			}
+			break;
 
+	}
+	
+	glMatrixMode(GL_MODELVIEW);
+	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+}
 
-int InitGL()
+int InitGL(const int FUNCTION)
 {
 	if (!LoadFontTexture()) return -1;
 
@@ -147,39 +209,14 @@ int InitGL()
 
     glBlendFunc( GL_SRC_ALPHA, GL_ONE );
 	glShadeModel(GL_SMOOTH);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	switch(FUNCTION)
-	{
-		case 1:
-			{
-				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,100.0f);
-			}
-			break;
-		case 5:
-			{
-				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,8000.0f);
-				dist = 2000;
-			}
-			break;
-		case 6:
-			{
-				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,8000.0f);
-				dist = 1000;
-			}
-			break;
-
-	}
 	
-	glMatrixMode(GL_MODELVIEW);
-	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+	setPerspective(FUNCTION);
 
 	return TRUE;
 }
 
 void keyPressed(SDL_keysym *keysym)
 {
-	double tick = 0.5;
 	switch(keysym->sym)
 	{
 		case SDLK_ESCAPE:
@@ -194,6 +231,14 @@ void keyPressed(SDL_keysym *keysym)
 		case SDLK_F3:
 			pso.draw_normal = !pso.draw_normal;
 			break;
+		case SDLK_F4:
+			{
+				FUNCTION++;
+				if(FUNCTION > 10) FUNCTION = 1;
+				setPerspective(FUNCTION);
+				pso.setFunction(FUNCTION);
+			}
+			break;
 		case SDLK_F12:
 			{
 				if (shape == 2) shape = 1;
@@ -202,22 +247,22 @@ void keyPressed(SDL_keysym *keysym)
 			break;
 		case SDLK_a:
 			{
-				xtrans -= tick;
+				KEY = LEFT;
 			}
 			break;
 		case SDLK_d:
 			{
-				xtrans += tick;
+				KEY = RIGHT;
 			}
 			break;
 		case SDLK_w:
 			{
-				ytrans += tick;
+				KEY = UP;
 			}
 			break;
 		case SDLK_s:
 			{
-				ytrans -= tick;
+				KEY = DOWN;
 			}
 			break;
 		default:
@@ -406,6 +451,22 @@ void DrawGLScene()
 	glDisable(GL_BLEND);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+	switch(KEY)
+	{
+		case LEFT:
+			xtrans += tick;
+		break;
+		case RIGHT:
+			xtrans -= tick;
+		break;
+		case UP:
+			ytrans -= tick;
+		break;
+		case DOWN:
+			ytrans += tick;
+		break;
+		case STOP: break;
+	}
 	gluLookAt(xtrans,ytrans,dist,xtrans,ytrans,0.0,0.0,1.0,0.0);
 	glRotatef(xrot,1.0,0.0,0.0);
 	glRotatef(yrot,0.0,1.0,0.0);
@@ -507,8 +568,6 @@ int main(int argc, char** argv)
 {
 	cout << "Before setupPSO" << endl;
 	int videoFlags;
-	float tick = 0.05;
-	if(FUNCTION >=5) tick = 20;
 	bool done=false;
 	bool calcRotation = false;
 	SDL_Event event;
@@ -555,10 +614,10 @@ int main(int argc, char** argv)
 		surface = SDL_SetVideoMode(modes[0]->w,modes[0]->h,SCREEN_BPP,videoFlags);
 		//Toggle Fullscreen
 		SDL_WM_ToggleFullScreen(surface);
-		delete modes;
+		//delete modes[];
 	}
 	else surface = SDL_SetVideoMode(SCREEN_WIDTH,SCREEN_HEIGHT,SCREEN_BPP,videoFlags);
-	if(InitGL() != TRUE)
+	if(InitGL(FUNCTION) != TRUE)
 	{
 		cout << "Error initializing OpenGL" << endl;
 		Quit(1);
@@ -576,6 +635,8 @@ int main(int argc, char** argv)
 				case SDL_KEYDOWN:
 					keyPressed(&event.key.keysym);
 					break;
+				case SDL_KEYUP:
+					KEY = STOP;
 				case SDL_MOUSEBUTTONDOWN:
 					if(event.button.button == SDL_BUTTON_RIGHT)
 					{

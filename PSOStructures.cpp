@@ -236,6 +236,14 @@ ConsolePSO::~ConsolePSO()
 	delete function;
 }
 
+void ConsolePSO::setFunction(const int func)
+{
+	function = createFunction(func);
+	initializeSwarm(func);
+	evaluateSwarm();
+	global_best = swarm[0].getParticleBest();
+}
+
 void ConsolePSO::initializeSwarm(const int func)
 {
 	boost::mt19937 rng(time(0));
@@ -246,7 +254,49 @@ void ConsolePSO::initializeSwarm(const int func)
 				boost::uniform_real<double> u(-5.14,5.14);
 				boost::variate_generator<boost::mt19937&, boost::uniform_real<double> > gen(rng, u);
 				double x,y,z;
-				for(unsigned int i =0; i < population;i++)
+				for(int i =0; i < population;i++)
+				{
+					x = gen();
+					y = gen();
+					z = gen();
+					swarm[i] = Particle(Vector3d(x,y,z),i);
+				}
+			}
+			break;
+		case 2:
+			{
+				boost::uniform_real<double> u(-65356,65356);
+				boost::variate_generator<boost::mt19937&, boost::uniform_real<double> > gen(rng, u);
+				double x,y,z;
+				for(int i =0; i < population;i++)
+				{
+					x = gen();
+					y = gen();
+					z = 1;
+					swarm[i] = Particle(Vector3d(x,y,z),i);
+				}
+			}
+			break;
+		case 3:
+			{
+				boost::uniform_real<double> u(-10.6,10.6);
+				boost::variate_generator<boost::mt19937&, boost::uniform_real<double> > gen(rng, u);
+				double x,y,z;
+				for(int i =0; i < population;i++)
+				{
+					x = gen();
+					y = gen();
+					z = 1;
+					swarm[i] = Particle(Vector3d(x,y,z),i);
+				}
+			}
+			break;
+		case 4:
+			{
+				boost::uniform_real<double> u(-5.12,5.12);
+				boost::variate_generator<boost::mt19937&, boost::uniform_real<double> > gen(rng, u);
+				double x,y,z;
+				for(int i =0; i < population;i++)
 				{
 					x = gen();
 					y = gen();
@@ -257,33 +307,46 @@ void ConsolePSO::initializeSwarm(const int func)
 			break;
 		case 5:
 			{
-				boost::uniform_real<double> u(-65356,65356);
+				boost::uniform_real<double> u(-500,500);
 				boost::variate_generator<boost::mt19937&, boost::uniform_real<double> > gen(rng, u);
 				double x,y,z;
-				for(unsigned int i =0; i < population;i++)
+				for(int i =0; i < population;i++)
 				{
 					x = gen();
 					y = gen();
-					z = 1;
+					z = gen();
 					swarm[i] = Particle(Vector3d(x,y,z),i);
 				}
 			}
 			break;
 		case 6:
 			{
-				boost::uniform_real<double> u(-10.6,10.6);
+				boost::uniform_real<double> u(-600,600);
 				boost::variate_generator<boost::mt19937&, boost::uniform_real<double> > gen(rng, u);
 				double x,y,z;
-				for(unsigned int i =0; i < population;i++)
+				for(int i =0; i < population;i++)
 				{
 					x = gen();
 					y = gen();
-					z = 1;
+					z = gen();
 					swarm[i] = Particle(Vector3d(x,y,z),i);
 				}
 			}
 			break;
-
+		case 7:
+			{
+				boost::uniform_real<double> u(-65536,65536);
+				boost::variate_generator<boost::mt19937&, boost::uniform_real<double> > gen(rng, u);
+				double x,y,z;
+				for(int i =0; i < population;i++)
+				{
+					x = gen();
+					y = gen();
+					z = gen();
+					swarm[i] = Particle(Vector3d(x,y,z),i);
+				}
+			}
+			break;
 	}
 	
 }
@@ -367,6 +430,17 @@ GraphicalPSO::~GraphicalPSO()
 	delete function;
 }
 
+void GraphicalPSO::setFunction(const int func)
+{
+	function = createFunction(func);
+	initializeSwarm(func);
+	draw_normal = true;
+	draw_best = true;
+	selectedParticleUID = 0;
+	evaluateSwarm();
+	global_best = swarm[0].getParticleBest();
+}
+
 void GraphicalPSO::initializeSwarm(const int &func)
 {
 	boost::mt19937 rng(time(0));
@@ -386,7 +460,7 @@ void GraphicalPSO::initializeSwarm(const int &func)
 				}
 			}
 			break;
-		case 5:
+		case 2:
 			{
 				boost::uniform_real<double> u(-65356,65356);
 				//boost::uniform_real<double> u(-10.6,10.6);
@@ -401,7 +475,7 @@ void GraphicalPSO::initializeSwarm(const int &func)
 				}
 			}
 			break;
-		case 6:
+		case 3:
 			{
 				boost::uniform_real<double> u(-6.6,6.6);
 				boost::variate_generator<boost::mt19937&, boost::uniform_real<double> > gen(rng, u);
@@ -415,7 +489,62 @@ void GraphicalPSO::initializeSwarm(const int &func)
 				}
 			}
 			break;
-
+		case 4:
+			{
+				boost::uniform_real<double> u(-5.12,5.12);
+				boost::variate_generator<boost::mt19937&, boost::uniform_real<double> > gen(rng, u);
+				double x,y,z;
+				for(int i =0; i < population;i++)
+				{
+					x = gen();
+					y = gen();
+					z = gen();
+					swarm[i] = gfxParticle(Vector3d(x,y,z),i);
+				}
+			}
+			break;
+		case 5:
+			{
+				boost::uniform_real<double> u(-500,500);
+				boost::variate_generator<boost::mt19937&, boost::uniform_real<double> > gen(rng, u);
+				double x,y,z;
+				for(int i =0; i < population;i++)
+				{
+					x = gen();
+					y = gen();
+					z = gen();
+					swarm[i] = gfxParticle(Vector3d(x,y,z),i);
+				}
+			}
+			break;
+		case 6:
+			{
+				boost::uniform_real<double> u(-600,600);
+				boost::variate_generator<boost::mt19937&, boost::uniform_real<double> > gen(rng, u);
+				double x,y,z;
+				for(int i =0; i < population;i++)
+				{
+					x = gen();
+					y = gen();
+					z = gen();
+					swarm[i] = gfxParticle(Vector3d(x,y,z),i);
+				}
+			}
+			break;
+		case 7:
+			{
+				boost::uniform_real<double> u(-65536,65536);
+				boost::variate_generator<boost::mt19937&, boost::uniform_real<double> > gen(rng, u);
+				double x,y,z;
+				for(int i =0; i < population;i++)
+				{
+					x = gen();
+					y = gen();
+					z = gen();
+					swarm[i] = gfxParticle(Vector3d(x,y,z),i);
+				}
+			}
+			break;
 	}
 }
 

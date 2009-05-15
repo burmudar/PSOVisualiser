@@ -64,6 +64,7 @@ public:
 	ConsolePSO();
 	ConsolePSO(const int &pop,const int &func,const double &c1,const double &c2);
 	~ConsolePSO();
+	void setFunction(const int func);
 	void evaluateSwarm();
 	void evaluateParticle(const int &index);
 	void updateSwarmMovement();
@@ -84,6 +85,7 @@ public:
 	GraphicalPSO();
 	GraphicalPSO(const int &pop,const int &func,const double &c1,const double &c2);
 	~GraphicalPSO();
+	void setFunction(const int func);
 	void evaluateSwarm();
 	void evaluateParticle(const int &index);
 	void updateSwarmMovement();
