@@ -25,14 +25,16 @@ float xtrans = 0.0f;
 float ytrans = 0.0f;
 float dist = 40.0f;
 float tick = 0.05f;
-const int PARTICLES = 10000;
-const bool FULLSCREEN = TRUE;
-const int SCREEN_WIDTH = 1024;
-const int SCREEN_HEIGHT = 768;
+const int PARTICLES = 15000;
+const bool FULLSCREEN = true;
+const int SCREEN_WIDTH = 1680;
+const int SCREEN_HEIGHT = 1050;
+const int TOTALFUNCTIONCOUNT = 17;
 enum movement{STOP=0,LEFT=1,RIGHT=2,UP=3,DOWN=4};
+
 movement KEY;
 int shape =1;
-int FUNCTION = 1;
+int FUNCTION = 17;
 GraphicalPSO pso = GraphicalPSO(PARTICLES,FUNCTION,0.41,0.52); 
 
 GLuint base;
@@ -188,7 +190,76 @@ void setPerspective(const int FUNCTION)
 				tick = 20;
 			}
 			break;
-
+		case 8:
+			{
+				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,5000.0f);
+				dist = 1000;
+				tick = 20;
+			}
+			break;
+		case 9:
+			{
+				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,100.0f);
+				dist = 15;
+				tick = 0.05;
+			}
+			break;
+		case 10:
+			{
+				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,100.0f);
+				dist = 45;
+				tick = 15;
+			}
+			break;
+		case 11:
+			{
+				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,100.0f);
+				dist = 45;
+				tick = 15;
+			}
+			break;
+		case 12:
+			{
+				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,100.0f);
+				dist = 15;
+				tick = 0.05;
+			}
+			break;
+		case 13:
+			{
+				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,200.0f);
+				dist = 85;
+				tick = 0.05;
+			}
+			break;
+		case 14:
+			{
+				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,200.0f);
+				dist = 85;
+				tick = 0.05;
+			}
+			break;
+		case 15:
+			{
+				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,5000.0f);
+				dist = 1000;
+				tick = 20;
+			}
+			break;
+		case 16:
+			{
+				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,200.0f);
+				dist = 15;
+				tick = 0.05;
+			}
+			break;
+		case 17:
+			{
+				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,800.0f);
+				dist = 75;
+				tick = 1.05;
+			}
+			break;
 	}
 	
 	glMatrixMode(GL_MODELVIEW);
@@ -234,14 +305,14 @@ void keyPressed(SDL_keysym *keysym)
 		case SDLK_F4:
 			{
 				FUNCTION++;
-				if(FUNCTION > 10) FUNCTION = 1;
+				if(FUNCTION > TOTALFUNCTIONCOUNT) FUNCTION = 1;
 				setPerspective(FUNCTION);
 				pso.setFunction(FUNCTION);
 			}
 			break;
 		case SDLK_F12:
 			{
-				if (shape == 2) shape = 1;
+				if (shape == 3) shape = 1;
 				else shape++;
 			}
 			break;
@@ -473,28 +544,28 @@ void DrawGLScene()
 	//Set point size
 	//curSize = sizes[0]+5;
 	//glPointSize(curSize);
-	//Draw minimum point
-	glBegin(GL_QUADS);
-		glColor3f(0.5,0.5,0.5);
-		GLfloat point = 0.005;
-		glVertex3f(-point,point,-0);
-		glVertex3f(point,point,-0);
-		glVertex3f(point,-point,-0);
-		glVertex3f(-point,-point,-0);
-	glEnd();
 	//Draw the particles
 	pso.draw(mode,shape);	
 	//draw HUD
 	if (mode == GL_RENDER)
 	{
 		HUDMode(true);
-		glColor3f(0.0,0.0,1.0);
+		glColor3f(1.0,1.0,1.0);
+		//Top right box
+		/*glBegin(GL_QUADS);
+			glVertex2f(SCREEN_WIDTH*0.70,SCREEN_HEIGHT*0.70);
+			glVertex2f(SCREEN_WIDTH,SCREEN_HEIGHT*0.70);
+			glVertex2f(SCREEN_WIDTH,SCREEN_HEIGHT);
+			glVertex2f(SCREEN_WIDTH*0.70,SCREEN_HEIGHT);
+		glEnd();
+		*/
+		glColor3f(0,0,1);
 		glBegin(GL_QUADS);
 			glVertex2f(0,SCREEN_HEIGHT*0.10);
 			glVertex2f(SCREEN_WIDTH,SCREEN_HEIGHT*0.10);
 			glVertex2f(SCREEN_WIDTH,0);
 			glVertex2f(0,0);
-		glEnd(); //End of Blue line
+		glEnd();
 		glColor3f(0,0,0);
 		int boundaryThickness = 4;
 		glBegin(GL_QUADS);
@@ -552,7 +623,6 @@ int doSelect(const double &x,const double &y)
 	//get nearest hit
 	float minz = buff[0*4+1];	
 	int ruid = buff[0*4+3];   
-	cout << hits << endl;
 	for(int i = 0; i < hits;i++)
 	{
 		if (minz > buff[i*4+1])

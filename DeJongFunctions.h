@@ -83,5 +83,115 @@ private:
 		std::string info;
 };
 
+class Ackley:public DeJong 
+{
+public:
+	Ackley();
+	virtual double evaluate(const Vector3d& pos);
+	virtual const std::string name();
+	~Ackley(){}
+private:
+		std::string info;
+};
+
+class Camel:public DeJong 
+{
+public:
+	Camel();
+	virtual double evaluate(const Vector3d& pos);
+	virtual const std::string name();
+	~Camel(){}
+private:
+		std::string info;
+};
+
+class Shubert:public DeJong 
+{
+public:
+	Shubert();
+	virtual double evaluate(const Vector3d& pos);
+	virtual const std::string name();
+	~Shubert(){}
+private:
+		std::string info;
+};
+
+class Himmelblau:public DeJong 
+{
+public:
+	Himmelblau();
+	virtual double evaluate(const Vector3d& pos);
+	virtual const std::string name();
+	~Himmelblau(){}
+private:
+		std::string info;
+};
+
+class Rosenbrock:public DeJong 
+{
+public:
+	Rosenbrock();
+	virtual double evaluate(const Vector3d& pos);
+	virtual const std::string name();
+	~Rosenbrock(){}
+private:
+		std::string info;
+};
+
+class DropWave:public DeJong 
+{
+public:
+	DropWave();
+	virtual double evaluate(const Vector3d& pos);
+	virtual const std::string name();
+	~DropWave(){}
+private:
+		std::string info;
+};
+
+class Easom:public DeJong 
+{
+public:
+	Easom();
+	virtual double evaluate(const Vector3d& pos);
+	virtual const std::string name();
+	~Easom(){}
+private:
+		std::string info;
+};
+
+class Branins:public DeJong 
+{
+public:
+	Branins();
+	virtual double evaluate(const Vector3d& pos);
+	virtual const std::string name();
+	~Branins(){}
+private:
+		std::string info;
+};
+
+class Michalewicz:public DeJong 
+{
+public:
+	Michalewicz();
+	virtual double evaluate(const Vector3d& pos);
+	virtual const std::string name();
+	~Michalewicz(){}
+private:
+		std::string info;
+};
+
+class Goldstein:public DeJong 
+{
+public:
+	Goldstein();
+	virtual double evaluate(const Vector3d& pos);
+	virtual const std::string name();
+	~Goldstein(){}
+private:
+		std::string info;
+};
+
 DeJong * createFunction(const int& f);
 #endif

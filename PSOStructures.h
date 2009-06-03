@@ -53,6 +53,7 @@ class gfxParticle : public Particle
 		~gfxParticle();
 		void draw(int mode,int shape);
 		void drawBest(int mode,int shape);
+		void drawGraphPoint();
 	private:
 		void drawCube(const Vector3d& pos);
 		void drawPoint(const Vector3d& pos);
@@ -92,6 +93,7 @@ public:
 	std::string functionName() const;
 	const gfxParticle& getSelectedParticle();
 	void selectParticle(const int &uid);
+	void drawFunctionGraph(const int XMIN,const int YMIN,const int XMAX,const int YMAX);
 	void draw(int renderMode,int drawShape);
 	bool draw_normal;
 	bool draw_best;

@@ -10,9 +10,9 @@ using namespace std;
 
 int main(int argc,char* argv[])
 {
-	DeJong * function = createFunction(5);
+	DeJong * function = createFunction(17);
 	cout << function->name() << endl;
-	cout << setprecision(3) << function->evaluate(Vector3d(-420.9687,-420.9687,-420.9687));
+	cout << setprecision(3) << function->evaluate(Vector3d(0,-1,0));
 	int i;
 	cin >> i;
 	ConsolePSO pso = ConsolePSO(1000,7,0.41,0.52);	
