@@ -81,7 +81,7 @@ Rastrigin::Rastrigin()
 
 double Rastrigin::evaluate(const Vector3d& pos)
 {
-	double answ;
+	double answ=0;
 	answ += pow(pos.x,2) + 10*cos(2*PI*pos.x)+10; 
 	answ += pow(pos.y,2) + 10*cos(2*PI*pos.y)+10; 
 	answ += pow(pos.z,2) + 10*cos(2*PI*pos.z)+10; 
