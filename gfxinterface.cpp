@@ -2,6 +2,7 @@
 #include <iomanip>
 #include "gfxmath.h"
 #include "PSOStructures.h"
+#include "../ChartPlotter/Chart2DPlotter.cpp"
 #include <sstream>
 #include <vector>
 #include <cmath>
@@ -26,12 +27,12 @@ float ytrans = 0.0f;
 float dist = 40.0f;
 float tick = 0.05f;
 const int PARTICLES = 15000;
-const bool FULLSCREEN = true;
-const int SCREEN_WIDTH = 1680;
-const int SCREEN_HEIGHT = 1050;
+const bool FULLSCREEN = false;
+const int SCREEN_WIDTH = 1024;
+const int SCREEN_HEIGHT = 768;
 const int TOTALFUNCTIONCOUNT = 17;
 enum movement{STOP=0,LEFT=1,RIGHT=2,UP=3,DOWN=4};
-
+Chart2DPlotter chart(SCREEN_WIDTH*0.70,SCREEN_HEIGHT*0.70,SCREEN_WIDTH,SCREEN_HEIGHT,20);
 movement KEY;
 int shape =1;
 int FUNCTION = 17;
@@ -295,6 +296,7 @@ void keyPressed(SDL_keysym *keysym)
 			break;
 		case SDLK_F1:
 			draw = !draw;	
+			chart.Clear();
 			break;
 		case SDLK_F2:
 			pso.draw_best = !pso.draw_best;
@@ -550,6 +552,7 @@ void DrawGLScene()
 	if (mode == GL_RENDER)
 	{
 		HUDMode(true);
+		chart.DrawChart();
 		glColor3f(1.0,1.0,1.0);
 		//Top right box
 		/*glBegin(GL_QUADS);
@@ -642,7 +645,7 @@ int main(int argc, char** argv)
 	bool calcRotation = false;
 	SDL_Event event;
 	const SDL_VideoInfo *videoInfo;
-
+	chart.Plot(0,0);
 	if(SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		cout << "Video initialization failed: " << SDL_GetError();
@@ -692,7 +695,8 @@ int main(int argc, char** argv)
 		cout << "Error initializing OpenGL" << endl;
 		Quit(1);
 	}
-	
+	int i = 1;	
+	chart.Plot(1,1);
 	while(!done)
 	{
 		while(SDL_PollEvent(&event))
@@ -745,6 +749,7 @@ int main(int argc, char** argv)
 		if (draw == false)
 		{
 			pso.updateSwarmMovement();
+			chart.Plot(i++,pso.global_best.fitness);
 		}
 	}
 	delete surface;
