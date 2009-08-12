@@ -8,7 +8,7 @@
 #include <cmath>
 #include <GL/gl.h>
 #include <GL/glu.h>
-#include "SDL.h"
+#include <SDL.h>
 
 #define SCREEN_BPP 16
 #define TRUE 1
@@ -26,7 +26,7 @@ float xtrans = 0.0f;
 float ytrans = 0.0f;
 float dist = 40.0f;
 float tick = 0.05f;
-const int PARTICLES = 15000;
+const int PARTICLES = 65000;
 const bool FULLSCREEN = false;
 const int SCREEN_WIDTH = 1024;
 const int SCREEN_HEIGHT = 768;
@@ -36,7 +36,11 @@ Chart2DPlotter chart(SCREEN_WIDTH*0.70,SCREEN_HEIGHT*0.70,SCREEN_WIDTH,SCREEN_HE
 movement KEY;
 int shape =1;
 int FUNCTION = 17;
-GraphicalPSO pso = GraphicalPSO(PARTICLES,FUNCTION,0.41,0.52); 
+//if you take out inertia (the 0.5) the swarm seems to explore more, but then it doens't find
+//the optimum for Schwefel function
+
+GraphicalPSO pso = GraphicalPSO(PARTICLES,FUNCTION,0.41,0.52,0.5); 
+//GraphicalPSO pso = GraphicalPSO(PARTICLES,FUNCTION,0.5,1.5,1.0); 
 
 GLuint base;
 GLuint texture[1];

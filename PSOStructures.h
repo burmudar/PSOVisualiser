@@ -7,7 +7,7 @@
 #include <string>
 #include <sstream>
 #include <cmath>
-#include <boost/random.hpp>
+#include "boost/random.hpp"
 #include <GL/glu.h>
 #include <GL/gl.h>
 
@@ -63,7 +63,7 @@ class ConsolePSO
 {
 public:
 	ConsolePSO();
-	ConsolePSO(const int &pop,const int &func,const double &c1,const double &c2);
+	ConsolePSO(const int &pop,const int &func,const double &c1,const double &c2,const double& inertia);
 	~ConsolePSO();
 	void setFunction(const int func);
 	void evaluateSwarm();
@@ -76,7 +76,7 @@ protected:
 private:
 	std::vector<Particle> swarm;
 	int population;
-	double c1,c2;
+	double c1,c2,inertia;
 	DeJong * function;
 };
 
@@ -84,7 +84,7 @@ class GraphicalPSO
 {
 public:
 	GraphicalPSO();
-	GraphicalPSO(const int &pop,const int &func,const double &c1,const double &c2);
+	GraphicalPSO(const int &pop,const int &func,const double &c1,const double &c2,const double& inertia);
 	~GraphicalPSO();
 	void setFunction(const int func);
 	void evaluateSwarm();
@@ -104,7 +104,7 @@ private:
 	std::vector<gfxParticle> swarm;
 	int selectedParticleUID;
 	int population;
-	double c1,c2;
+	double c1,c2,inertia;
 	DeJong * function;
 };
 
