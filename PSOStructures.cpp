@@ -220,6 +220,7 @@ ConsolePSO::ConsolePSO()
 	population = 0;
 	c1 = 0.41;
 	c2 = 0.52;
+	inertia = 0.5;
 	swarm = vector<Particle>(population);
 	initializeSwarm(1);
 	function = createFunction(1);
@@ -227,11 +228,12 @@ ConsolePSO::ConsolePSO()
 	global_best = swarm[0].getParticleBest();
 }
 
-ConsolePSO::ConsolePSO(const int &pop,const int &func,const double &c1,const double &c2)
+ConsolePSO::ConsolePSO(const int &pop,const int &func,const double &c1,const double &c2,const double& inertia)
 {
 	population = pop;
 	this->c1 = c1;
 	this->c2 = c2;
+	this->inertia = inertia;
 	swarm = vector<Particle>(population);
 	initializeSwarm(func);
 	function = createFunction(func);
@@ -532,7 +534,7 @@ void ConsolePSO::updateSwarmMovement()
 	boost::variate_generator<boost::mt19937&, boost::uniform_real<double> > gen(rng, u);	
 	for(unsigned int i =0; i < swarm.size();i++)
 	{
-		swarm[i].velocity = swarm[i].velocity + c1 * gen() * (swarm[i].getBestPosition() - swarm[i].getPosition()) + c2 * (global_best.pos - swarm[i].getPosition());
+		swarm[i].velocity = (inertia * swarm[i].velocity) + c1 * gen() * (swarm[i].getBestPosition() - swarm[i].getPosition()) + c2 * (global_best.pos - swarm[i].getPosition());
 		swarm[i].move();
 		evaluateParticle(i);
 	}
@@ -551,6 +553,7 @@ GraphicalPSO::GraphicalPSO()
 	population = 0;
 	c1 = 0.41;
 	c2 = 0.52;
+	inertia = 0.5;
 	swarm = vector<gfxParticle>(population);
 	initializeSwarm(1);
 	function = createFunction(1);
@@ -561,11 +564,12 @@ GraphicalPSO::GraphicalPSO()
 	global_best = swarm[0].getParticleBest();
 }
 
-GraphicalPSO::GraphicalPSO(const int &pop,const int &func,const double &c1,const double &c2)
+GraphicalPSO::GraphicalPSO(const int &pop,const int &func,const double &c1,const double &c2,const double& inertia)
 {
 	population = pop;
 	this->c1 = c1;
 	this->c2 = c2;
+	this->inertia = inertia;
 	swarm = vector<gfxParticle>(population);
 	initializeSwarm(func);
 	function = createFunction(func);
@@ -872,7 +876,7 @@ void GraphicalPSO::updateSwarmMovement()
 	boost::variate_generator<boost::mt19937&, boost::uniform_real<double> > gen(rng, u);	
 	for(unsigned int i =0; i < swarm.size();i++)
 	{
-		swarm[i].velocity = swarm[i].velocity + c1 * gen() * (swarm[i].getBestPosition() - swarm[i].getPosition()) + c2 * gen() * (global_best.pos - swarm[i].getPosition());
+		swarm[i].velocity = (inertia * swarm[i].velocity) + c1 * gen() * (swarm[i].getBestPosition() - swarm[i].getPosition()) + c2 * gen() * (global_best.pos - swarm[i].getPosition());
 		swarm[i].move();
 		evaluateParticle(i);
 	}

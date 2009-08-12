@@ -101,10 +101,10 @@ Schwefel::Schwefel()
 double Schwefel::evaluate(const Vector3d& pos)
 {
 	double answ = 0;
-	answ += pos.x*sin(sqrt(abs(pos.x)));
-	answ += pos.y*sin(sqrt(abs(pos.y)));
-	answ += pos.z*sin(sqrt(abs(pos.z)));
-	return 418.9829*3 - answ;
+	answ += (-1 * pos.x)*sin(sqrt(abs(pos.x)));
+	answ += (-1 * pos.y)*sin(sqrt(abs(pos.y)));
+	answ += (-1 * pos.z)*sin(sqrt(abs(pos.z)));
+	return 418.9829 * 3 + answ;
 }
 
 const string Schwefel::name()
