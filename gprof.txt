@@ -1,0 +1,1109 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 32.08      3.82     3.82  8085000     0.00     0.00  DeJongF5::evaluate(Vector3d const&)
+ 17.30      5.88     2.06                             __powidf2
+ 11.25      7.22     1.34 404340000     0.00     0.00  std::pow(double, int)
+  5.21      7.84     0.62 19110000     0.00     0.00  gfxParticle::draw(int, int)
+  3.11      8.21     0.37                             __gnu_cxx::__enable_if<std::__is_integer<int>::__value, double>::__type std::sqrt<int>(int)
+  2.69      8.53     0.32 111031309     0.00     0.00  std::vector<gfxParticle, std::allocator<gfxParticle> >::operator[](unsigned long)
+  2.31      8.81     0.28 38220000     0.00     0.00  gfxParticle::drawPoint(Vector3d const&)
+  2.10      9.06     0.25 40350000     0.00     0.00  Vector3d::Vector3d(double const&, double const&, double const&, double const&)
+  2.02      9.30     0.24      538     0.45    14.37  GraphicalPSO::updateSwarmMovement()
+  1.76      9.51     0.21 16140000     0.00     0.00  Vector3d::operator-(Vector3d const&) const
+  1.76      9.72     0.21  8115000     0.00     0.00  GraphicalPSO::evaluateParticle(int const&)
+  1.68      9.92     0.20  8175000     0.00     0.00  boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>::operator()()
+  1.68     10.12     0.20     1274     0.16     1.04  GraphicalPSO::draw(int, int)
+  1.34     10.28     0.16 24210000     0.00     0.00  Vector3d::operator+(Vector3d const&) const
+  1.22     10.42     0.15  8175000     0.00     0.00  double boost::uniform_real<double>::operator()<boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double> >(boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double>&)
+  1.13     10.56     0.14  8175000     0.00     0.00  boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double>::operator()()
+  1.01     10.68     0.12 56808828     0.00     0.00  Vector3d::~Vector3d()
+  1.01     10.80     0.12  8353771     0.00     0.00  Vector3d::operator=(Vector3d const&)
+  1.01     10.92     0.12                             Goldstein::~Goldstein()
+  0.97     11.03     0.12 19110000     0.00     0.00  gfxParticle::drawBest(int, int)
+  0.67     11.11     0.08    13621     0.01     0.01  boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>::twist(int)
+  0.67     11.19     0.08                             std::vector<Particle, std::allocator<Particle> >::size() const
+  0.50     11.25     0.06  8175541     0.00     0.00  boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::min() const
+  0.42     11.30     0.05 16140000     0.00     0.00  operator*(double, Vector3d const&)
+  0.42     11.35     0.05  8175000     0.00     0.00  boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::base()
+  0.34     11.39     0.04  8175541     0.00     0.00  boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>::min() const
+  0.34     11.43     0.04  8115001     0.00     0.00  Particle::setPosition(Vector3d const&)
+  0.34     11.47     0.04  8070539     0.00     0.00  std::vector<gfxParticle, std::allocator<gfxParticle> >::size() const
+  0.29     11.51     0.04 16351082     0.00     0.00  boost::random::detail::ptr_helper<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::ref(boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&)
+  0.25     11.54     0.03 16350000     0.00     0.00  boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double>::min() const
+  0.25     11.57     0.03  8175000     0.00     0.00  boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::operator()()
+  0.25     11.60     0.03  8115000     0.00     0.00  Particle::setFitness(double&)
+  0.25     11.63     0.03  8071274     0.00     0.00  Particle::getBestPosition()
+  0.25     11.66     0.03                             gfxParticle::drawCube(Vector3d const&)
+  0.17     11.68     0.02 24255000     0.00     0.00  Particle::getPosition()
+  0.17     11.70     0.02  8176082     0.00     0.00  boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::base() const
+  0.17     11.72     0.02  8175000     0.00     0.00  boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double>::max() const
+  0.17     11.74     0.02  8070000     0.00     0.00  Particle::move()
+  0.17     11.76     0.02        1    20.00    20.00  global constructors keyed to _ZN8ParticleC2Ev
+  0.17     11.78     0.02                             Vector3d::Vector3d(double const&, double const&, double const&)
+  0.17     11.80     0.02                             Vector3d::Vector3d(double const&, double const&, double const&, double const&)
+  0.17     11.82     0.02                             Vector3d::~Vector3d()
+  0.17     11.84     0.02                             Vector3d::operator+() const
+  0.08     11.85     0.01 16185000     0.00     0.00  Vector3d::Vector3d(double const&, double const&, double const&)
+  0.08     11.86     0.01  8116274     0.00     0.00  Particle::getBestFitness()
+  0.08     11.87     0.01                             ConsolePSO::evaluateSwarm()
+  0.08     11.88     0.01                             Camel::evaluate(Vector3d const&)
+  0.08     11.89     0.01                             Particle::setPosition(double, double, double)
+  0.08     11.90     0.01                             Vector3d::operator==(Vector3d const&) const
+  0.08     11.91     0.01                             std::__miter_base<Particle*, false>::__b(Particle*)
+  0.04     11.91     0.01                             bool __gnu_cxx::operator!=<Particle*, std::vector<Particle, std::allocator<Particle> > >(__gnu_cxx::__normal_iterator<Particle*, std::vector<Particle, std::allocator<Particle> > > const&, __gnu_cxx::__normal_iterator<Particle*, std::vector<Particle, std::allocator<Particle> > > const&)
+  0.00     11.91     0.00  8175000     0.00     0.00  boost::variate_generator<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&, boost::uniform_real<double> >::operator()()
+  0.00     11.91     0.00   180006     0.00     0.00  Vector3d::Vector3d()
+  0.00     11.91     0.00    93822     0.00     0.00  Vector3d::Vector3d(Vector3d const&)
+  0.00     11.91     0.00    76276     0.00     0.00  ParticleBest::~ParticleBest()
+  0.00     11.91     0.00    76275     0.00     0.00  gfxParticle::~gfxParticle()
+  0.00     11.91     0.00    76275     0.00     0.00  Particle::~Particle()
+  0.00     11.91     0.00    45035     0.00     0.00  ParticleBest::operator=(ParticleBest const&)
+  0.00     11.91     0.00    45002     0.00     0.00  ParticleBest::ParticleBest()
+  0.00     11.91     0.00    45000     0.00     0.00  gfxParticle::gfxParticle(Vector3d const&, int)
+  0.00     11.91     0.00    45000     0.00     0.00  gfxParticle::operator=(gfxParticle const&)
+  0.00     11.91     0.00    45000     0.00     0.00  Particle::Particle(Vector3d const&, int)
+  0.00     11.91     0.00    45000     0.00     0.00  Particle::operator=(Particle const&)
+  0.00     11.91     0.00    31274     0.00     0.00  gfxParticle::gfxParticle(gfxParticle const&)
+  0.00     11.91     0.00    31274     0.00     0.00  ParticleBest::ParticleBest(ParticleBest const&)
+  0.00     11.91     0.00    31274     0.00     0.00  Particle::Particle(Particle const&)
+  0.00     11.91     0.00    30002     0.00     0.00  __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >::base() const
+  0.00     11.91     0.00    30000     0.00     0.00  void std::_Destroy<gfxParticle>(gfxParticle*)
+  0.00     11.91     0.00    30000     0.00     0.00  operator new(unsigned long, void*)
+  0.00     11.91     0.00    15001     0.00     0.00  bool __gnu_cxx::operator!=<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >(__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > > const&, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > > const&)
+  0.00     11.91     0.00    15000     0.00     0.00  Michalewicz::evaluate(Vector3d const&)
+  0.00     11.91     0.00    15000     0.00     0.00  DeJongF1::evaluate(Vector3d const&)
+  0.00     11.91     0.00    15000     0.00     0.00  __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >::operator++()
+  0.00     11.91     0.00    15000     0.00     0.00  __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >::operator*() const
+  0.00     11.91     0.00    15000     0.00     0.00  void std::_Construct<gfxParticle, gfxParticle>(gfxParticle*, gfxParticle const&)
+  0.00     11.91     0.00     5096     0.00     0.00  std::setprecision(int)
+  0.00     11.91     0.00     2548     0.00     0.00  HUDMode(bool)
+  0.00     11.91     0.00     2548     0.00     0.00  operator<<(std::ostream&, Vector3d const&)
+  0.00     11.91     0.00     1274     0.00     1.04  DrawGLScene()
+  0.00     11.91     0.00     1274     0.00     0.00  glPrintHUDInfo(int, int, int)
+  0.00     11.91     0.00     1274     0.00     0.00  GraphicalPSO::getSelectedParticle()
+  0.00     11.91     0.00     1274     0.00     0.00  Particle::getUID()
+  0.00     11.91     0.00     1274     0.00     0.00  GraphicalPSO::functionName() const
+  0.00     11.91     0.00      753     0.00     0.00  DeJongF5::name()
+  0.00     11.91     0.00      541     0.00     0.00  boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double>::uniform_01(boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>)
+  0.00     11.91     0.00      541     0.00     0.00  boost::uniform_real<double>::uniform_real(double, double)
+  0.00     11.91     0.00      541     0.00     0.00  boost::variate_generator<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&, boost::uniform_real<double> >::variate_generator(boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&, boost::uniform_real<double>)
+  0.00     11.91     0.00      541     0.00     0.00  boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>::seed(unsigned int)
+  0.00     11.91     0.00      541     0.00     0.00  boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>::mersenne_twister(unsigned int)
+  0.00     11.91     0.00      541     0.00     0.00  boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::pass_through_engine(boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&)
+  0.00     11.91     0.00      541     0.00     0.00  boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>::max() const
+  0.00     11.91     0.00      541     0.00     0.00  boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::max() const
+  0.00     11.91     0.00      463     0.00     0.00  Michalewicz::name()
+  0.00     11.91     0.00       58     0.00     0.00  DeJongF1::name()
+  0.00     11.91     0.00       35     0.00     0.00  Particle::getParticleBest()
+  0.00     11.91     0.00        5     0.00     0.00  std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_M_get_Tp_allocator()
+  0.00     11.91     0.00        4     0.00     7.46  keyPressed(SDL_keysym*)
+  0.00     11.91     0.00        3     0.00     0.00  createFunction(int const&)
+  0.00     11.91     0.00        3     0.00     0.00  setPerspective(int)
+  0.00     11.91     0.00        3     0.00    10.15  GraphicalPSO::evaluateSwarm()
+  0.00     11.91     0.00        3     0.00     4.76  GraphicalPSO::initializeSwarm(int const&)
+  0.00     11.91     0.00        3     0.00     0.00  DeJong::DeJong()
+  0.00     11.91     0.00        3     0.00     0.00  __gnu_cxx::new_allocator<gfxParticle>::~new_allocator()
+  0.00     11.91     0.00        3     0.00     0.00  std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_M_deallocate(gfxParticle*, unsigned long)
+  0.00     11.91     0.00        3     0.00     0.06  void std::_Destroy<gfxParticle*>(gfxParticle*, gfxParticle*)
+  0.00     11.91     0.00        3     0.00     0.06  void std::_Destroy<gfxParticle*, gfxParticle>(gfxParticle*, gfxParticle*, std::allocator<gfxParticle>&)
+  0.00     11.91     0.00        2     0.00    14.91  GraphicalPSO::setFunction(int)
+  0.00     11.91     0.00        2     0.00     0.00  __gnu_cxx::new_allocator<gfxParticle>::deallocate(gfxParticle*, unsigned long)
+  0.00     11.91     0.00        2     0.00     0.00  __gnu_cxx::new_allocator<gfxParticle>::allocate(unsigned long, void const*)
+  0.00     11.91     0.00        2     0.00     0.00  __gnu_cxx::new_allocator<gfxParticle>::new_allocator()
+  0.00     11.91     0.00        2     0.00     0.00  __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >::__normal_iterator(gfxParticle const* const&)
+  0.00     11.91     0.00        2     0.00     0.00  __gnu_cxx::new_allocator<gfxParticle>::max_size() const
+  0.00     11.91     0.00        2     0.00     0.00  std::allocator<gfxParticle>::~allocator()
+  0.00     11.91     0.00        2     0.00     0.00  std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_M_allocate(unsigned long)
+  0.00     11.91     0.00        2     0.00     0.00  std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_Vector_impl::~_Vector_impl()
+  0.00     11.91     0.00        2     0.00     0.00  std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::~_Vector_base()
+  0.00     11.91     0.00        2     0.00     0.06  std::vector<gfxParticle, std::allocator<gfxParticle> >::~vector()
+  0.00     11.91     0.00        1     0.00     0.00  global constructors keyed to _ZN8DeJongF1C2Ev
+  0.00     11.91     0.00        1     0.00     0.00  global constructors keyed to _ZN8Vector3dC2Ev
+  0.00     11.91     0.00        1     0.00    15.04  global constructors keyed to draw
+  0.00     11.91     0.00        1     0.00     0.00  LoadFontTexture()
+  0.00     11.91     0.00        1     0.00    15.04  __static_initialization_and_destruction_0(int, int)
+  0.00     11.91     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00     11.91     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00     11.91     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00     11.91     0.00        1     0.00     0.00  Quit(int)
+  0.00     11.91     0.00        1     0.00     0.00  InitGL(int)
+  0.00     11.91     0.00        1     0.00     0.00  BuildFont()
+  0.00     11.91     0.00        1     0.00     0.00  Michalewicz::Michalewicz()
+  0.00     11.91     0.00        1     0.00     0.00  gfxParticle::gfxParticle()
+  0.00     11.91     0.00        1     0.00    15.04  GraphicalPSO::GraphicalPSO(int const&, int const&, double const&, double const&)
+  0.00     11.91     0.00        1     0.00     0.00  DeJong::~DeJong()
+  0.00     11.91     0.00        1     0.00     0.00  DeJongF1::DeJongF1()
+  0.00     11.91     0.00        1     0.00     0.00  DeJongF5::DeJongF5()
+  0.00     11.91     0.00        1     0.00     0.00  DeJongF5::~DeJongF5()
+  0.00     11.91     0.00        1     0.00     0.00  Particle::Particle()
+  0.00     11.91     0.00        1     0.00     0.00  __gnu_cxx::new_allocator<gfxParticle>::new_allocator(__gnu_cxx::new_allocator<gfxParticle> const&)
+  0.00     11.91     0.00        1     0.00     0.00  std::vector<gfxParticle, std::allocator<gfxParticle> >::end() const
+  0.00     11.91     0.00        1     0.00     0.00  std::vector<gfxParticle, std::allocator<gfxParticle> >::begin() const
+  0.00     11.91     0.00        1     0.00     0.00  std::vector<gfxParticle, std::allocator<gfxParticle> >::capacity() const
+  0.00     11.91     0.00        1     0.00     0.00  std::allocator<gfxParticle>::allocator()
+  0.00     11.91     0.00        1     0.00     0.00  std::allocator<gfxParticle>::allocator(std::allocator<gfxParticle> const&)
+  0.00     11.91     0.00        1     0.00     0.00  std::allocator<gfxParticle>::allocator()
+  0.00     11.91     0.00        1     0.00     0.00  std::allocator<gfxParticle>::~allocator()
+  0.00     11.91     0.00        1     0.00     0.00  std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_Vector_impl::_Vector_impl(std::allocator<gfxParticle> const&)
+  0.00     11.91     0.00        1     0.00     0.00  std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_Vector_impl::_Vector_impl()
+  0.00     11.91     0.00        1     0.00     0.00  std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_Vector_base(unsigned long, std::allocator<gfxParticle> const&)
+  0.00     11.91     0.00        1     0.00     0.00  std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_Vector_base()
+  0.00     11.91     0.00        1     0.00     0.00  gfxParticle* std::__uninitialized_copy<false>::uninitialized_copy<__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*>(__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*)
+  0.00     11.91     0.00        1     0.00     0.00  void std::__uninitialized_fill_n<false>::uninitialized_fill_n<gfxParticle*, unsigned long, gfxParticle>(gfxParticle*, unsigned long, gfxParticle const&)
+  0.00     11.91     0.00        1     0.00     0.00  std::vector<gfxParticle, std::allocator<gfxParticle> >::_M_fill_initialize(unsigned long, gfxParticle const&)
+  0.00     11.91     0.00        1     0.00     0.00  gfxParticle* std::vector<gfxParticle, std::allocator<gfxParticle> >::_M_allocate_and_copy<__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > > >(unsigned long, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >)
+  0.00     11.91     0.00        1     0.00     0.00  std::vector<gfxParticle, std::allocator<gfxParticle> >::vector(unsigned long, gfxParticle const&, std::allocator<gfxParticle> const&)
+  0.00     11.91     0.00        1     0.00     0.00  std::vector<gfxParticle, std::allocator<gfxParticle> >::vector()
+  0.00     11.91     0.00        1     0.00     0.06  std::vector<gfxParticle, std::allocator<gfxParticle> >::operator=(std::vector<gfxParticle, std::allocator<gfxParticle> > const&)
+  0.00     11.91     0.00        1     0.00     0.00  gfxParticle* std::uninitialized_copy<__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*>(__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*)
+  0.00     11.91     0.00        1     0.00     0.00  void std::uninitialized_fill_n<gfxParticle*, unsigned long, gfxParticle>(gfxParticle*, unsigned long, gfxParticle const&)
+  0.00     11.91     0.00        1     0.00     0.00  gfxParticle* std::__uninitialized_copy_a<__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*, gfxParticle>(__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*, std::allocator<gfxParticle>&)
+  0.00     11.91     0.00        1     0.00     0.00  void std::__uninitialized_fill_n_a<gfxParticle*, unsigned long, gfxParticle, gfxParticle>(gfxParticle*, unsigned long, gfxParticle const&, std::allocator<gfxParticle>&)
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+ 
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this 
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 2 byte(s) for 0.08% of 11.91 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]     76.2    0.00    9.08                 main [1]
+                0.24    7.49     538/538         GraphicalPSO::updateSwarmMovement() [2]
+                0.00    1.32    1274/1274        DrawGLScene() [7]
+                0.00    0.03       4/4           keyPressed(SDL_keysym*) [42]
+                0.00    0.00       1/1           InitGL(int) [140]
+-----------------------------------------------
+                0.24    7.49     538/538         main [1]
+[2]     64.9    0.24    7.49     538         GraphicalPSO::updateSwarmMovement() [2]
+                0.21    5.25 8070000/8115000     GraphicalPSO::evaluateParticle(int const&) [3]
+                0.00    0.83 8070000/8175000     boost::variate_generator<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&, boost::uniform_real<double> >::operator()() [10]
+                0.21    0.10 16140000/16140000     Vector3d::operator-(Vector3d const&) const [17]
+                0.11    0.10 16140000/24210000     Vector3d::operator+(Vector3d const&) const [16]
+                0.02    0.16 8070000/8070000     Particle::move() [22]
+                0.14    0.00 48420000/111031309     std::vector<gfxParticle, std::allocator<gfxParticle> >::operator[](unsigned long) [15]
+                0.12    0.00 8070000/8353771     Vector3d::operator=(Vector3d const&) [26]
+                0.10    0.00 48420000/56808828     Vector3d::~Vector3d() [24]
+                0.05    0.01 16140000/16140000     operator*(double, Vector3d const&) [30]
+                0.04    0.00 8070538/8070539     std::vector<gfxParticle, std::allocator<gfxParticle> >::size() const [33]
+                0.03    0.00 8070000/8071274     Particle::getBestPosition() [40]
+                0.01    0.00 16140000/24255000     Particle::getPosition() [44]
+                0.00    0.00     538/541         boost::variate_generator<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&, boost::uniform_real<double> >::variate_generator(boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&, boost::uniform_real<double>) [81]
+                0.00    0.00     538/541         boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>::mersenne_twister(unsigned int) [112]
+                0.00    0.00     538/541         boost::uniform_real<double>::uniform_real(double, double) [110]
+-----------------------------------------------
+                0.00    0.03   45000/8115000     GraphicalPSO::evaluateSwarm() [38]
+                0.21    5.25 8070000/8115000     GraphicalPSO::updateSwarmMovement() [2]
+[3]     46.1    0.21    5.28 8115000         GraphicalPSO::evaluateParticle(int const&) [3]
+                3.82    1.34 8085000/8085000     DeJongF5::evaluate(Vector3d const&) [4]
+                0.07    0.00 24345032/111031309     std::vector<gfxParticle, std::allocator<gfxParticle> >::operator[](unsigned long) [15]
+                0.03    0.00 8115000/8115000     Particle::setFitness(double&) [37]
+                0.01    0.00 8115000/8116274     Particle::getBestFitness() [56]
+                0.01    0.00 8115000/24255000     Particle::getPosition() [44]
+                0.00    0.00   15000/15000       DeJongF1::evaluate(Vector3d const&) [75]
+                0.00    0.00   15000/15000       Michalewicz::evaluate(Vector3d const&) [74]
+                0.00    0.00      32/45035       ParticleBest::operator=(ParticleBest const&) [67]
+                0.00    0.00      32/35          Particle::getParticleBest() [117]
+-----------------------------------------------
+                3.82    1.34 8085000/8085000     GraphicalPSO::evaluateParticle(int const&) [3]
+[4]     43.3    3.82    1.34 8085000         DeJongF5::evaluate(Vector3d const&) [4]
+                1.34    0.00 404250000/404340000     std::pow(double, int) [6]
+-----------------------------------------------
+                                                 <spontaneous>
+[5]     17.3    2.06    0.00                 __powidf2 [5]
+-----------------------------------------------
+                0.00    0.00   45000/404340000     DeJongF1::evaluate(Vector3d const&) [75]
+                0.00    0.00   45000/404340000     Michalewicz::evaluate(Vector3d const&) [74]
+                1.34    0.00 404250000/404340000     DeJongF5::evaluate(Vector3d const&) [4]
+[6]     11.3    1.34    0.00 404340000         std::pow(double, int) [6]
+-----------------------------------------------
+                0.00    1.32    1274/1274        main [1]
+[7]     11.1    0.00    1.32    1274         DrawGLScene() [7]
+                0.20    1.12    1274/1274        GraphicalPSO::draw(int, int) [8]
+                0.00    0.00    1274/1274        glPrintHUDInfo(int, int, int) [79]
+                0.00    0.00    2548/2548        HUDMode(bool) [105]
+-----------------------------------------------
+                0.20    1.12    1274/1274        DrawGLScene() [7]
+[8]     11.1    0.20    1.12    1274         GraphicalPSO::draw(int, int) [8]
+                0.62    0.14 19110000/19110000     gfxParticle::draw(int, int) [11]
+                0.12    0.14 19110000/19110000     gfxParticle::drawBest(int, int) [20]
+                0.11    0.00 38220000/111031309     std::vector<gfxParticle, std::allocator<gfxParticle> >::operator[](unsigned long) [15]
+-----------------------------------------------
+                0.15    0.70 8175000/8175000     boost::variate_generator<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&, boost::uniform_real<double> >::operator()() [10]
+[9]      7.1    0.15    0.70 8175000         double boost::uniform_real<double>::operator()<boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double> >(boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double>&) [9]
+                0.14    0.52 8175000/8175000     boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double>::operator()() [12]
+                0.03    0.00 16350000/16350000     boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double>::min() const [39]
+                0.02    0.00 8175000/8175000     boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double>::max() const [45]
+-----------------------------------------------
+                0.00    0.01  105000/8175000     GraphicalPSO::initializeSwarm(int const&) [54]
+                0.00    0.83 8070000/8175000     GraphicalPSO::updateSwarmMovement() [2]
+[10]     7.1    0.00    0.85 8175000         boost::variate_generator<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&, boost::uniform_real<double> >::operator()() [10]
+                0.15    0.70 8175000/8175000     double boost::uniform_real<double>::operator()<boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double> >(boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double>&) [9]
+-----------------------------------------------
+                0.62    0.14 19110000/19110000     GraphicalPSO::draw(int, int) [8]
+[11]     6.4    0.62    0.14 19110000         gfxParticle::draw(int, int) [11]
+                0.14    0.00 19110000/38220000     gfxParticle::drawPoint(Vector3d const&) [19]
+-----------------------------------------------
+                0.14    0.52 8175000/8175000     double boost::uniform_real<double>::operator()<boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double> >(boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double>&) [9]
+[12]     5.5    0.14    0.52 8175000         boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double>::operator()() [12]
+                0.03    0.35 8175000/8175000     boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::operator()() [13]
+                0.06    0.08 8175000/8175541     boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::min() const [23]
+-----------------------------------------------
+                0.03    0.35 8175000/8175000     boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double>::operator()() [12]
+[13]     3.2    0.03    0.35 8175000         boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::operator()() [13]
+                0.20    0.08 8175000/8175000     boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>::operator()() [18]
+                0.05    0.02 8175000/8175000     boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::base() [29]
+-----------------------------------------------
+                                                 <spontaneous>
+[14]     3.1    0.37    0.00                 __gnu_cxx::__enable_if<std::__is_integer<int>::__value, double>::__type std::sqrt<int>(int) [14]
+-----------------------------------------------
+                0.00    0.00       1/111031309     GraphicalPSO::GraphicalPSO(int const&, int const&, double const&, double const&) [53]
+                0.00    0.00       2/111031309     GraphicalPSO::setFunction(int) [43]
+                0.00    0.00    1274/111031309     GraphicalPSO::getSelectedParticle() [82]
+                0.00    0.00   45000/111031309     GraphicalPSO::initializeSwarm(int const&) [54]
+                0.07    0.00 24345032/111031309     GraphicalPSO::evaluateParticle(int const&) [3]
+                0.11    0.00 38220000/111031309     GraphicalPSO::draw(int, int) [8]
+                0.14    0.00 48420000/111031309     GraphicalPSO::updateSwarmMovement() [2]
+[15]     2.7    0.32    0.00 111031309         std::vector<gfxParticle, std::allocator<gfxParticle> >::operator[](unsigned long) [15]
+-----------------------------------------------
+                0.05    0.05 8070000/24210000     Particle::move() [22]
+                0.11    0.10 16140000/24210000     GraphicalPSO::updateSwarmMovement() [2]
+[16]     2.6    0.16    0.15 24210000         Vector3d::operator+(Vector3d const&) const [16]
+                0.15    0.00 24210000/40350000     Vector3d::Vector3d(double const&, double const&, double const&, double const&) [21]
+-----------------------------------------------
+                0.21    0.10 16140000/16140000     GraphicalPSO::updateSwarmMovement() [2]
+[17]     2.6    0.21    0.10 16140000         Vector3d::operator-(Vector3d const&) const [17]
+                0.10    0.00 16140000/40350000     Vector3d::Vector3d(double const&, double const&, double const&, double const&) [21]
+-----------------------------------------------
+                0.20    0.08 8175000/8175000     boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::operator()() [13]
+[18]     2.4    0.20    0.08 8175000         boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>::operator()() [18]
+                0.08    0.00   13621/13621       boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>::twist(int) [27]
+-----------------------------------------------
+                0.14    0.00 19110000/38220000     gfxParticle::drawBest(int, int) [20]
+                0.14    0.00 19110000/38220000     gfxParticle::draw(int, int) [11]
+[19]     2.3    0.28    0.00 38220000         gfxParticle::drawPoint(Vector3d const&) [19]
+-----------------------------------------------
+                0.12    0.14 19110000/19110000     GraphicalPSO::draw(int, int) [8]
+[20]     2.1    0.12    0.14 19110000         gfxParticle::drawBest(int, int) [20]
+                0.14    0.00 19110000/38220000     gfxParticle::drawPoint(Vector3d const&) [19]
+-----------------------------------------------
+                0.10    0.00 16140000/40350000     Vector3d::operator-(Vector3d const&) const [17]
+                0.15    0.00 24210000/40350000     Vector3d::operator+(Vector3d const&) const [16]
+[21]     2.1    0.25    0.00 40350000         Vector3d::Vector3d(double const&, double const&, double const&, double const&) [21]
+-----------------------------------------------
+                0.02    0.16 8070000/8070000     GraphicalPSO::updateSwarmMovement() [2]
+[22]     1.5    0.02    0.16 8070000         Particle::move() [22]
+                0.05    0.05 8070000/24210000     Vector3d::operator+(Vector3d const&) const [16]
+                0.04    0.00 8070000/8115001     Particle::setPosition(Vector3d const&) [32]
+                0.02    0.00 8070000/56808828     Vector3d::~Vector3d() [24]
+-----------------------------------------------
+                0.00    0.00     541/8175541     boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double>::uniform_01(boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>) [80]
+                0.06    0.08 8175000/8175541     boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double>::operator()() [12]
+[23]     1.2    0.06    0.08 8175541         boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::min() const [23]
+                0.04    0.00 8175541/8175541     boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>::min() const [31]
+                0.02    0.02 8175541/8176082     boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::base() const [34]
+-----------------------------------------------
+                0.00    0.00       2/56808828     Particle::Particle() [85]
+                0.00    0.00   45000/56808828     Particle::Particle(Vector3d const&, int) [66]
+                0.00    0.00   45000/56808828     GraphicalPSO::initializeSwarm(int const&) [54]
+                0.00    0.00   76276/56808828     ParticleBest::~ParticleBest() [73]
+                0.00    0.00  152550/56808828     Particle::~Particle() [69]
+                0.02    0.00 8070000/56808828     Particle::move() [22]
+                0.10    0.00 48420000/56808828     GraphicalPSO::updateSwarmMovement() [2]
+[24]     1.0    0.12    0.00 56808828         Vector3d::~Vector3d() [24]
+-----------------------------------------------
+                                                 <spontaneous>
+[25]     1.0    0.12    0.00                 Goldstein::~Goldstein() [25]
+-----------------------------------------------
+                0.00    0.00       1/8353771     Particle::Particle() [85]
+                0.00    0.00   45000/8353771     Particle::Particle(Vector3d const&, int) [66]
+                0.00    0.00   45035/8353771     ParticleBest::operator=(ParticleBest const&) [67]
+                0.00    0.00   90000/8353771     Particle::operator=(Particle const&) [64]
+                0.00    0.00  103735/8353771     Particle::setFitness(double&) [37]
+                0.12    0.00 8070000/8353771     GraphicalPSO::updateSwarmMovement() [2]
+[26]     1.0    0.12    0.00 8353771         Vector3d::operator=(Vector3d const&) [26]
+-----------------------------------------------
+                0.08    0.00   13621/13621       boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>::operator()() [18]
+[27]     0.7    0.08    0.00   13621         boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>::twist(int) [27]
+-----------------------------------------------
+                                                 <spontaneous>
+[28]     0.7    0.08    0.00                 std::vector<Particle, std::allocator<Particle> >::size() const [28]
+-----------------------------------------------
+                0.05    0.02 8175000/8175000     boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::operator()() [13]
+[29]     0.6    0.05    0.02 8175000         boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::base() [29]
+                0.02    0.00 8175000/16351082     boost::random::detail::ptr_helper<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::ref(boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&) [36]
+-----------------------------------------------
+                0.05    0.01 16140000/16140000     GraphicalPSO::updateSwarmMovement() [2]
+[30]     0.5    0.05    0.01 16140000         operator*(double, Vector3d const&) [30]
+                0.01    0.00 16140000/16185000     Vector3d::Vector3d(double const&, double const&, double const&) [55]
+-----------------------------------------------
+                0.04    0.00 8175541/8175541     boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::min() const [23]
+[31]     0.3    0.04    0.00 8175541         boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>::min() const [31]
+-----------------------------------------------
+                0.00    0.00       1/8115001     Particle::Particle() [85]
+                0.00    0.00   45000/8115001     Particle::Particle(Vector3d const&, int) [66]
+                0.04    0.00 8070000/8115001     Particle::move() [22]
+[32]     0.3    0.04    0.00 8115001         Particle::setPosition(Vector3d const&) [32]
+-----------------------------------------------
+                0.00    0.00       1/8070539     std::vector<gfxParticle, std::allocator<gfxParticle> >::operator=(std::vector<gfxParticle, std::allocator<gfxParticle> > const&) [77]
+                0.04    0.00 8070538/8070539     GraphicalPSO::updateSwarmMovement() [2]
+[33]     0.3    0.04    0.00 8070539         std::vector<gfxParticle, std::allocator<gfxParticle> >::size() const [33]
+-----------------------------------------------
+                0.00    0.00     541/8176082     boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::max() const [83]
+                0.02    0.02 8175541/8176082     boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::min() const [23]
+[34]     0.3    0.02    0.02 8176082         boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::base() const [34]
+                0.02    0.00 8176082/16351082     boost::random::detail::ptr_helper<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::ref(boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&) [36]
+-----------------------------------------------
+                                                 <spontaneous>
+[35]     0.3    0.00    0.04                 __do_global_ctors_aux [35]
+                0.02    0.00       1/1           global constructors keyed to _ZN8ParticleC2Ev [46]
+                0.00    0.02       1/1           global constructors keyed to draw [51]
+                0.00    0.00       1/1           global constructors keyed to _ZN8Vector3dC2Ev [134]
+                0.00    0.00       1/1           global constructors keyed to _ZN8DeJongF1C2Ev [133]
+-----------------------------------------------
+                0.02    0.00 8175000/16351082     boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::base() [29]
+                0.02    0.00 8176082/16351082     boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::base() const [34]
+[36]     0.3    0.04    0.00 16351082         boost::random::detail::ptr_helper<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::ref(boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&) [36]
+-----------------------------------------------
+                0.03    0.00 8115000/8115000     GraphicalPSO::evaluateParticle(int const&) [3]
+[37]     0.3    0.03    0.00 8115000         Particle::setFitness(double&) [37]
+                0.00    0.00  103735/8353771     Vector3d::operator=(Vector3d const&) [26]
+-----------------------------------------------
+                0.00    0.01       1/3           GraphicalPSO::GraphicalPSO(int const&, int const&, double const&, double const&) [53]
+                0.00    0.02       2/3           GraphicalPSO::setFunction(int) [43]
+[38]     0.3    0.00    0.03       3         GraphicalPSO::evaluateSwarm() [38]
+                0.00    0.03   45000/8115000     GraphicalPSO::evaluateParticle(int const&) [3]
+-----------------------------------------------
+                0.03    0.00 16350000/16350000     double boost::uniform_real<double>::operator()<boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double> >(boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double>&) [9]
+[39]     0.3    0.03    0.00 16350000         boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double>::min() const [39]
+-----------------------------------------------
+                0.00    0.00    1274/8071274     glPrintHUDInfo(int, int, int) [79]
+                0.03    0.00 8070000/8071274     GraphicalPSO::updateSwarmMovement() [2]
+[40]     0.3    0.03    0.00 8071274         Particle::getBestPosition() [40]
+-----------------------------------------------
+                                                 <spontaneous>
+[41]     0.3    0.03    0.00                 gfxParticle::drawCube(Vector3d const&) [41]
+-----------------------------------------------
+                0.00    0.03       4/4           main [1]
+[42]     0.3    0.00    0.03       4         keyPressed(SDL_keysym*) [42]
+                0.00    0.03       2/2           GraphicalPSO::setFunction(int) [43]
+                0.00    0.00       2/3           setPerspective(int) [120]
+                0.00    0.00       1/1           Quit(int) [139]
+-----------------------------------------------
+                0.00    0.03       2/2           keyPressed(SDL_keysym*) [42]
+[43]     0.3    0.00    0.03       2         GraphicalPSO::setFunction(int) [43]
+                0.00    0.02       2/3           GraphicalPSO::evaluateSwarm() [38]
+                0.00    0.01       2/3           GraphicalPSO::initializeSwarm(int const&) [54]
+                0.00    0.00       2/45035       ParticleBest::operator=(ParticleBest const&) [67]
+                0.00    0.00       2/111031309     std::vector<gfxParticle, std::allocator<gfxParticle> >::operator[](unsigned long) [15]
+                0.00    0.00       2/3           createFunction(int const&) [119]
+                0.00    0.00       2/35          Particle::getParticleBest() [117]
+-----------------------------------------------
+                0.01    0.00 8115000/24255000     GraphicalPSO::evaluateParticle(int const&) [3]
+                0.01    0.00 16140000/24255000     GraphicalPSO::updateSwarmMovement() [2]
+[44]     0.2    0.02    0.00 24255000         Particle::getPosition() [44]
+-----------------------------------------------
+                0.02    0.00 8175000/8175000     double boost::uniform_real<double>::operator()<boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double> >(boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double>&) [9]
+[45]     0.2    0.02    0.00 8175000         boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double>::max() const [45]
+-----------------------------------------------
+                0.02    0.00       1/1           __do_global_ctors_aux [35]
+[46]     0.2    0.02    0.00       1         global constructors keyed to _ZN8ParticleC2Ev [46]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [136]
+-----------------------------------------------
+                                                 <spontaneous>
+[47]     0.2    0.02    0.00                 Vector3d::Vector3d(double const&, double const&, double const&) [47]
+-----------------------------------------------
+                                                 <spontaneous>
+[48]     0.2    0.02    0.00                 Vector3d::Vector3d(double const&, double const&, double const&, double const&) [48]
+-----------------------------------------------
+                                                 <spontaneous>
+[49]     0.2    0.02    0.00                 Vector3d::~Vector3d() [49]
+-----------------------------------------------
+                                                 <spontaneous>
+[50]     0.2    0.02    0.00                 Vector3d::operator+() const [50]
+-----------------------------------------------
+                0.00    0.02       1/1           __do_global_ctors_aux [35]
+[51]     0.1    0.00    0.02       1         global constructors keyed to draw [51]
+                0.00    0.02       1/1           __static_initialization_and_destruction_0(int, int) [52]
+-----------------------------------------------
+                0.00    0.02       1/1           global constructors keyed to draw [51]
+[52]     0.1    0.00    0.02       1         __static_initialization_and_destruction_0(int, int) [52]
+                0.00    0.02       1/1           GraphicalPSO::GraphicalPSO(int const&, int const&, double const&, double const&) [53]
+-----------------------------------------------
+                0.00    0.02       1/1           __static_initialization_and_destruction_0(int, int) [52]
+[53]     0.1    0.00    0.02       1         GraphicalPSO::GraphicalPSO(int const&, int const&, double const&, double const&) [53]
+                0.00    0.01       1/3           GraphicalPSO::evaluateSwarm() [38]
+                0.00    0.00       1/3           GraphicalPSO::initializeSwarm(int const&) [54]
+                0.00    0.00       1/1           std::vector<gfxParticle, std::allocator<gfxParticle> >::operator=(std::vector<gfxParticle, std::allocator<gfxParticle> > const&) [77]
+                0.00    0.00       1/2           std::vector<gfxParticle, std::allocator<gfxParticle> >::~vector() [76]
+                0.00    0.00       1/1           gfxParticle::gfxParticle() [84]
+                0.00    0.00       1/45035       ParticleBest::operator=(ParticleBest const&) [67]
+                0.00    0.00       1/76275       gfxParticle::~gfxParticle() [68]
+                0.00    0.00       1/111031309     std::vector<gfxParticle, std::allocator<gfxParticle> >::operator[](unsigned long) [15]
+                0.00    0.00       1/45002       ParticleBest::ParticleBest() [94]
+                0.00    0.00       1/1           std::vector<gfxParticle, std::allocator<gfxParticle> >::vector() [164]
+                0.00    0.00       1/1           std::allocator<gfxParticle>::allocator() [151]
+                0.00    0.00       1/1           std::vector<gfxParticle, std::allocator<gfxParticle> >::vector(unsigned long, gfxParticle const&, std::allocator<gfxParticle> const&) [163]
+                0.00    0.00       1/1           std::allocator<gfxParticle>::~allocator() [154]
+                0.00    0.00       1/3           createFunction(int const&) [119]
+                0.00    0.00       1/35          Particle::getParticleBest() [117]
+-----------------------------------------------
+                0.00    0.00       1/3           GraphicalPSO::GraphicalPSO(int const&, int const&, double const&, double const&) [53]
+                0.00    0.01       2/3           GraphicalPSO::setFunction(int) [43]
+[54]     0.1    0.00    0.01       3         GraphicalPSO::initializeSwarm(int const&) [54]
+                0.00    0.01  105000/8175000     boost::variate_generator<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&, boost::uniform_real<double> >::operator()() [10]
+                0.00    0.00   45000/45000       gfxParticle::operator=(gfxParticle const&) [63]
+                0.00    0.00   45000/45000       gfxParticle::gfxParticle(Vector3d const&, int) [65]
+                0.00    0.00   45000/76275       gfxParticle::~gfxParticle() [68]
+                0.00    0.00   45000/111031309     std::vector<gfxParticle, std::allocator<gfxParticle> >::operator[](unsigned long) [15]
+                0.00    0.00   45000/56808828     Vector3d::~Vector3d() [24]
+                0.00    0.00   45000/16185000     Vector3d::Vector3d(double const&, double const&, double const&) [55]
+                0.00    0.00       3/541         boost::variate_generator<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&, boost::uniform_real<double> >::variate_generator(boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&, boost::uniform_real<double>) [81]
+                0.00    0.00       3/541         boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>::mersenne_twister(unsigned int) [112]
+                0.00    0.00       3/541         boost::uniform_real<double>::uniform_real(double, double) [110]
+-----------------------------------------------
+                0.00    0.00   45000/16185000     GraphicalPSO::initializeSwarm(int const&) [54]
+                0.01    0.00 16140000/16185000     operator*(double, Vector3d const&) [30]
+[55]     0.1    0.01    0.00 16185000         Vector3d::Vector3d(double const&, double const&, double const&) [55]
+-----------------------------------------------
+                0.00    0.00    1274/8116274     glPrintHUDInfo(int, int, int) [79]
+                0.01    0.00 8115000/8116274     GraphicalPSO::evaluateParticle(int const&) [3]
+[56]     0.1    0.01    0.00 8116274         Particle::getBestFitness() [56]
+-----------------------------------------------
+                                                 <spontaneous>
+[57]     0.1    0.01    0.00                 ConsolePSO::evaluateSwarm() [57]
+-----------------------------------------------
+                                                 <spontaneous>
+[58]     0.1    0.01    0.00                 Camel::evaluate(Vector3d const&) [58]
+-----------------------------------------------
+                                                 <spontaneous>
+[59]     0.1    0.01    0.00                 Particle::setPosition(double, double, double) [59]
+-----------------------------------------------
+                                                 <spontaneous>
+[60]     0.1    0.01    0.00                 Vector3d::operator==(Vector3d const&) const [60]
+-----------------------------------------------
+                                                 <spontaneous>
+[61]     0.1    0.01    0.00                 std::__miter_base<Particle*, false>::__b(Particle*) [61]
+-----------------------------------------------
+                                                 <spontaneous>
+[62]     0.0    0.01    0.00                 bool __gnu_cxx::operator!=<Particle*, std::vector<Particle, std::allocator<Particle> > >(__gnu_cxx::__normal_iterator<Particle*, std::vector<Particle, std::allocator<Particle> > > const&, __gnu_cxx::__normal_iterator<Particle*, std::vector<Particle, std::allocator<Particle> > > const&) [62]
+-----------------------------------------------
+                0.00    0.00   45000/45000       GraphicalPSO::initializeSwarm(int const&) [54]
+[63]     0.0    0.00    0.00   45000         gfxParticle::operator=(gfxParticle const&) [63]
+                0.00    0.00   45000/45000       Particle::operator=(Particle const&) [64]
+-----------------------------------------------
+                0.00    0.00   45000/45000       gfxParticle::operator=(gfxParticle const&) [63]
+[64]     0.0    0.00    0.00   45000         Particle::operator=(Particle const&) [64]
+                0.00    0.00   90000/8353771     Vector3d::operator=(Vector3d const&) [26]
+                0.00    0.00   45000/45035       ParticleBest::operator=(ParticleBest const&) [67]
+-----------------------------------------------
+                0.00    0.00   45000/45000       GraphicalPSO::initializeSwarm(int const&) [54]
+[65]     0.0    0.00    0.00   45000         gfxParticle::gfxParticle(Vector3d const&, int) [65]
+                0.00    0.00   45000/45000       Particle::Particle(Vector3d const&, int) [66]
+-----------------------------------------------
+                0.00    0.00   45000/45000       gfxParticle::gfxParticle(Vector3d const&, int) [65]
+[66]     0.0    0.00    0.00   45000         Particle::Particle(Vector3d const&, int) [66]
+                0.00    0.00   45000/8353771     Vector3d::operator=(Vector3d const&) [26]
+                0.00    0.00   45000/8115001     Particle::setPosition(Vector3d const&) [32]
+                0.00    0.00   45000/56808828     Vector3d::~Vector3d() [24]
+                0.00    0.00  135000/180006      Vector3d::Vector3d() [92]
+                0.00    0.00   45000/45002       ParticleBest::ParticleBest() [94]
+-----------------------------------------------
+                0.00    0.00       1/45035       GraphicalPSO::GraphicalPSO(int const&, int const&, double const&, double const&) [53]
+                0.00    0.00       2/45035       GraphicalPSO::setFunction(int) [43]
+                0.00    0.00      32/45035       GraphicalPSO::evaluateParticle(int const&) [3]
+                0.00    0.00   45000/45035       Particle::operator=(Particle const&) [64]
+[67]     0.0    0.00    0.00   45035         ParticleBest::operator=(ParticleBest const&) [67]
+                0.00    0.00   45035/8353771     Vector3d::operator=(Vector3d const&) [26]
+-----------------------------------------------
+                0.00    0.00       1/76275       GraphicalPSO::GraphicalPSO(int const&, int const&, double const&, double const&) [53]
+                0.00    0.00    1274/76275       glPrintHUDInfo(int, int, int) [79]
+                0.00    0.00   30000/76275       void std::_Destroy<gfxParticle>(gfxParticle*) [70]
+                0.00    0.00   45000/76275       GraphicalPSO::initializeSwarm(int const&) [54]
+[68]     0.0    0.00    0.00   76275         gfxParticle::~gfxParticle() [68]
+                0.00    0.00   76275/76275       Particle::~Particle() [69]
+-----------------------------------------------
+                0.00    0.00   76275/76275       gfxParticle::~gfxParticle() [68]
+[69]     0.0    0.00    0.00   76275         Particle::~Particle() [69]
+                0.00    0.00  152550/56808828     Vector3d::~Vector3d() [24]
+                0.00    0.00   76275/76276       ParticleBest::~ParticleBest() [73]
+-----------------------------------------------
+                0.00    0.00   30000/30000       void std::_Destroy<gfxParticle*>(gfxParticle*, gfxParticle*) [71]
+[70]     0.0    0.00    0.00   30000         void std::_Destroy<gfxParticle>(gfxParticle*) [70]
+                0.00    0.00   30000/76275       gfxParticle::~gfxParticle() [68]
+-----------------------------------------------
+                0.00    0.00       3/3           void std::_Destroy<gfxParticle*, gfxParticle>(gfxParticle*, gfxParticle*, std::allocator<gfxParticle>&) [72]
+[71]     0.0    0.00    0.00       3         void std::_Destroy<gfxParticle*>(gfxParticle*, gfxParticle*) [71]
+                0.00    0.00   30000/30000       void std::_Destroy<gfxParticle>(gfxParticle*) [70]
+-----------------------------------------------
+                0.00    0.00       1/3           std::vector<gfxParticle, std::allocator<gfxParticle> >::operator=(std::vector<gfxParticle, std::allocator<gfxParticle> > const&) [77]
+                0.00    0.00       2/3           std::vector<gfxParticle, std::allocator<gfxParticle> >::~vector() [76]
+[72]     0.0    0.00    0.00       3         void std::_Destroy<gfxParticle*, gfxParticle>(gfxParticle*, gfxParticle*, std::allocator<gfxParticle>&) [72]
+                0.00    0.00       3/3           void std::_Destroy<gfxParticle*>(gfxParticle*, gfxParticle*) [71]
+-----------------------------------------------
+                0.00    0.00       1/76276       GraphicalPSO::~GraphicalPSO() [78]
+                0.00    0.00   76275/76276       Particle::~Particle() [69]
+[73]     0.0    0.00    0.00   76276         ParticleBest::~ParticleBest() [73]
+                0.00    0.00   76276/56808828     Vector3d::~Vector3d() [24]
+-----------------------------------------------
+                0.00    0.00   15000/15000       GraphicalPSO::evaluateParticle(int const&) [3]
+[74]     0.0    0.00    0.00   15000         Michalewicz::evaluate(Vector3d const&) [74]
+                0.00    0.00   45000/404340000     std::pow(double, int) [6]
+-----------------------------------------------
+                0.00    0.00   15000/15000       GraphicalPSO::evaluateParticle(int const&) [3]
+[75]     0.0    0.00    0.00   15000         DeJongF1::evaluate(Vector3d const&) [75]
+                0.00    0.00   45000/404340000     std::pow(double, int) [6]
+-----------------------------------------------
+                0.00    0.00       1/2           GraphicalPSO::~GraphicalPSO() [78]
+                0.00    0.00       1/2           GraphicalPSO::GraphicalPSO(int const&, int const&, double const&, double const&) [53]
+[76]     0.0    0.00    0.00       2         std::vector<gfxParticle, std::allocator<gfxParticle> >::~vector() [76]
+                0.00    0.00       2/3           void std::_Destroy<gfxParticle*, gfxParticle>(gfxParticle*, gfxParticle*, std::allocator<gfxParticle>&) [72]
+                0.00    0.00       2/5           std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_M_get_Tp_allocator() [118]
+                0.00    0.00       2/2           std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::~_Vector_base() [132]
+-----------------------------------------------
+                0.00    0.00       1/1           GraphicalPSO::GraphicalPSO(int const&, int const&, double const&, double const&) [53]
+[77]     0.0    0.00    0.00       1         std::vector<gfxParticle, std::allocator<gfxParticle> >::operator=(std::vector<gfxParticle, std::allocator<gfxParticle> > const&) [77]
+                0.00    0.00       1/3           void std::_Destroy<gfxParticle*, gfxParticle>(gfxParticle*, gfxParticle*, std::allocator<gfxParticle>&) [72]
+                0.00    0.00       1/8070539     std::vector<gfxParticle, std::allocator<gfxParticle> >::size() const [33]
+                0.00    0.00       1/1           std::vector<gfxParticle, std::allocator<gfxParticle> >::capacity() const [150]
+                0.00    0.00       1/1           std::vector<gfxParticle, std::allocator<gfxParticle> >::end() const [148]
+                0.00    0.00       1/1           std::vector<gfxParticle, std::allocator<gfxParticle> >::begin() const [149]
+                0.00    0.00       1/1           gfxParticle* std::vector<gfxParticle, std::allocator<gfxParticle> >::_M_allocate_and_copy<__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > > >(unsigned long, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >) [162]
+                0.00    0.00       1/5           std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_M_get_Tp_allocator() [118]
+                0.00    0.00       1/3           std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_M_deallocate(gfxParticle*, unsigned long) [123]
+-----------------------------------------------
+                                                 <spontaneous>
+[78]     0.0    0.00    0.00                 GraphicalPSO::~GraphicalPSO() [78]
+                0.00    0.00       1/2           std::vector<gfxParticle, std::allocator<gfxParticle> >::~vector() [76]
+                0.00    0.00       1/76276       ParticleBest::~ParticleBest() [73]
+                0.00    0.00       1/1           DeJongF5::~DeJongF5() [146]
+-----------------------------------------------
+                0.00    0.00    1274/1274        DrawGLScene() [7]
+[79]     0.0    0.00    0.00    1274         glPrintHUDInfo(int, int, int) [79]
+                0.00    0.00    1274/76275       gfxParticle::~gfxParticle() [68]
+                0.00    0.00    1274/8071274     Particle::getBestPosition() [40]
+                0.00    0.00    1274/1274        GraphicalPSO::getSelectedParticle() [82]
+                0.00    0.00    1274/8116274     Particle::getBestFitness() [56]
+                0.00    0.00    2548/5096        std::setprecision(int) [104]
+                0.00    0.00    2548/2548        operator<<(std::ostream&, Vector3d const&) [106]
+                0.00    0.00    1274/31274       gfxParticle::gfxParticle(gfxParticle const&) [95]
+                0.00    0.00    1274/1274        Particle::getUID() [107]
+                0.00    0.00    1274/1274        GraphicalPSO::functionName() const [108]
+-----------------------------------------------
+                0.00    0.00     541/541         boost::variate_generator<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&, boost::uniform_real<double> >::variate_generator(boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&, boost::uniform_real<double>) [81]
+[80]     0.0    0.00    0.00     541         boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double>::uniform_01(boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>) [80]
+                0.00    0.00     541/8175541     boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::min() const [23]
+                0.00    0.00     541/541         boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::max() const [83]
+-----------------------------------------------
+                0.00    0.00       3/541         GraphicalPSO::initializeSwarm(int const&) [54]
+                0.00    0.00     538/541         GraphicalPSO::updateSwarmMovement() [2]
+[81]     0.0    0.00    0.00     541         boost::variate_generator<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&, boost::uniform_real<double> >::variate_generator(boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&, boost::uniform_real<double>) [81]
+                0.00    0.00     541/541         boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double>::uniform_01(boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>) [80]
+                0.00    0.00     541/541         boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::pass_through_engine(boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&) [113]
+-----------------------------------------------
+                0.00    0.00    1274/1274        glPrintHUDInfo(int, int, int) [79]
+[82]     0.0    0.00    0.00    1274         GraphicalPSO::getSelectedParticle() [82]
+                0.00    0.00    1274/111031309     std::vector<gfxParticle, std::allocator<gfxParticle> >::operator[](unsigned long) [15]
+-----------------------------------------------
+                0.00    0.00     541/541         boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double>::uniform_01(boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>) [80]
+[83]     0.0    0.00    0.00     541         boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::max() const [83]
+                0.00    0.00     541/8176082     boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::base() const [34]
+                0.00    0.00     541/541         boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>::max() const [114]
+-----------------------------------------------
+                0.00    0.00       1/1           GraphicalPSO::GraphicalPSO(int const&, int const&, double const&, double const&) [53]
+[84]     0.0    0.00    0.00       1         gfxParticle::gfxParticle() [84]
+                0.00    0.00       1/1           Particle::Particle() [85]
+-----------------------------------------------
+                0.00    0.00       1/1           gfxParticle::gfxParticle() [84]
+[85]     0.0    0.00    0.00       1         Particle::Particle() [85]
+                0.00    0.00       1/8353771     Vector3d::operator=(Vector3d const&) [26]
+                0.00    0.00       1/8115001     Particle::setPosition(Vector3d const&) [32]
+                0.00    0.00       2/56808828     Vector3d::~Vector3d() [24]
+                0.00    0.00       4/180006      Vector3d::Vector3d() [92]
+                0.00    0.00       1/45002       ParticleBest::ParticleBest() [94]
+-----------------------------------------------
+                0.00    0.00       4/180006      Particle::Particle() [85]
+                0.00    0.00   45002/180006      ParticleBest::ParticleBest() [94]
+                0.00    0.00  135000/180006      Particle::Particle(Vector3d const&, int) [66]
+[92]     0.0    0.00    0.00  180006         Vector3d::Vector3d() [92]
+-----------------------------------------------
+                0.00    0.00   31274/93822       ParticleBest::ParticleBest(ParticleBest const&) [96]
+                0.00    0.00   62548/93822       Particle::Particle(Particle const&) [97]
+[93]     0.0    0.00    0.00   93822         Vector3d::Vector3d(Vector3d const&) [93]
+-----------------------------------------------
+                0.00    0.00       1/45002       Particle::Particle() [85]
+                0.00    0.00       1/45002       GraphicalPSO::GraphicalPSO(int const&, int const&, double const&, double const&) [53]
+                0.00    0.00   45000/45002       Particle::Particle(Vector3d const&, int) [66]
+[94]     0.0    0.00    0.00   45002         ParticleBest::ParticleBest() [94]
+                0.00    0.00   45002/180006      Vector3d::Vector3d() [92]
+-----------------------------------------------
+                0.00    0.00    1274/31274       glPrintHUDInfo(int, int, int) [79]
+                0.00    0.00   15000/31274       void std::_Construct<gfxParticle, gfxParticle>(gfxParticle*, gfxParticle const&) [103]
+                0.00    0.00   15000/31274       gfxParticle* std::__uninitialized_copy<false>::uninitialized_copy<__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*>(__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*) [159]
+[95]     0.0    0.00    0.00   31274         gfxParticle::gfxParticle(gfxParticle const&) [95]
+                0.00    0.00   31274/31274       Particle::Particle(Particle const&) [97]
+-----------------------------------------------
+                0.00    0.00   31274/31274       Particle::Particle(Particle const&) [97]
+[96]     0.0    0.00    0.00   31274         ParticleBest::ParticleBest(ParticleBest const&) [96]
+                0.00    0.00   31274/93822       Vector3d::Vector3d(Vector3d const&) [93]
+-----------------------------------------------
+                0.00    0.00   31274/31274       gfxParticle::gfxParticle(gfxParticle const&) [95]
+[97]     0.0    0.00    0.00   31274         Particle::Particle(Particle const&) [97]
+                0.00    0.00   62548/93822       Vector3d::Vector3d(Vector3d const&) [93]
+                0.00    0.00   31274/31274       ParticleBest::ParticleBest(ParticleBest const&) [96]
+-----------------------------------------------
+                0.00    0.00   30002/30002       bool __gnu_cxx::operator!=<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >(__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > > const&, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > > const&) [100]
+[98]     0.0    0.00    0.00   30002         __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >::base() const [98]
+-----------------------------------------------
+                0.00    0.00   15000/30000       void std::_Construct<gfxParticle, gfxParticle>(gfxParticle*, gfxParticle const&) [103]
+                0.00    0.00   15000/30000       gfxParticle* std::__uninitialized_copy<false>::uninitialized_copy<__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*>(__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*) [159]
+[99]     0.0    0.00    0.00   30000         operator new(unsigned long, void*) [99]
+-----------------------------------------------
+                0.00    0.00   15001/15001       gfxParticle* std::__uninitialized_copy<false>::uninitialized_copy<__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*>(__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*) [159]
+[100]    0.0    0.00    0.00   15001         bool __gnu_cxx::operator!=<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >(__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > > const&, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > > const&) [100]
+                0.00    0.00   30002/30002       __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >::base() const [98]
+-----------------------------------------------
+                0.00    0.00   15000/15000       gfxParticle* std::__uninitialized_copy<false>::uninitialized_copy<__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*>(__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*) [159]
+[101]    0.0    0.00    0.00   15000         __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >::operator++() [101]
+-----------------------------------------------
+                0.00    0.00   15000/15000       gfxParticle* std::__uninitialized_copy<false>::uninitialized_copy<__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*>(__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*) [159]
+[102]    0.0    0.00    0.00   15000         __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >::operator*() const [102]
+-----------------------------------------------
+                0.00    0.00   15000/15000       void std::__uninitialized_fill_n<false>::uninitialized_fill_n<gfxParticle*, unsigned long, gfxParticle>(gfxParticle*, unsigned long, gfxParticle const&) [160]
+[103]    0.0    0.00    0.00   15000         void std::_Construct<gfxParticle, gfxParticle>(gfxParticle*, gfxParticle const&) [103]
+                0.00    0.00   15000/30000       operator new(unsigned long, void*) [99]
+                0.00    0.00   15000/31274       gfxParticle::gfxParticle(gfxParticle const&) [95]
+-----------------------------------------------
+                0.00    0.00    2548/5096        glPrintHUDInfo(int, int, int) [79]
+                0.00    0.00    2548/5096        operator<<(std::ostream&, Vector3d const&) [106]
+[104]    0.0    0.00    0.00    5096         std::setprecision(int) [104]
+-----------------------------------------------
+                0.00    0.00    2548/2548        DrawGLScene() [7]
+[105]    0.0    0.00    0.00    2548         HUDMode(bool) [105]
+-----------------------------------------------
+                0.00    0.00    2548/2548        glPrintHUDInfo(int, int, int) [79]
+[106]    0.0    0.00    0.00    2548         operator<<(std::ostream&, Vector3d const&) [106]
+                0.00    0.00    2548/5096        std::setprecision(int) [104]
+-----------------------------------------------
+                0.00    0.00    1274/1274        glPrintHUDInfo(int, int, int) [79]
+[107]    0.0    0.00    0.00    1274         Particle::getUID() [107]
+-----------------------------------------------
+                0.00    0.00    1274/1274        glPrintHUDInfo(int, int, int) [79]
+[108]    0.0    0.00    0.00    1274         GraphicalPSO::functionName() const [108]
+                0.00    0.00     753/753         DeJongF5::name() [109]
+                0.00    0.00     463/463         Michalewicz::name() [115]
+                0.00    0.00      58/58          DeJongF1::name() [116]
+-----------------------------------------------
+                0.00    0.00     753/753         GraphicalPSO::functionName() const [108]
+[109]    0.0    0.00    0.00     753         DeJongF5::name() [109]
+-----------------------------------------------
+                0.00    0.00       3/541         GraphicalPSO::initializeSwarm(int const&) [54]
+                0.00    0.00     538/541         GraphicalPSO::updateSwarmMovement() [2]
+[110]    0.0    0.00    0.00     541         boost::uniform_real<double>::uniform_real(double, double) [110]
+-----------------------------------------------
+                0.00    0.00     541/541         boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>::mersenne_twister(unsigned int) [112]
+[111]    0.0    0.00    0.00     541         boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>::seed(unsigned int) [111]
+-----------------------------------------------
+                0.00    0.00       3/541         GraphicalPSO::initializeSwarm(int const&) [54]
+                0.00    0.00     538/541         GraphicalPSO::updateSwarmMovement() [2]
+[112]    0.0    0.00    0.00     541         boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>::mersenne_twister(unsigned int) [112]
+                0.00    0.00     541/541         boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>::seed(unsigned int) [111]
+-----------------------------------------------
+                0.00    0.00     541/541         boost::variate_generator<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&, boost::uniform_real<double> >::variate_generator(boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&, boost::uniform_real<double>) [81]
+[113]    0.0    0.00    0.00     541         boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::pass_through_engine(boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&) [113]
+-----------------------------------------------
+                0.00    0.00     541/541         boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::max() const [83]
+[114]    0.0    0.00    0.00     541         boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>::max() const [114]
+-----------------------------------------------
+                0.00    0.00     463/463         GraphicalPSO::functionName() const [108]
+[115]    0.0    0.00    0.00     463         Michalewicz::name() [115]
+-----------------------------------------------
+                0.00    0.00      58/58          GraphicalPSO::functionName() const [108]
+[116]    0.0    0.00    0.00      58         DeJongF1::name() [116]
+-----------------------------------------------
+                0.00    0.00       1/35          GraphicalPSO::GraphicalPSO(int const&, int const&, double const&, double const&) [53]
+                0.00    0.00       2/35          GraphicalPSO::setFunction(int) [43]
+                0.00    0.00      32/35          GraphicalPSO::evaluateParticle(int const&) [3]
+[117]    0.0    0.00    0.00      35         Particle::getParticleBest() [117]
+-----------------------------------------------
+                0.00    0.00       1/5           std::vector<gfxParticle, std::allocator<gfxParticle> >::_M_fill_initialize(unsigned long, gfxParticle const&) [161]
+                0.00    0.00       1/5           gfxParticle* std::vector<gfxParticle, std::allocator<gfxParticle> >::_M_allocate_and_copy<__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > > >(unsigned long, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >) [162]
+                0.00    0.00       1/5           std::vector<gfxParticle, std::allocator<gfxParticle> >::operator=(std::vector<gfxParticle, std::allocator<gfxParticle> > const&) [77]
+                0.00    0.00       2/5           std::vector<gfxParticle, std::allocator<gfxParticle> >::~vector() [76]
+[118]    0.0    0.00    0.00       5         std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_M_get_Tp_allocator() [118]
+-----------------------------------------------
+                0.00    0.00       1/3           GraphicalPSO::GraphicalPSO(int const&, int const&, double const&, double const&) [53]
+                0.00    0.00       2/3           GraphicalPSO::setFunction(int) [43]
+[119]    0.0    0.00    0.00       3         createFunction(int const&) [119]
+                0.00    0.00       1/1           DeJongF1::DeJongF1() [144]
+                0.00    0.00       1/1           DeJongF5::DeJongF5() [145]
+                0.00    0.00       1/1           Michalewicz::Michalewicz() [142]
+-----------------------------------------------
+                0.00    0.00       1/3           InitGL(int) [140]
+                0.00    0.00       2/3           keyPressed(SDL_keysym*) [42]
+[120]    0.0    0.00    0.00       3         setPerspective(int) [120]
+-----------------------------------------------
+                0.00    0.00       1/3           Michalewicz::Michalewicz() [142]
+                0.00    0.00       1/3           DeJongF1::DeJongF1() [144]
+                0.00    0.00       1/3           DeJongF5::DeJongF5() [145]
+[121]    0.0    0.00    0.00       3         DeJong::DeJong() [121]
+-----------------------------------------------
+                0.00    0.00       1/3           std::allocator<gfxParticle>::~allocator() [154]
+                0.00    0.00       2/3           std::allocator<gfxParticle>::~allocator() [129]
+[122]    0.0    0.00    0.00       3         __gnu_cxx::new_allocator<gfxParticle>::~new_allocator() [122]
+-----------------------------------------------
+                0.00    0.00       1/3           std::vector<gfxParticle, std::allocator<gfxParticle> >::operator=(std::vector<gfxParticle, std::allocator<gfxParticle> > const&) [77]
+                0.00    0.00       2/3           std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::~_Vector_base() [132]
+[123]    0.0    0.00    0.00       3         std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_M_deallocate(gfxParticle*, unsigned long) [123]
+                0.00    0.00       2/2           __gnu_cxx::new_allocator<gfxParticle>::deallocate(gfxParticle*, unsigned long) [124]
+-----------------------------------------------
+                0.00    0.00       2/2           std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_M_deallocate(gfxParticle*, unsigned long) [123]
+[124]    0.0    0.00    0.00       2         __gnu_cxx::new_allocator<gfxParticle>::deallocate(gfxParticle*, unsigned long) [124]
+-----------------------------------------------
+                0.00    0.00       2/2           std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_M_allocate(unsigned long) [130]
+[125]    0.0    0.00    0.00       2         __gnu_cxx::new_allocator<gfxParticle>::allocate(unsigned long, void const*) [125]
+                0.00    0.00       2/2           __gnu_cxx::new_allocator<gfxParticle>::max_size() const [128]
+-----------------------------------------------
+                0.00    0.00       1/2           std::allocator<gfxParticle>::allocator() [153]
+                0.00    0.00       1/2           std::allocator<gfxParticle>::allocator() [151]
+[126]    0.0    0.00    0.00       2         __gnu_cxx::new_allocator<gfxParticle>::new_allocator() [126]
+-----------------------------------------------
+                0.00    0.00       1/2           std::vector<gfxParticle, std::allocator<gfxParticle> >::end() const [148]
+                0.00    0.00       1/2           std::vector<gfxParticle, std::allocator<gfxParticle> >::begin() const [149]
+[127]    0.0    0.00    0.00       2         __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >::__normal_iterator(gfxParticle const* const&) [127]
+-----------------------------------------------
+                0.00    0.00       2/2           __gnu_cxx::new_allocator<gfxParticle>::allocate(unsigned long, void const*) [125]
+[128]    0.0    0.00    0.00       2         __gnu_cxx::new_allocator<gfxParticle>::max_size() const [128]
+-----------------------------------------------
+                0.00    0.00       2/2           std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_Vector_impl::~_Vector_impl() [131]
+[129]    0.0    0.00    0.00       2         std::allocator<gfxParticle>::~allocator() [129]
+                0.00    0.00       2/3           __gnu_cxx::new_allocator<gfxParticle>::~new_allocator() [122]
+-----------------------------------------------
+                0.00    0.00       1/2           std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_Vector_base(unsigned long, std::allocator<gfxParticle> const&) [157]
+                0.00    0.00       1/2           gfxParticle* std::vector<gfxParticle, std::allocator<gfxParticle> >::_M_allocate_and_copy<__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > > >(unsigned long, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >) [162]
+[130]    0.0    0.00    0.00       2         std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_M_allocate(unsigned long) [130]
+                0.00    0.00       2/2           __gnu_cxx::new_allocator<gfxParticle>::allocate(unsigned long, void const*) [125]
+-----------------------------------------------
+                0.00    0.00       2/2           std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::~_Vector_base() [132]
+[131]    0.0    0.00    0.00       2         std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_Vector_impl::~_Vector_impl() [131]
+                0.00    0.00       2/2           std::allocator<gfxParticle>::~allocator() [129]
+-----------------------------------------------
+                0.00    0.00       2/2           std::vector<gfxParticle, std::allocator<gfxParticle> >::~vector() [76]
+[132]    0.0    0.00    0.00       2         std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::~_Vector_base() [132]
+                0.00    0.00       2/3           std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_M_deallocate(gfxParticle*, unsigned long) [123]
+                0.00    0.00       2/2           std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_Vector_impl::~_Vector_impl() [131]
+-----------------------------------------------
+                0.00    0.00       1/1           __do_global_ctors_aux [35]
+[133]    0.0    0.00    0.00       1         global constructors keyed to _ZN8DeJongF1C2Ev [133]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [138]
+-----------------------------------------------
+                0.00    0.00       1/1           __do_global_ctors_aux [35]
+[134]    0.0    0.00    0.00       1         global constructors keyed to _ZN8Vector3dC2Ev [134]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [137]
+-----------------------------------------------
+                0.00    0.00       1/1           InitGL(int) [140]
+[135]    0.0    0.00    0.00       1         LoadFontTexture() [135]
+-----------------------------------------------
+                0.00    0.00       1/1           global constructors keyed to _ZN8ParticleC2Ev [46]
+[136]    0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [136]
+-----------------------------------------------
+                0.00    0.00       1/1           global constructors keyed to _ZN8Vector3dC2Ev [134]
+[137]    0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [137]
+-----------------------------------------------
+                0.00    0.00       1/1           global constructors keyed to _ZN8DeJongF1C2Ev [133]
+[138]    0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [138]
+-----------------------------------------------
+                0.00    0.00       1/1           keyPressed(SDL_keysym*) [42]
+[139]    0.0    0.00    0.00       1         Quit(int) [139]
+-----------------------------------------------
+                0.00    0.00       1/1           main [1]
+[140]    0.0    0.00    0.00       1         InitGL(int) [140]
+                0.00    0.00       1/1           LoadFontTexture() [135]
+                0.00    0.00       1/1           BuildFont() [141]
+                0.00    0.00       1/3           setPerspective(int) [120]
+-----------------------------------------------
+                0.00    0.00       1/1           InitGL(int) [140]
+[141]    0.0    0.00    0.00       1         BuildFont() [141]
+-----------------------------------------------
+                0.00    0.00       1/1           createFunction(int const&) [119]
+[142]    0.0    0.00    0.00       1         Michalewicz::Michalewicz() [142]
+                0.00    0.00       1/3           DeJong::DeJong() [121]
+-----------------------------------------------
+                0.00    0.00       1/1           DeJongF5::~DeJongF5() [146]
+[143]    0.0    0.00    0.00       1         DeJong::~DeJong() [143]
+-----------------------------------------------
+                0.00    0.00       1/1           createFunction(int const&) [119]
+[144]    0.0    0.00    0.00       1         DeJongF1::DeJongF1() [144]
+                0.00    0.00       1/3           DeJong::DeJong() [121]
+-----------------------------------------------
+                0.00    0.00       1/1           createFunction(int const&) [119]
+[145]    0.0    0.00    0.00       1         DeJongF5::DeJongF5() [145]
+                0.00    0.00       1/3           DeJong::DeJong() [121]
+-----------------------------------------------
+                0.00    0.00       1/1           GraphicalPSO::~GraphicalPSO() [78]
+[146]    0.0    0.00    0.00       1         DeJongF5::~DeJongF5() [146]
+                0.00    0.00       1/1           DeJong::~DeJong() [143]
+-----------------------------------------------
+                0.00    0.00       1/1           std::allocator<gfxParticle>::allocator(std::allocator<gfxParticle> const&) [152]
+[147]    0.0    0.00    0.00       1         __gnu_cxx::new_allocator<gfxParticle>::new_allocator(__gnu_cxx::new_allocator<gfxParticle> const&) [147]
+-----------------------------------------------
+                0.00    0.00       1/1           std::vector<gfxParticle, std::allocator<gfxParticle> >::operator=(std::vector<gfxParticle, std::allocator<gfxParticle> > const&) [77]
+[148]    0.0    0.00    0.00       1         std::vector<gfxParticle, std::allocator<gfxParticle> >::end() const [148]
+                0.00    0.00       1/2           __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >::__normal_iterator(gfxParticle const* const&) [127]
+-----------------------------------------------
+                0.00    0.00       1/1           std::vector<gfxParticle, std::allocator<gfxParticle> >::operator=(std::vector<gfxParticle, std::allocator<gfxParticle> > const&) [77]
+[149]    0.0    0.00    0.00       1         std::vector<gfxParticle, std::allocator<gfxParticle> >::begin() const [149]
+                0.00    0.00       1/2           __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >::__normal_iterator(gfxParticle const* const&) [127]
+-----------------------------------------------
+                0.00    0.00       1/1           std::vector<gfxParticle, std::allocator<gfxParticle> >::operator=(std::vector<gfxParticle, std::allocator<gfxParticle> > const&) [77]
+[150]    0.0    0.00    0.00       1         std::vector<gfxParticle, std::allocator<gfxParticle> >::capacity() const [150]
+-----------------------------------------------
+                0.00    0.00       1/1           GraphicalPSO::GraphicalPSO(int const&, int const&, double const&, double const&) [53]
+[151]    0.0    0.00    0.00       1         std::allocator<gfxParticle>::allocator() [151]
+                0.00    0.00       1/2           __gnu_cxx::new_allocator<gfxParticle>::new_allocator() [126]
+-----------------------------------------------
+                0.00    0.00       1/1           std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_Vector_impl::_Vector_impl(std::allocator<gfxParticle> const&) [155]
+[152]    0.0    0.00    0.00       1         std::allocator<gfxParticle>::allocator(std::allocator<gfxParticle> const&) [152]
+                0.00    0.00       1/1           __gnu_cxx::new_allocator<gfxParticle>::new_allocator(__gnu_cxx::new_allocator<gfxParticle> const&) [147]
+-----------------------------------------------
+                0.00    0.00       1/1           std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_Vector_impl::_Vector_impl() [156]
+[153]    0.0    0.00    0.00       1         std::allocator<gfxParticle>::allocator() [153]
+                0.00    0.00       1/2           __gnu_cxx::new_allocator<gfxParticle>::new_allocator() [126]
+-----------------------------------------------
+                0.00    0.00       1/1           GraphicalPSO::GraphicalPSO(int const&, int const&, double const&, double const&) [53]
+[154]    0.0    0.00    0.00       1         std::allocator<gfxParticle>::~allocator() [154]
+                0.00    0.00       1/3           __gnu_cxx::new_allocator<gfxParticle>::~new_allocator() [122]
+-----------------------------------------------
+                0.00    0.00       1/1           std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_Vector_base(unsigned long, std::allocator<gfxParticle> const&) [157]
+[155]    0.0    0.00    0.00       1         std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_Vector_impl::_Vector_impl(std::allocator<gfxParticle> const&) [155]
+                0.00    0.00       1/1           std::allocator<gfxParticle>::allocator(std::allocator<gfxParticle> const&) [152]
+-----------------------------------------------
+                0.00    0.00       1/1           std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_Vector_base() [158]
+[156]    0.0    0.00    0.00       1         std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_Vector_impl::_Vector_impl() [156]
+                0.00    0.00       1/1           std::allocator<gfxParticle>::allocator() [153]
+-----------------------------------------------
+                0.00    0.00       1/1           std::vector<gfxParticle, std::allocator<gfxParticle> >::vector(unsigned long, gfxParticle const&, std::allocator<gfxParticle> const&) [163]
+[157]    0.0    0.00    0.00       1         std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_Vector_base(unsigned long, std::allocator<gfxParticle> const&) [157]
+                0.00    0.00       1/1           std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_Vector_impl::_Vector_impl(std::allocator<gfxParticle> const&) [155]
+                0.00    0.00       1/2           std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_M_allocate(unsigned long) [130]
+-----------------------------------------------
+                0.00    0.00       1/1           std::vector<gfxParticle, std::allocator<gfxParticle> >::vector() [164]
+[158]    0.0    0.00    0.00       1         std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_Vector_base() [158]
+                0.00    0.00       1/1           std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_Vector_impl::_Vector_impl() [156]
+-----------------------------------------------
+                0.00    0.00       1/1           gfxParticle* std::uninitialized_copy<__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*>(__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*) [165]
+[159]    0.0    0.00    0.00       1         gfxParticle* std::__uninitialized_copy<false>::uninitialized_copy<__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*>(__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*) [159]
+                0.00    0.00   15001/15001       bool __gnu_cxx::operator!=<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >(__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > > const&, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > > const&) [100]
+                0.00    0.00   15000/15000       __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >::operator*() const [102]
+                0.00    0.00   15000/30000       operator new(unsigned long, void*) [99]
+                0.00    0.00   15000/31274       gfxParticle::gfxParticle(gfxParticle const&) [95]
+                0.00    0.00   15000/15000       __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >::operator++() [101]
+-----------------------------------------------
+                0.00    0.00       1/1           void std::uninitialized_fill_n<gfxParticle*, unsigned long, gfxParticle>(gfxParticle*, unsigned long, gfxParticle const&) [166]
+[160]    0.0    0.00    0.00       1         void std::__uninitialized_fill_n<false>::uninitialized_fill_n<gfxParticle*, unsigned long, gfxParticle>(gfxParticle*, unsigned long, gfxParticle const&) [160]
+                0.00    0.00   15000/15000       void std::_Construct<gfxParticle, gfxParticle>(gfxParticle*, gfxParticle const&) [103]
+-----------------------------------------------
+                0.00    0.00       1/1           std::vector<gfxParticle, std::allocator<gfxParticle> >::vector(unsigned long, gfxParticle const&, std::allocator<gfxParticle> const&) [163]
+[161]    0.0    0.00    0.00       1         std::vector<gfxParticle, std::allocator<gfxParticle> >::_M_fill_initialize(unsigned long, gfxParticle const&) [161]
+                0.00    0.00       1/5           std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_M_get_Tp_allocator() [118]
+                0.00    0.00       1/1           void std::__uninitialized_fill_n_a<gfxParticle*, unsigned long, gfxParticle, gfxParticle>(gfxParticle*, unsigned long, gfxParticle const&, std::allocator<gfxParticle>&) [168]
+-----------------------------------------------
+                0.00    0.00       1/1           std::vector<gfxParticle, std::allocator<gfxParticle> >::operator=(std::vector<gfxParticle, std::allocator<gfxParticle> > const&) [77]
+[162]    0.0    0.00    0.00       1         gfxParticle* std::vector<gfxParticle, std::allocator<gfxParticle> >::_M_allocate_and_copy<__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > > >(unsigned long, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >) [162]
+                0.00    0.00       1/5           std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_M_get_Tp_allocator() [118]
+                0.00    0.00       1/2           std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_M_allocate(unsigned long) [130]
+                0.00    0.00       1/1           gfxParticle* std::__uninitialized_copy_a<__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*, gfxParticle>(__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*, std::allocator<gfxParticle>&) [167]
+-----------------------------------------------
+                0.00    0.00       1/1           GraphicalPSO::GraphicalPSO(int const&, int const&, double const&, double const&) [53]
+[163]    0.0    0.00    0.00       1         std::vector<gfxParticle, std::allocator<gfxParticle> >::vector(unsigned long, gfxParticle const&, std::allocator<gfxParticle> const&) [163]
+                0.00    0.00       1/1           std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_Vector_base(unsigned long, std::allocator<gfxParticle> const&) [157]
+                0.00    0.00       1/1           std::vector<gfxParticle, std::allocator<gfxParticle> >::_M_fill_initialize(unsigned long, gfxParticle const&) [161]
+-----------------------------------------------
+                0.00    0.00       1/1           GraphicalPSO::GraphicalPSO(int const&, int const&, double const&, double const&) [53]
+[164]    0.0    0.00    0.00       1         std::vector<gfxParticle, std::allocator<gfxParticle> >::vector() [164]
+                0.00    0.00       1/1           std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_Vector_base() [158]
+-----------------------------------------------
+                0.00    0.00       1/1           gfxParticle* std::__uninitialized_copy_a<__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*, gfxParticle>(__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*, std::allocator<gfxParticle>&) [167]
+[165]    0.0    0.00    0.00       1         gfxParticle* std::uninitialized_copy<__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*>(__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*) [165]
+                0.00    0.00       1/1           gfxParticle* std::__uninitialized_copy<false>::uninitialized_copy<__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*>(__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*) [159]
+-----------------------------------------------
+                0.00    0.00       1/1           void std::__uninitialized_fill_n_a<gfxParticle*, unsigned long, gfxParticle, gfxParticle>(gfxParticle*, unsigned long, gfxParticle const&, std::allocator<gfxParticle>&) [168]
+[166]    0.0    0.00    0.00       1         void std::uninitialized_fill_n<gfxParticle*, unsigned long, gfxParticle>(gfxParticle*, unsigned long, gfxParticle const&) [166]
+                0.00    0.00       1/1           void std::__uninitialized_fill_n<false>::uninitialized_fill_n<gfxParticle*, unsigned long, gfxParticle>(gfxParticle*, unsigned long, gfxParticle const&) [160]
+-----------------------------------------------
+                0.00    0.00       1/1           gfxParticle* std::vector<gfxParticle, std::allocator<gfxParticle> >::_M_allocate_and_copy<__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > > >(unsigned long, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >) [162]
+[167]    0.0    0.00    0.00       1         gfxParticle* std::__uninitialized_copy_a<__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*, gfxParticle>(__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*, std::allocator<gfxParticle>&) [167]
+                0.00    0.00       1/1           gfxParticle* std::uninitialized_copy<__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*>(__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*) [165]
+-----------------------------------------------
+                0.00    0.00       1/1           std::vector<gfxParticle, std::allocator<gfxParticle> >::_M_fill_initialize(unsigned long, gfxParticle const&) [161]
+[168]    0.0    0.00    0.00       1         void std::__uninitialized_fill_n_a<gfxParticle*, unsigned long, gfxParticle, gfxParticle>(gfxParticle*, unsigned long, gfxParticle const&, std::allocator<gfxParticle>&) [168]
+                0.00    0.00       1/1           void std::uninitialized_fill_n<gfxParticle*, unsigned long, gfxParticle>(gfxParticle*, unsigned long, gfxParticle const&) [166]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+
+Index by function name
+
+ [133] global constructors keyed to _ZN8DeJongF1C2Ev (DeJongFunctions.cpp) [18] boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>::operator()() [23] boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::min() const
+  [46] global constructors keyed to _ZN8ParticleC2Ev (PSOStructures.cpp) [36] boost::random::detail::ptr_helper<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::ref(boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&) [34] boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::base() const
+ [134] global constructors keyed to _ZN8Vector3dC2Ev (gfxmath.cpp) [29] boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::base() [60] Vector3d::operator==(Vector3d const&) const
+  [51] global constructors keyed to draw (gfxinterface.cpp) [113] boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::pass_through_engine(boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&) [17] Vector3d::operator-(Vector3d const&) const
+  [42] keyPressed(SDL_keysym*) [13] boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::operator()() [16] Vector3d::operator+(Vector3d const&) const
+   [7] DrawGLScene()         [121] DeJong::DeJong()       [50] Vector3d::operator+() const
+ [119] createFunction(int const&) [143] DeJong::~DeJong() [128] __gnu_cxx::new_allocator<gfxParticle>::max_size() const
+  [79] glPrintHUDInfo(int, int, int) [116] DeJongF1::name() [98] __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >::base() const
+ [120] setPerspective(int)    [75] DeJongF1::evaluate(Vector3d const&) [102] __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >::operator*() const
+ [135] LoadFontTexture()     [144] DeJongF1::DeJongF1()  [148] std::vector<gfxParticle, std::allocator<gfxParticle> >::end() const
+  [52] __static_initialization_and_destruction_0(int, int) (gfxinterface.cpp) [109] DeJongF5::name() [33] std::vector<gfxParticle, std::allocator<gfxParticle> >::size() const
+ [136] __static_initialization_and_destruction_0(int, int) (PSOStructures.cpp) [4] DeJongF5::evaluate(Vector3d const&) [149] std::vector<gfxParticle, std::allocator<gfxParticle> >::begin() const
+ [137] __static_initialization_and_destruction_0(int, int) (gfxmath.cpp) [145] DeJongF5::DeJongF5() [150] std::vector<gfxParticle, std::allocator<gfxParticle> >::capacity() const
+ [138] __static_initialization_and_destruction_0(int, int) (DeJongFunctions.cpp) [146] DeJongF5::~DeJongF5() [28] std::vector<Particle, std::allocator<Particle> >::size() const
+ [139] Quit(int)              [37] Particle::setFitness(double&) [151] std::allocator<gfxParticle>::allocator()
+ [140] InitGL(int)            [44] Particle::getPosition() [152] std::allocator<gfxParticle>::allocator(std::allocator<gfxParticle> const&)
+ [105] HUDMode(bool)          [32] Particle::setPosition(Vector3d const&) [153] std::allocator<gfxParticle>::allocator()
+ [141] BuildFont()            [59] Particle::setPosition(double, double, double) [154] std::allocator<gfxParticle>::~allocator()
+  [57] ConsolePSO::evaluateSwarm() [56] Particle::getBestFitness() [129] std::allocator<gfxParticle>::~allocator()
+ [115] Michalewicz::name()    [40] Particle::getBestPosition() [130] std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_M_allocate(unsigned long)
+  [74] Michalewicz::evaluate(Vector3d const&) [117] Particle::getParticleBest() [155] std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_Vector_impl::_Vector_impl(std::allocator<gfxParticle> const&)
+ [142] Michalewicz::Michalewicz() [22] Particle::move()  [156] std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_Vector_impl::_Vector_impl()
+  [11] gfxParticle::draw(int, int) [107] Particle::getUID() [131] std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_Vector_impl::~_Vector_impl()
+  [20] gfxParticle::drawBest(int, int) [66] Particle::Particle(Vector3d const&, int) [123] std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_M_deallocate(gfxParticle*, unsigned long)
+  [41] gfxParticle::drawCube(Vector3d const&) [97] Particle::Particle(Particle const&) [118] std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_M_get_Tp_allocator()
+  [19] gfxParticle::drawPoint(Vector3d const&) [85] Particle::Particle() [157] std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_Vector_base(unsigned long, std::allocator<gfxParticle> const&)
+  [65] gfxParticle::gfxParticle(Vector3d const&, int) [69] Particle::~Particle() [158] std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::_Vector_base()
+  [95] gfxParticle::gfxParticle(gfxParticle const&) [64] Particle::operator=(Particle const&) [132] std::_Vector_base<gfxParticle, std::allocator<gfxParticle> >::~_Vector_base()
+  [84] gfxParticle::gfxParticle() [93] Vector3d::Vector3d(Vector3d const&) [61] std::__miter_base<Particle*, false>::__b(Particle*)
+  [68] gfxParticle::~gfxParticle() [55] Vector3d::Vector3d(double const&, double const&, double const&) [159] gfxParticle* std::__uninitialized_copy<false>::uninitialized_copy<__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*>(__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*)
+  [63] gfxParticle::operator=(gfxParticle const&) [21] Vector3d::Vector3d(double const&, double const&, double const&, double const&) [160] void std::__uninitialized_fill_n<false>::uninitialized_fill_n<gfxParticle*, unsigned long, gfxParticle>(gfxParticle*, unsigned long, gfxParticle const&)
+  [43] GraphicalPSO::setFunction(int) [92] Vector3d::Vector3d() [161] std::vector<gfxParticle, std::allocator<gfxParticle> >::_M_fill_initialize(unsigned long, gfxParticle const&)
+  [38] GraphicalPSO::evaluateSwarm() [47] Vector3d::Vector3d(double const&, double const&, double const&) [162] gfxParticle* std::vector<gfxParticle, std::allocator<gfxParticle> >::_M_allocate_and_copy<__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > > >(unsigned long, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >)
+  [54] GraphicalPSO::initializeSwarm(int const&) [48] Vector3d::Vector3d(double const&, double const&, double const&, double const&) [163] std::vector<gfxParticle, std::allocator<gfxParticle> >::vector(unsigned long, gfxParticle const&, std::allocator<gfxParticle> const&)
+   [3] GraphicalPSO::evaluateParticle(int const&) [24] Vector3d::~Vector3d() [164] std::vector<gfxParticle, std::allocator<gfxParticle> >::vector()
+  [82] GraphicalPSO::getSelectedParticle() [49] Vector3d::~Vector3d() [76] std::vector<gfxParticle, std::allocator<gfxParticle> >::~vector()
+   [2] GraphicalPSO::updateSwarmMovement() [26] Vector3d::operator=(Vector3d const&) [77] std::vector<gfxParticle, std::allocator<gfxParticle> >::operator=(std::vector<gfxParticle, std::allocator<gfxParticle> > const&)
+   [8] GraphicalPSO::draw(int, int) [25] Goldstein::~Goldstein() [15] std::vector<gfxParticle, std::allocator<gfxParticle> >::operator[](unsigned long)
+  [53] GraphicalPSO::GraphicalPSO(int const&, int const&, double const&, double const&) [124] __gnu_cxx::new_allocator<gfxParticle>::deallocate(gfxParticle*, unsigned long) [103] void std::_Construct<gfxParticle, gfxParticle>(gfxParticle*, gfxParticle const&)
+  [96] ParticleBest::ParticleBest(ParticleBest const&) [125] __gnu_cxx::new_allocator<gfxParticle>::allocate(unsigned long, void const*) [104] std::setprecision(int)
+  [94] ParticleBest::ParticleBest() [147] __gnu_cxx::new_allocator<gfxParticle>::new_allocator(__gnu_cxx::new_allocator<gfxParticle> const&) [165] gfxParticle* std::uninitialized_copy<__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*>(__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*)
+  [73] ParticleBest::~ParticleBest() [126] __gnu_cxx::new_allocator<gfxParticle>::new_allocator() [166] void std::uninitialized_fill_n<gfxParticle*, unsigned long, gfxParticle>(gfxParticle*, unsigned long, gfxParticle const&)
+  [67] ParticleBest::operator=(ParticleBest const&) [122] __gnu_cxx::new_allocator<gfxParticle>::~new_allocator() [167] gfxParticle* std::__uninitialized_copy_a<__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*, gfxParticle>(__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >, gfxParticle*, std::allocator<gfxParticle>&)
+  [58] Camel::evaluate(Vector3d const&) [127] __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >::__normal_iterator(gfxParticle const* const&) [168] void std::__uninitialized_fill_n_a<gfxParticle*, unsigned long, gfxParticle, gfxParticle>(gfxParticle*, unsigned long, gfxParticle const&, std::allocator<gfxParticle>&)
+  [80] boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double>::uniform_01(boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>) [101] __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >::operator++() [6] std::pow(double, int)
+  [12] boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double>::operator()() [62] bool __gnu_cxx::operator!=<Particle*, std::vector<Particle, std::allocator<Particle> > >(__gnu_cxx::__normal_iterator<Particle*, std::vector<Particle, std::allocator<Particle> > > const&, __gnu_cxx::__normal_iterator<Particle*, std::vector<Particle, std::allocator<Particle> > > const&) [14] __gnu_cxx::__enable_if<std::__is_integer<int>::__value, double>::__type std::sqrt<int>(int)
+ [110] boost::uniform_real<double>::uniform_real(double, double) [100] bool __gnu_cxx::operator!=<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > >(__gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > > const&, __gnu_cxx::__normal_iterator<gfxParticle const*, std::vector<gfxParticle, std::allocator<gfxParticle> > > const&) [70] void std::_Destroy<gfxParticle>(gfxParticle*)
+   [9] double boost::uniform_real<double>::operator()<boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double> >(boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double>&) [108] GraphicalPSO::functionName() const [71] void std::_Destroy<gfxParticle*>(gfxParticle*, gfxParticle*)
+  [81] boost::variate_generator<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&, boost::uniform_real<double> >::variate_generator(boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&, boost::uniform_real<double>) [45] boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double>::max() const [72] void std::_Destroy<gfxParticle*, gfxParticle>(gfxParticle*, gfxParticle*, std::allocator<gfxParticle>&)
+  [10] boost::variate_generator<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&, boost::uniform_real<double> >::operator()() [39] boost::uniform_01<boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>, double>::min() const [106] operator<<(std::ostream&, Vector3d const&)
+ [111] boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>::seed(unsigned int) [114] boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>::max() const [30] operator*(double, Vector3d const&)
+  [27] boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>::twist(int) [31] boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>::min() const [99] operator new(unsigned long, void*)
+ [112] boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>::mersenne_twister(unsigned int) [83] boost::random::detail::pass_through_engine<boost::random::mersenne_twister<unsigned int, 32, 624, 397, 31, 2567483615u, 11, 7, 2636928640u, 15, 4022730752u, 18, 3346425566u>&>::max() const [5] __powidf2

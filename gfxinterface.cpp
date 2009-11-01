@@ -4,11 +4,12 @@
 #include "PSOStructures.h"
 #include "../ChartPlotter/Chart2DPlotter.cpp"
 #include <sstream>
+#include <fstream>
 #include <vector>
 #include <cmath>
 #include <GL/gl.h>
 #include <GL/glu.h>
-#include <SDL.h>
+#include "SDL.h"
 
 #define SCREEN_BPP 16
 #define TRUE 1
@@ -28,8 +29,8 @@ float dist = 40.0f;
 float tick = 0.05f;
 const int PARTICLES = 65000;
 const bool FULLSCREEN = false;
-const int SCREEN_WIDTH = 1024;
-const int SCREEN_HEIGHT = 768;
+const int SCREEN_WIDTH = 640;
+const int SCREEN_HEIGHT = 480;
 const int TOTALFUNCTIONCOUNT = 17;
 enum movement{STOP=0,LEFT=1,RIGHT=2,UP=3,DOWN=4};
 Chart2DPlotter chart(SCREEN_WIDTH*0.70,SCREEN_HEIGHT*0.70,SCREEN_WIDTH,SCREEN_HEIGHT,20);
@@ -39,8 +40,9 @@ int FUNCTION = 17;
 //if you take out inertia (the 0.5) the swarm seems to explore more, but then it doens't find
 //the optimum for Schwefel function
 
-GraphicalPSO pso = GraphicalPSO(PARTICLES,FUNCTION,0.41,0.52,0.5); 
-//GraphicalPSO pso = GraphicalPSO(PARTICLES,FUNCTION,0.5,1.5,1.0); 
+//GraphicalPSO pso = GraphicalPSO(PARTICLES,FUNCTION,0.41,0.52,0.9999); 
+//GraphicalPSO pso = GraphicalPSO(PARTICLES,FUNCTION,0.41,0.52,0.5); 
+GraphicalPSO pso = GraphicalPSO(PARTICLES,FUNCTION,0.41,0.52,1.0); 
 
 GLuint base;
 GLuint texture[1];
@@ -553,19 +555,20 @@ void DrawGLScene()
 	//Draw the particles
 	pso.draw(mode,shape);	
 	//draw HUD
+	/*
 	if (mode == GL_RENDER)
 	{
 		HUDMode(true);
 		chart.DrawChart();
 		glColor3f(1.0,1.0,1.0);
 		//Top right box
-		/*glBegin(GL_QUADS);
+		*glBegin(GL_QUADS);
 			glVertex2f(SCREEN_WIDTH*0.70,SCREEN_HEIGHT*0.70);
 			glVertex2f(SCREEN_WIDTH,SCREEN_HEIGHT*0.70);
 			glVertex2f(SCREEN_WIDTH,SCREEN_HEIGHT);
 			glVertex2f(SCREEN_WIDTH*0.70,SCREEN_HEIGHT);
 		glEnd();
-		*/
+		
 		glColor3f(0,0,1);
 		glBegin(GL_QUADS);
 			glVertex2f(0,SCREEN_HEIGHT*0.10);
@@ -587,7 +590,7 @@ void DrawGLScene()
 		glDisable(GL_TEXTURE_2D);
 		glDisable(GL_BLEND);
 		HUDMode(false);
-	}
+	}*/
 	SDL_GL_SwapBuffers();
     /* Gather our frames per second */
     Frames++;
@@ -643,7 +646,6 @@ int doSelect(const double &x,const double &y)
 
 int main(int argc, char** argv)
 {
-	cout << "Before setupPSO" << endl;
 	int videoFlags;
 	bool done=false;
 	bool calcRotation = false;
@@ -701,6 +703,8 @@ int main(int argc, char** argv)
 	}
 	int i = 1;	
 	chart.Plot(1,1);
+	ofstream graphfile;
+	graphfile.open("function.txt");
 	while(!done)
 	{
 		while(SDL_PollEvent(&event))
@@ -753,9 +757,11 @@ int main(int argc, char** argv)
 		if (draw == false)
 		{
 			pso.updateSwarmMovement();
+			graphfile << i-1 << "\t" << pso.global_best.fitness << endl;
 			chart.Plot(i++,pso.global_best.fitness);
 		}
 	}
+	graphfile.close();
 	delete surface;
 	return(0);
 }

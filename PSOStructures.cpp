@@ -453,7 +453,7 @@ void ConsolePSO::initializeSwarm(const int func)
 					x = gen();
 					y = gen();
 					z = 0;
-					swarm[i] = gfxParticle(Vector3d(x,y,z),i);
+					swarm[i] = Particle(Vector3d(x,y,z),i);
 				}
 			}
 			break;
