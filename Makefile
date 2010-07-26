@@ -1,7 +1,7 @@
-CC = gcc -Wall -ansi -O3
+CC = gcc -Wall -ansi
 
 all:
-	$(CC) gfxinterface.cpp PSOStructures.cpp gfxmath.cpp DeJongFunctions.cpp -g -o gfxinterface -lGL -lGLU `sdl-config --cflags --libs`
+	$(CC) gfxinterface.cpp PSOStructures.cpp gfxstructures.cpp BenchFunctions.cpp -g -o gfxinterface -lGL -lGLU `sdl-config --cflags --libs`
 
 clean:
 	@echo Cleaning up...

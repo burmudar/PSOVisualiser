@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
-#include "gfxmath.h"
+#include "gfxstructures.h"
+#include "BenchFunctions.h"
 #include "PSOStructures.h"
 #include "../ChartPlotter/Chart2DPlotter.cpp"
 #include <sstream>
@@ -27,22 +28,18 @@ float xtrans = 0.0f;
 float ytrans = 0.0f;
 float dist = 40.0f;
 float tick = 0.05f;
-const int PARTICLES = 65000;
+const int PARTICLES = 10000;
 const bool FULLSCREEN = false;
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
-const int TOTALFUNCTIONCOUNT = 17;
+const int SCREEN_WIDTH = 1024;
+const int SCREEN_HEIGHT = 768;
 enum movement{STOP=0,LEFT=1,RIGHT=2,UP=3,DOWN=4};
 Chart2DPlotter chart(SCREEN_WIDTH*0.70,SCREEN_HEIGHT*0.70,SCREEN_WIDTH,SCREEN_HEIGHT,20);
 movement KEY;
 int shape =1;
-int FUNCTION = 17;
 //if you take out inertia (the 0.5) the swarm seems to explore more, but then it doens't find
 //the optimum for Schwefel function
 
-//GraphicalPSO pso = GraphicalPSO(PARTICLES,FUNCTION,0.41,0.52,0.9999); 
-//GraphicalPSO pso = GraphicalPSO(PARTICLES,FUNCTION,0.41,0.52,0.5); 
-GraphicalPSO pso = GraphicalPSO(PARTICLES,FUNCTION,0.41,0.52,1.0); 
+GraphicalPSO *pso;  
 
 GLuint base;
 GLuint texture[1];
@@ -142,133 +139,16 @@ GLvoid BuildFont()
 	}
 }
 
-void setPerspective(const int FUNCTION)
+void setPerspective()
 {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	switch(FUNCTION)
-	{
-		case 1:
-			{
-				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,100.0f);
-				dist =40;
-				tick = 0.05;
-			}
-			break;
-		case 2:
-			{
-				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,8000.0f);
-				dist = 200;
-				tick = 20;
-			}
-			break;
-		case 3:
-			{
-				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,8000.0f);
-				dist = 100;
-				tick = 1;
-			}
-			break;
-		case 4:
-			{
-				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,100.0f);
-				dist = 40;
-				tick = 0.05;
-			}
-			break;
-		case 5:
-			{
-				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,5000.0f);
-				dist = 1000;
-				tick = 20;
-			}
-			break;
-		case 6:
-			{
-				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,5000.0f);
-				dist = 1000;
-				tick = 20;
-			}
-			break;
-		case 7:
-			{
-				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,5000.0f);
-				dist = 1000;
-				tick = 20;
-			}
-			break;
-		case 8:
-			{
-				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,5000.0f);
-				dist = 1000;
-				tick = 20;
-			}
-			break;
-		case 9:
-			{
-				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,100.0f);
-				dist = 15;
-				tick = 0.05;
-			}
-			break;
-		case 10:
-			{
-				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,100.0f);
-				dist = 45;
-				tick = 15;
-			}
-			break;
-		case 11:
-			{
-				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,100.0f);
-				dist = 45;
-				tick = 15;
-			}
-			break;
-		case 12:
-			{
-				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,100.0f);
-				dist = 15;
-				tick = 0.05;
-			}
-			break;
-		case 13:
-			{
-				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,200.0f);
-				dist = 85;
-				tick = 0.05;
-			}
-			break;
-		case 14:
-			{
-				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,200.0f);
-				dist = 85;
-				tick = 0.05;
-			}
-			break;
-		case 15:
-			{
-				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,5000.0f);
-				dist = 1000;
-				tick = 20;
-			}
-			break;
-		case 16:
-			{
-				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,200.0f);
-				dist = 15;
-				tick = 0.05;
-			}
-			break;
-		case 17:
-			{
-				gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,0.1f,800.0f);
-				dist = 75;
-				tick = 1.05;
-			}
-			break;
-	}
-	
+
+	const SceneConfig config = pso->getFunctionSceneConfig();
+	gluPerspective(45.0f,(GLfloat)SCREEN_WIDTH/(GLfloat)SCREEN_HEIGHT,config.nearZPlane,config.farZPlane);
+	dist =config.distance;
+	tick = config.chartTickRate;
+
 	glMatrixMode(GL_MODELVIEW);
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 }
@@ -288,7 +168,7 @@ int InitGL(const int FUNCTION)
     glBlendFunc( GL_SRC_ALPHA, GL_ONE );
 	glShadeModel(GL_SMOOTH);
 	
-	setPerspective(FUNCTION);
+	setPerspective();
 
 	return TRUE;
 }
@@ -305,17 +185,15 @@ void keyPressed(SDL_keysym *keysym)
 			chart.Clear();
 			break;
 		case SDLK_F2:
-			pso.draw_best = !pso.draw_best;
+			pso->draw_best = !pso->draw_best;
 			break;
 		case SDLK_F3:
-			pso.draw_normal = !pso.draw_normal;
+			pso->draw_normal = !pso->draw_normal;
 			break;
 		case SDLK_F4:
 			{
-				FUNCTION++;
-				if(FUNCTION > TOTALFUNCTIONCOUNT) FUNCTION = 1;
-				setPerspective(FUNCTION);
-				pso.setFunction(FUNCTION);
+				pso->nextFunction();
+				setPerspective();
 			}
 			break;
 		case SDLK_F12:
@@ -410,7 +288,7 @@ void glPrintHUDInfo(GLint xbound, GLint ybound,int fps)
 	glColor3f(1.0,1.0,1.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
 	out.str("");
-	out <<setprecision(5) <<pso.global_best.fitness;
+	out <<setprecision(5) <<pso->global_best.fitness;
 	msg = out.str();
 	glColor3f(0.0,0.0,1.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
@@ -422,14 +300,14 @@ void glPrintHUDInfo(GLint xbound, GLint ybound,int fps)
 	glColor3f(1.0,1.0,1.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
 	out.str("");
-	out << pso.global_best.pos;
+	out << pso->global_best.pos;
 	msg = out.str();
 	glColor3f(0.0,0.0,1.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
 	glLoadIdentity();
 	glTranslated(0*16,ybound-2-(16*2),0);//*16 -> each character is 16 pixels, so multiply the size of hte string with the pixel amount to get the next draw pos
 	out.str("");
-	gfxParticle particle = pso.getSelectedParticle();
+	gfxParticle particle = pso->getSelectedParticle();
 	out << "Particle ID:";
 	msg = out.str();
 	glColor3f(1.0,1.0,1.0);
@@ -482,7 +360,7 @@ void glPrintHUDInfo(GLint xbound, GLint ybound,int fps)
 	glColor3f(1.0,1.0,1.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
 	out.str("");
-	if(pso.draw_best == true) out << "Yes";
+	if(pso->draw_best == true) out << "Yes";
 	else out << "No";
 	msg = out.str();
 	glColor3f(1.0,1.0,0.0);
@@ -493,7 +371,7 @@ void glPrintHUDInfo(GLint xbound, GLint ybound,int fps)
 	glColor3f(1.0,1.0,1.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
 	out.str("");
-	if(pso.draw_normal == true) out << "Yes";
+	if(pso->draw_normal == true) out << "Yes";
 	else out << "No";
 	msg = out.str();
 	glColor3f(1.0,1.0,0.0);
@@ -506,7 +384,7 @@ void glPrintHUDInfo(GLint xbound, GLint ybound,int fps)
 	glColor3f(1.0,1.0,1.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
 	out.str("");
-	out << pso.functionName();
+	out << pso->functionName();
 	msg = out.str();
 	glColor3f(1.0,0.0,0.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
@@ -553,22 +431,21 @@ void DrawGLScene()
 	//curSize = sizes[0]+5;
 	//glPointSize(curSize);
 	//Draw the particles
-	pso.draw(mode,shape);	
+	pso->draw(mode,shape);	
 	//draw HUD
-	/*
+	
 	if (mode == GL_RENDER)
 	{
 		HUDMode(true);
-		chart.DrawChart();
 		glColor3f(1.0,1.0,1.0);
 		//Top right box
-		*glBegin(GL_QUADS);
+		glBegin(GL_QUADS);
 			glVertex2f(SCREEN_WIDTH*0.70,SCREEN_HEIGHT*0.70);
 			glVertex2f(SCREEN_WIDTH,SCREEN_HEIGHT*0.70);
 			glVertex2f(SCREEN_WIDTH,SCREEN_HEIGHT);
 			glVertex2f(SCREEN_WIDTH*0.70,SCREEN_HEIGHT);
 		glEnd();
-		
+		chart.DrawChart();
 		glColor3f(0,0,1);
 		glBegin(GL_QUADS);
 			glVertex2f(0,SCREEN_HEIGHT*0.10);
@@ -590,7 +467,7 @@ void DrawGLScene()
 		glDisable(GL_TEXTURE_2D);
 		glDisable(GL_BLEND);
 		HUDMode(false);
-	}*/
+	}
 	SDL_GL_SwapBuffers();
     /* Gather our frames per second */
     Frames++;
@@ -644,8 +521,18 @@ int doSelect(const double &x,const double &y)
 	return ruid;
 }
 
+GraphicalPSO* initializePSO()
+{
+	BenchmarkFunctionFactory *functionFactory = new BenchmarkFunctionFactory();
+	Benchmark *function = functionFactory->createDeJongF1();
+	delete functionFactory;
+	return new GraphicalPSO(PARTICLES,function,0.52,0.41,0.5);
+}
+
 int main(int argc, char** argv)
 {
+	
+	pso = initializePSO();
 	int videoFlags;
 	bool done=false;
 	bool calcRotation = false;
@@ -696,15 +583,15 @@ int main(int argc, char** argv)
 		//delete modes[];
 	}
 	else surface = SDL_SetVideoMode(SCREEN_WIDTH,SCREEN_HEIGHT,SCREEN_BPP,videoFlags);
-	if(InitGL(FUNCTION) != TRUE)
+	if(InitGL() != TRUE)
 	{
 		cout << "Error initializing OpenGL" << endl;
 		Quit(1);
 	}
 	int i = 1;	
 	chart.Plot(1,1);
-	ofstream graphfile;
-	graphfile.open("function.txt");
+	//ofstream graphfile;
+	//graphfile.open("function.txt");
 	while(!done)
 	{
 		while(SDL_PollEvent(&event))
@@ -725,7 +612,7 @@ int main(int argc, char** argv)
 						int temp = doSelect(event.button.x,event.button.y);
 						if (temp > -1)
 						{
-							pso.selectParticle(temp);
+							pso->selectParticle(temp);
 						}
 					}
 					if(event.button.button == SDL_BUTTON_LEFT)
@@ -756,12 +643,13 @@ int main(int argc, char** argv)
 		DrawGLScene();
 		if (draw == false)
 		{
-			pso.updateSwarmMovement();
-			graphfile << i-1 << "\t" << pso.global_best.fitness << endl;
-			chart.Plot(i++,pso.global_best.fitness);
+			pso->updateSwarmMovement();
+			//graphfile << i-1 << "\t" << pso.global_best.fitness << endl;
+			chart.Plot(i++,pso->global_best.fitness);
 		}
 	}
-	graphfile.close();
+	//graphfile.close();
 	delete surface;
+	delete pso;
 	return(0);
 }

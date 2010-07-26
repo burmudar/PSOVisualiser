@@ -1,5 +1,5 @@
 #define EPS 0.00000000001;
-#include "gfxmath.h"
+#include "gfxstructures.h"
 
 using namespace std;
 

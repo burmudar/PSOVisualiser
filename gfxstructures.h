@@ -1,5 +1,5 @@
-#ifndef GFXMATH_H
-#define GFXMATH_H
+#ifndef GFXSTRUCTURES_H_
+#define GFXSTRUCTURES_H_
 
 #include <iostream>
 #include <iomanip>
@@ -38,5 +38,14 @@ public:
 	Vector3d transmit(Vector3d i, Vector3d n, double n1,double n2);
 	std::string toString();
 };
+
+struct SceneConfig
+{
+	int chartTickRate;
+	int distance;
+	float nearZPlane;
+	float farZPlane;
+};
+
 typedef class Vector3d Vector3d;
 #endif

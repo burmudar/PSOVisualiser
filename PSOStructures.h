@@ -1,13 +1,13 @@
 #ifndef PSOSTRUCTURES_H
 #define PSOSTRUCTURES_H
 
-#include "gfxmath.h"
-#include "DeJongFunctions.h"
+#include "BenchFunctions.h"
+#include "gfxstructures.h"
+#include "boost/random.hpp"
 #include <vector>
 #include <string>
 #include <sstream>
 #include <cmath>
-#include "boost/random.hpp"
 #include <GL/glu.h>
 #include <GL/gl.h>
 
@@ -18,6 +18,7 @@ struct ParticleBest
 		double fitness;  
 		int uid;
 };
+
 class Particle
 {
 public:
@@ -63,49 +64,51 @@ class ConsolePSO
 {
 public:
 	ConsolePSO();
-	ConsolePSO(const int &pop,const int &func,const double &c1,const double &c2,const double& inertia);
+	ConsolePSO(const int &pop,Benchmark* func,const double &c1,const double &c2,const double& inertia);
 	~ConsolePSO();
-	void setFunction(const int func);
+	void setFunction(Benchmark* func);
+	void nextFunction();
 	void evaluateSwarm();
 	void evaluateParticle(const int &index);
 	void updateSwarmMovement();
 	void print();
 	ParticleBest global_best;
 protected:
-	void initializeSwarm(int func);
+	void initializeSwarm();
 private:
 	std::vector<Particle> swarm;
 	int population;
 	double c1,c2,inertia;
-	DeJong * function;
+	Benchmark *function;
 };
 
 class GraphicalPSO 
 {
 public:
 	GraphicalPSO();
-	GraphicalPSO(const int &pop,const int &func,const double &c1,const double &c2,const double& inertia);
+	GraphicalPSO(const int &pop,Benchmark* func,const double &c1,const double &c2,const double& inertia);
 	~GraphicalPSO();
-	void setFunction(const int func);
+	void setFunction(Benchmark* func);
+	void nextFunction();
 	void evaluateSwarm();
 	void evaluateParticle(const int &index);
 	void updateSwarmMovement();
 	std::string functionName() const;
 	const gfxParticle& getSelectedParticle();
 	void selectParticle(const int &uid);
-	void drawFunctionGraph(const int XMIN,const int YMIN,const int XMAX,const int YMAX);
+	const SceneConfig getFunctionSceneConfig();
 	void draw(int renderMode,int drawShape);
 	bool draw_normal;
 	bool draw_best;
 	ParticleBest global_best;
 protected:
-	void initializeSwarm(const int &func);
+	void initializeSwarm();
 private:
 	std::vector<gfxParticle> swarm;
 	int selectedParticleUID;
 	int population;
 	double c1,c2,inertia;
-	DeJong * function;
+	Benchmark *function;
 };
 
 typedef class Particle Particle;
