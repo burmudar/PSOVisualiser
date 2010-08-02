@@ -28,7 +28,7 @@ float xtrans = 0.0f;
 float ytrans = 0.0f;
 float dist = 40.0f;
 float tick = 0.05f;
-const int PARTICLES = 10000;
+const int PARTICLES = 65000;
 const bool FULLSCREEN = false;
 const int SCREEN_WIDTH = 1024;
 const int SCREEN_HEIGHT = 768;
@@ -153,7 +153,7 @@ void setPerspective()
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 }
 
-int InitGL(const int FUNCTION)
+int InitGL()
 {
 	if (!LoadFontTexture()) return -1;
 
@@ -526,7 +526,7 @@ GraphicalPSO* initializePSO()
 	BenchmarkFunctionFactory *functionFactory = new BenchmarkFunctionFactory();
 	Benchmark *function = functionFactory->createDeJongF1();
 	delete functionFactory;
-	return new GraphicalPSO(PARTICLES,function,0.52,0.41,0.5);
+	return new GraphicalPSO(PARTICLES,function,0.52,0.41,0.9);
 }
 
 int main(int argc, char** argv)

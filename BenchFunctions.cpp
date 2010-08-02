@@ -105,7 +105,6 @@ DeJongF5::DeJongF5()
 					{
 						value = -32;
 					}
-					cout << a[row][col] << endl;
 				}
 				break;
 				case 1:
@@ -116,7 +115,6 @@ DeJongF5::DeJongF5()
 						value = value + 16;
 						if (value == 48) value = 32;
 					}
-					cout << a[row][col] << endl;
 				}
 				break;
 			}

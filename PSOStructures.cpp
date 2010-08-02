@@ -169,7 +169,10 @@ void gfxParticle::draw(int mode,int shape)
 	}
 	else
 	{
-		glColor3f(0.5 - position.z/pbest.fitness,0.5 - position.y/pbest.fitness,0.5 - position.x/pbest.fitness);
+		Vector3d colorVec(position.x,position.y,position.z);
+		colorVec.normalize();
+		//glColor3f(0.5 - position.z/pbest.fitness,0.5 - position.y/pbest.fitness,0.5 - position.x/pbest.fitness);
+		glColor3f((colorVec.x + 1)/2,(colorVec.y+1)/2,(colorVec.z+1)/2);
 		//glColor3f(0.5*position.x/pbest.fitness,0.5*position.y/pbest.fitness,0.5*position.z/pbest.fitness);
 	}
 	switch(shape)
@@ -195,7 +198,9 @@ void gfxParticle::drawBest(int mode,int shape)
 	}
 	else
 	{
-		glColor3f(1.0,1.0,1.0);
+		Vector3d colorVec(pbest.fitness,pbest.fitness,pbest.fitness);
+		colorVec.normalize();
+		glColor3f(1.0 - (colorVec.x + 1) / 2,1.0 - (colorVec.y+1)/2,1.0 - (colorVec.z+1)/2);
 	}
 	switch(shape)
 	{
@@ -386,7 +391,6 @@ void GraphicalPSO::initializeSwarm()
 		Vector3d position = generator->generatePosition();
 		swarm[i] = gfxParticle(position,i);
 	}
-	cout <<"Initialized Swarm" << endl;
 	delete generator;
 }
 
