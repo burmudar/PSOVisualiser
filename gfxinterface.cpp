@@ -521,18 +521,35 @@ int doSelect(const double &x,const double &y)
 	return ruid;
 }
 
-GraphicalPSO* initializePSO()
+GraphicalPSO* initializeNormalPSO()
 {
 	BenchmarkFunctionFactory *functionFactory = new BenchmarkFunctionFactory();
 	Benchmark *function = functionFactory->createDeJongF1();
 	delete functionFactory;
-	return new GraphicalPSO(PARTICLES,function,0.52,0.41,0.9);
+	return new GraphicalPSO(PARTICLES,function,0.52,0.41);
+}
+
+GraphicalPSO* initializeInertiaPSO()
+{
+	BenchmarkFunctionFactory *functionFactory = new BenchmarkFunctionFactory();
+	Benchmark *function = functionFactory->createDeJongF1();
+	delete functionFactory;
+	return new GraphicalInertiaPSO(PARTICLES,function,0.52,1.41,0.25);
+}
+
+GraphicalPSO* initializeConstrictionPSO()
+{
+	BenchmarkFunctionFactory *functionFactory = new BenchmarkFunctionFactory();
+	Benchmark *function = functionFactory->createDeJongF1();
+	delete functionFactory;
+	return new GraphicalConstrictionPSO(PARTICLES,function,2.52,1.41,1);
 }
 
 int main(int argc, char** argv)
 {
 	
-	pso = initializePSO();
+	pso = initializeInertiaPSO();
+	pso->initialize();
 	int videoFlags;
 	bool done=false;
 	bool calcRotation = false;

@@ -86,13 +86,14 @@ class GraphicalPSO
 {
 public:
 	GraphicalPSO();
-	GraphicalPSO(const int &pop,Benchmark* func,const double &c1,const double &c2,const double& inertia);
+	GraphicalPSO(const int &pop,Benchmark* func,const double &c1,const double &c2);
 	~GraphicalPSO();
+	void initialize();
 	void setFunction(Benchmark* func);
 	void nextFunction();
 	void evaluateSwarm();
 	void evaluateParticle(const int &index);
-	void updateSwarmMovement();
+	virtual void updateSwarmMovement();
 	std::string functionName() const;
 	const gfxParticle& getSelectedParticle();
 	void selectParticle(const int &uid);
@@ -103,17 +104,37 @@ public:
 	ParticleBest global_best;
 protected:
 	void initializeSwarm();
-private:
 	std::vector<gfxParticle> swarm;
 	int selectedParticleUID;
 	int population;
-	double c1,c2,inertia;
+	double c1,c2;
 	Benchmark *function;
+};
+
+class GraphicalInertiaPSO : public GraphicalPSO
+{
+public:
+	GraphicalInertiaPSO(const int &pop,Benchmark* func,const double &c1,const double &c2,const double& inertia);
+	virtual void updateSwarmMovement();
+private:
+	double inertia;
+};
+
+class GraphicalConstrictionPSO : public GraphicalPSO
+{
+public:
+	GraphicalConstrictionPSO(const int &pop,Benchmark* func,const double &c1,const double &c2,const double& constriction);
+	virtual void updateSwarmMovement();
+private:
+	double calculateConstrictionCoefficient();
+	double constriction;
 };
 
 typedef class Particle Particle;
 typedef class gfxParticle gfxParticle;
 typedef struct ParticleBest ParticleBest;
 typedef class GraphicalPSO GraphicalPSO;
+typedef class GraphicalInertiaPSO GraphicalInertiaPSO;
+typedef class GraphicalConstrictionPSO GraphicalConstrictionPSO;
 typedef class ConsolePSO ConsolePSO;
 #endif
