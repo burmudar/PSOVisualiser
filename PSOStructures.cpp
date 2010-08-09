@@ -384,6 +384,11 @@ void GraphicalPSO::nextFunction()
 	setFunction(function);
 }
 
+Benchmark* GraphicalPSO::getFunction()
+{
+	return function;
+}
+
 void GraphicalPSO::initializeSwarm()
 {
 	BenchmarkPositionGenerator *generator = function->createPositionGenerator();
@@ -502,10 +507,10 @@ GraphicalConstrictionPSO::GraphicalConstrictionPSO(const int &pop,Benchmark* fun
 	this->constriction = constriction;
 }
 
-double GraphicalConstrictionPSO::calculateConstrictionCoefficient()
+double GraphicalConstrictionPSO::calculateConstrictionCoefficient(const double& r1, const double& r2)
 {
-	double alpha = c1 + c2;
-	return 2 / abs(2 - alpha - sqrt((alpha * alpha) - 4 * alpha));
+	double alpha = c1*r1 + c2*r2;
+	return (2 * constriction) / abs(2 - alpha - sqrt(alpha * (alpha - 4)));
 }
 
 void GraphicalConstrictionPSO::updateSwarmMovement()
@@ -513,12 +518,21 @@ void GraphicalConstrictionPSO::updateSwarmMovement()
 	boost::mt19937 rng(time(0));
 	boost::uniform_real<double> u(0.00,1.00);
 	boost::variate_generator<boost::mt19937&, boost::uniform_real<double> > gen(rng, u);	
-	double c_coefficient = calculateConstrictionCoefficient();
-	if(c_coefficient < 4)
-		c_coefficient = 4;
+	
+	double c_coefficient,r1,r2;
 	for(unsigned int i =0; i < swarm.size();i++)
 	{
-		swarm[i].velocity = c_coefficient * (swarm[i].velocity + c1 * gen() * (swarm[i].getBestPosition() - swarm[i].getPosition()) + c2 * gen() * (global_best.pos - swarm[i].getPosition()));
+		r1 = gen();
+		r2 = gen();
+		c_coefficient = calculateConstrictionCoefficient(r1,r2);
+		if(c_coefficient < 4)
+		{
+			swarm[i].velocity = (swarm[i].velocity + c1 * r1 * (swarm[i].getBestPosition() - swarm[i].getPosition()) + c2 * r2 * (global_best.pos - swarm[i].getPosition()));
+		}
+		else
+		{
+			swarm[i].velocity = c_coefficient * (swarm[i].velocity + c1 * r1 * (swarm[i].getBestPosition() - swarm[i].getPosition()) + c2 * r2 * (global_best.pos - swarm[i].getPosition()));
+		}
 		swarm[i].move();
 		evaluateParticle(i);
 	}

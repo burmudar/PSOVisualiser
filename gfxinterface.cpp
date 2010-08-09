@@ -46,6 +46,11 @@ GLuint texture[1];
 
 SDL_Surface *surface;
 
+//PROTOTYPES
+GraphicalPSO* initializeNormalPSO();
+GraphicalPSO* initializeInertiaPSO();
+GraphicalPSO* initializeConstrictionPSO();
+
 GLvoid KillFont()
 {
 	glDeleteLists(base,256);
@@ -194,6 +199,24 @@ void keyPressed(SDL_keysym *keysym)
 			{
 				pso->nextFunction();
 				setPerspective();
+			}
+			break;
+		case SDLK_F5:
+			{
+				pso = initializeNormalPSO();
+				pso->initialize();
+			}
+			break;
+		case SDLK_F6:
+			{
+				pso = initializeInertiaPSO();
+				pso->initialize();
+			}
+			break;
+		case SDLK_F7:
+			{
+				pso = initializeConstrictionPSO();
+				pso->initialize();
 			}
 			break;
 		case SDLK_F12:
@@ -521,28 +544,35 @@ int doSelect(const double &x,const double &y)
 	return ruid;
 }
 
+Benchmark *setupFunctionForPSO(GraphicalPSO* gpso)
+{
+	Benchmark *function = NULL;
+	if(gpso == NULL)
+	{
+		BenchmarkFunctionFactory *functionFactory = new BenchmarkFunctionFactory();
+		function = functionFactory->createDeJongF1();
+		delete functionFactory;
+	}
+	else
+	{
+		function = gpso->getFunction();	
+	}
+	return function;
+}
+
 GraphicalPSO* initializeNormalPSO()
 {
-	BenchmarkFunctionFactory *functionFactory = new BenchmarkFunctionFactory();
-	Benchmark *function = functionFactory->createDeJongF1();
-	delete functionFactory;
-	return new GraphicalPSO(PARTICLES,function,0.52,0.41);
+	return new GraphicalPSO(PARTICLES,setupFunctionForPSO(pso),0.52,0.41);
 }
 
 GraphicalPSO* initializeInertiaPSO()
 {
-	BenchmarkFunctionFactory *functionFactory = new BenchmarkFunctionFactory();
-	Benchmark *function = functionFactory->createDeJongF1();
-	delete functionFactory;
-	return new GraphicalInertiaPSO(PARTICLES,function,0.52,1.41,0.25);
+	return new GraphicalInertiaPSO(PARTICLES,setupFunctionForPSO(pso),0.52,1.41,0.25);
 }
 
 GraphicalPSO* initializeConstrictionPSO()
 {
-	BenchmarkFunctionFactory *functionFactory = new BenchmarkFunctionFactory();
-	Benchmark *function = functionFactory->createDeJongF1();
-	delete functionFactory;
-	return new GraphicalConstrictionPSO(PARTICLES,function,2.52,1.41,1);
+	r(pso)eturn new GraphicalConstrictionPSO(PARTICLES,setupFunctionForPSO(pso),2.52,1.41,0.5);
 }
 
 int main(int argc, char** argv)

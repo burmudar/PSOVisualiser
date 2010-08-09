@@ -90,6 +90,7 @@ public:
 	~GraphicalPSO();
 	void initialize();
 	void setFunction(Benchmark* func);
+	Benchmark* getFunction();
 	void nextFunction();
 	void evaluateSwarm();
 	void evaluateParticle(const int &index);
@@ -126,7 +127,7 @@ public:
 	GraphicalConstrictionPSO(const int &pop,Benchmark* func,const double &c1,const double &c2,const double& constriction);
 	virtual void updateSwarmMovement();
 private:
-	double calculateConstrictionCoefficient();
+	double calculateConstrictionCoefficient(const double& r1, const double& r2);
 	double constriction;
 };
 
