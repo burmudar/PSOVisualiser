@@ -3,13 +3,12 @@
 
 #include "BenchFunctions.h"
 #include "gfxstructures.h"
-#include "boost/random.hpp"
+#include <boost/random.hpp>
 #include <vector>
 #include <string>
 #include <sstream>
 #include <cmath>
-#include <GL/glu.h>
-#include <GL/gl.h>
+#include "SDL_opengl.h"
 
 const double EPSILON = 0.00000000001;
 struct ParticleBest
@@ -60,14 +59,36 @@ class gfxParticle : public Particle
 		void drawPoint(const Vector3d& pos);
 };
 
-class ConsolePSO 
+class BasePSO
+{
+public:
+	BasePSO();
+	BasePSO(const int &pop,Benchmark* func,const double &c1,const double &c2,const double& inertia);
+	~BasePSO();
+	void setFunction(Benchmark* func);
+	void nextFunction();
+	Benchmark* getFunction();
+	std::string getFunctionName() const;
+	virtual void initialize();
+	virtual void evaluateSwarm();
+	virtual void evaluateParticle(const int& index);
+	virtual void updateSwarmMovement();
+	virtual bool isSwarmBestAtOptimum();
+	ParticleBest global_best;
+protected:
+	virtual void initializeSwarm();
+	std::vector<gfxParticle> swarm;
+	int population;
+	double c1,c2,inertia;
+	Benchmark* function;
+};
+
+class ConsolePSO : public BasePSO
 {
 public:
 	ConsolePSO();
-	ConsolePSO(const int &pop,Benchmark* func,const double &c1,const double &c2,const double& inertia);
+	ConsolePSO(const int &pop,Benchmark* func,const double &c1,const double &c2,const double& inertia); 
 	~ConsolePSO();
-	void setFunction(Benchmark* func);
-	void nextFunction();
 	void evaluateSwarm();
 	void evaluateParticle(const int &index);
 	void updateSwarmMovement();
@@ -75,48 +96,33 @@ public:
 	ParticleBest global_best;
 protected:
 	void initializeSwarm();
-private:
-	std::vector<Particle> swarm;
-	int population;
-	double c1,c2,inertia;
-	Benchmark *function;
 };
 
-class GraphicalPSO 
+class GraphicalPSO: public BasePSO
 {
 public:
 	GraphicalPSO();
 	GraphicalPSO(const int &pop,Benchmark* func,const double &c1,const double &c2);
 	~GraphicalPSO();
-	void initialize();
+	//redefinition of inherited function from BasePSO
 	void setFunction(Benchmark* func);
-	Benchmark* getFunction();
-	void nextFunction();
-	void evaluateSwarm();
-	void evaluateParticle(const int &index);
-	virtual void updateSwarmMovement();
-	std::string functionName() const;
+	//Non-inherited methods i.e new methods
 	const gfxParticle& getSelectedParticle();
 	void selectParticle(const int &uid);
 	const SceneConfig getFunctionSceneConfig();
 	void draw(int renderMode,int drawShape);
 	bool draw_normal;
 	bool draw_best;
-	ParticleBest global_best;
 protected:
-	void initializeSwarm();
-	std::vector<gfxParticle> swarm;
+	bool benchmark_mode;
 	int selectedParticleUID;
-	int population;
-	double c1,c2;
-	Benchmark *function;
 };
 
 class GraphicalInertiaPSO : public GraphicalPSO
 {
 public:
 	GraphicalInertiaPSO(const int &pop,Benchmark* func,const double &c1,const double &c2,const double& inertia);
-	virtual void updateSwarmMovement();
+	void updateSwarmMovement();
 private:
 	double inertia;
 };
@@ -125,7 +131,7 @@ class GraphicalConstrictionPSO : public GraphicalPSO
 {
 public:
 	GraphicalConstrictionPSO(const int &pop,Benchmark* func,const double &c1,const double &c2,const double& constriction);
-	virtual void updateSwarmMovement();
+	void updateSwarmMovement();
 private:
 	double calculateConstrictionCoefficient(const double& r1, const double& r2);
 	double constriction;
@@ -134,6 +140,7 @@ private:
 typedef class Particle Particle;
 typedef class gfxParticle gfxParticle;
 typedef struct ParticleBest ParticleBest;
+typedef class BasePSO BasePSO;
 typedef class GraphicalPSO GraphicalPSO;
 typedef class GraphicalInertiaPSO GraphicalInertiaPSO;
 typedef class GraphicalConstrictionPSO GraphicalConstrictionPSO;

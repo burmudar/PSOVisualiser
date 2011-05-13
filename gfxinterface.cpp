@@ -8,9 +8,8 @@
 #include <fstream>
 #include <vector>
 #include <cmath>
-#include <GL/gl.h>
-#include <GL/glu.h>
 #include "SDL.h"
+#include "SDL_opengl.h"
 
 #define SCREEN_BPP 16
 #define TRUE 1
@@ -19,7 +18,7 @@
 using namespace std;
 //Global variables
 
-bool draw = true;
+bool draw = false;
 
 float xrot = 0.0f;
 float yrot = 0.0f;
@@ -36,6 +35,8 @@ enum movement{STOP=0,LEFT=1,RIGHT=2,UP=3,DOWN=4};
 Chart2DPlotter chart(SCREEN_WIDTH*0.70,SCREEN_HEIGHT*0.70,SCREEN_WIDTH,SCREEN_HEIGHT,20);
 movement KEY;
 int shape =1;
+bool benchmark_mode = false;
+int initial_bench_uid = -1;
 //if you take out inertia (the 0.5) the swarm seems to explore more, but then it doens't find
 //the optimum for Schwefel function
 
@@ -77,7 +78,6 @@ void ReSizeGLScene(int width,int height)
 	
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-
 }
 
 bool LoadFontTexture()
@@ -178,6 +178,21 @@ int InitGL()
 	return TRUE;
 }
 
+void doBenchmarkSetup()
+{
+	benchmark_mode = !benchmark_mode;
+	cout << benchmark_mode;
+	if(benchmark_mode == true)
+	{
+		draw = true;
+		initial_bench_uid = pso->getFunction()->getUID();
+	}
+	else
+	{
+		initial_bench_uid = -1;
+	}
+}
+
 void keyPressed(SDL_keysym *keysym)
 {
 	switch(keysym->sym)
@@ -217,6 +232,11 @@ void keyPressed(SDL_keysym *keysym)
 			{
 				pso = initializeConstrictionPSO();
 				pso->initialize();
+			}
+			break;
+		case SDLK_F8:
+			{
+				doBenchmarkSetup();	
 			}
 			break;
 		case SDLK_F12:
@@ -407,7 +427,7 @@ void glPrintHUDInfo(GLint xbound, GLint ybound,int fps)
 	glColor3f(1.0,1.0,1.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
 	out.str("");
-	out << pso->functionName();
+	out << pso->getFunctionName();
 	msg = out.str();
 	glColor3f(1.0,0.0,0.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
@@ -572,7 +592,21 @@ GraphicalPSO* initializeInertiaPSO()
 
 GraphicalPSO* initializeConstrictionPSO()
 {
-	r(pso)eturn new GraphicalConstrictionPSO(PARTICLES,setupFunctionForPSO(pso),2.52,1.41,0.5);
+	return new GraphicalConstrictionPSO(PARTICLES,setupFunctionForPSO(pso),2.52,1.41,0.5);
+}
+
+void doBenchmarkModeLogicProcessing()
+{
+	if(pso->isSwarmBestAtOptimum())
+	{
+		pso->nextFunction();
+		chart.Clear();
+	}
+	if(pso->getFunction()->isSameUID(initial_bench_uid))
+	{
+		benchmark_mode = false;
+		draw = false;
+	}
 }
 
 int main(int argc, char** argv)
@@ -688,9 +722,13 @@ int main(int argc, char** argv)
 			}
 		}
 		DrawGLScene();
-		if (draw == false)
+		if (draw == true)
 		{
 			pso->updateSwarmMovement();
+			if(benchmark_mode == true)
+			{
+				doBenchmarkModeLogicProcessing();
+			}
 			//graphfile << i-1 << "\t" << pso.global_best.fitness << endl;
 			chart.Plot(i++,pso->global_best.fitness);
 		}

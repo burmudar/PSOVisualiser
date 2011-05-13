@@ -62,6 +62,22 @@ double DeJongF1::evaluate(const Vector3d& pos)
 	return pow(pos.x,2) + pow(pos.y,2) + pow(pos.z,2);
 }
 
+const bool DeJongF1::isSameUID(const int& other_uid)
+{
+	if(this->uid == other_uid)
+	{
+		return true;
+	}
+	return false;
+}
+
+
+
+const int DeJongF1::getUID()
+{
+	return this->uid;
+}
+
 const string DeJongF1::name()
 {
 	return "DeJong Function F1";
@@ -80,6 +96,16 @@ const SceneConfig DeJongF1::getSceneConfigForBenchmark()
 	config.nearZPlane = 0.1f;
 	config.farZPlane = 100.0f;
 	return config;
+}
+
+const bool DeJongF1::isOptimum(const double& fitness)
+{
+	const double EPSILON = 0.0000000001;
+	if(fitness <= EPSILON)
+	{
+		return true;
+	}
+	return false;
 }
 
 BenchmarkPositionGenerator *DeJongF1::createPositionGenerator()
@@ -127,6 +153,22 @@ const string DeJongF5::name()
 	return "DeJong Function F5 Shekel's Foxhole";
 }
 
+const bool DeJongF5::isSameUID(const int& other_uid)
+{
+	if(this->uid == other_uid)
+	{
+		return true;
+	}
+	return false;
+}
+
+const int DeJongF5::getUID()
+{
+	return this->uid;
+}
+
+
+
 const BENCHMARK_FUNCTION DeJongF5::getBenchmarkFunctionType()
 {
 	return DEJONGF5;
@@ -140,6 +182,15 @@ const SceneConfig DeJongF5::getSceneConfigForBenchmark()
 	config.nearZPlane = 0.1f;
 	config.farZPlane = 8000.0f;
 	return config;
+}
+
+const bool DeJongF5::isOptimum(const double& fitness)
+{
+	if(fitness <= 0.000000001)
+	{
+		return true;
+	}
+	return false;
 }
 
 BenchmarkPositionGenerator *DeJongF5::createPositionGenerator()
@@ -180,6 +231,22 @@ const string Rastrigin::name()
 	return "Rastrigin Function";
 }
 
+const bool Rastrigin::isSameUID(const int& other_uid)
+{
+	if(this->uid == other_uid)
+	{
+		return true;
+	}
+	return false;
+}
+
+const int Rastrigin::getUID()
+{
+	return this->uid;
+}
+
+
+
 const BENCHMARK_FUNCTION Rastrigin::getBenchmarkFunctionType()
 {
 	return RASTRIGIN;
@@ -195,6 +262,14 @@ const SceneConfig Rastrigin::getSceneConfigForBenchmark()
 	return config;
 }
 
+const bool Rastrigin::isOptimum(const double& fitness)
+{
+	if(fitness <= 0.000000001)
+	{
+		return true;	
+	}
+	return false;
+}
 BenchmarkPositionGenerator *Rastrigin::createPositionGenerator()
 {
 	return new Position3DGenerator(-5.12,5.12);
@@ -221,6 +296,22 @@ const string Schwefel::name()
 	return "Schwefel Function 7";
 }
 
+const bool Schwefel::isSameUID(const int& other_uid)
+{
+	if(this->uid == other_uid)
+	{
+		return true;
+	}
+	return false;
+}
+
+const int Schwefel::getUID()
+{
+	return this->uid;
+}
+
+
+
 const BENCHMARK_FUNCTION Schwefel::getBenchmarkFunctionType()
 {
 	return SCHWEFEL;
@@ -234,6 +325,15 @@ const SceneConfig Schwefel::getSceneConfigForBenchmark()
 	config.nearZPlane = 0.1f;
 	config.farZPlane = 8000.0f;
 	return config;
+}
+
+const bool Schwefel::isOptimum(const double& fitness)
+{
+	if((fitness <= 0.000000001))
+	{
+		return true;
+	}
+	return false;
 }
 
 BenchmarkPositionGenerator *Schwefel::createPositionGenerator()
@@ -264,6 +364,22 @@ const string Griewank::name()
 	return "Griewank Function";
 }
 
+const bool Griewank::isSameUID(const int& other_uid)
+{
+	if(this->uid == other_uid)
+	{
+		return true;
+	}
+	return false;
+}
+
+const int Griewank::getUID()
+{
+	return this->uid;
+}
+
+
+
 const BENCHMARK_FUNCTION Griewank::getBenchmarkFunctionType()
 {
 	return GRIEWANK;
@@ -277,6 +393,15 @@ const SceneConfig Griewank::getSceneConfigForBenchmark()
 	config.nearZPlane = 0.1f;
 	config.farZPlane = 100.0f;
 	return config;
+}
+
+const bool Griewank::isOptimum(const double& fitness)
+{
+	if(fitness <= 0.000000001)
+	{
+		return true;
+	}
+	return false;
 }
 
 BenchmarkPositionGenerator *Griewank::createPositionGenerator()
@@ -309,6 +434,22 @@ const string Salomon::name()
 	return "Salomon Function";
 } 
 
+const bool Salomon::isSameUID(const int& other_uid)
+{
+	if(this->uid == other_uid)
+	{
+		return true;
+	}
+	return false;
+}
+
+const int Salomon::getUID()
+{
+	return this->uid;
+}
+
+
+
 const BENCHMARK_FUNCTION Salomon::getBenchmarkFunctionType()
 {
 	return SALAMON;
@@ -322,6 +463,15 @@ const SceneConfig Salomon::getSceneConfigForBenchmark()
 	config.nearZPlane = 0.1f;
 	config.farZPlane = 5000.0f;
 	return config;
+}
+
+const bool Salomon::isOptimum(const double& fitness)
+{
+	if(fitness <= 0.000000001)
+	{
+		return true;
+	}
+	return false;
 }
 
 BenchmarkPositionGenerator *Salomon::createPositionGenerator()
@@ -344,6 +494,15 @@ const SceneConfig Ackley::getSceneConfigForBenchmark()
 	return config;
 }
 
+const bool Ackley::isOptimum(const double& fitness)
+{
+	if(fitness <= 0.000000001)
+	{
+		return true;
+	}
+	return false;
+}
+
 Ackley::Ackley()
 {
 	info = "418.9829*n + sum(Xi*Sin(Sqrt(abs(Xi))))";
@@ -362,6 +521,22 @@ const string Ackley::name()
 {
 	return "Ackley Function in 2D";
 }
+
+const bool Ackley::isSameUID(const int& other_uid)
+{
+	if(this->uid == other_uid)
+	{
+		return true;
+	}
+	return false;
+}
+
+const int Ackley::getUID()
+{
+	return this->uid;
+}
+
+
 
 BenchmarkPositionGenerator *Ackley::createPositionGenerator()
 {
@@ -385,6 +560,22 @@ const string Camel::name()
 	return "Six-Camel Hump Back Function ";
 }
 
+const bool Camel::isSameUID(const int& other_uid)
+{
+	if(this->uid == other_uid)
+	{
+		return true;
+	}
+	return false;
+}
+
+const int Camel::getUID()
+{
+	return this->uid;
+}
+
+
+
 const BENCHMARK_FUNCTION Camel::getBenchmarkFunctionType()
 {
 	return CAMEL;
@@ -398,6 +589,15 @@ const SceneConfig Camel::getSceneConfigForBenchmark()
 	config.nearZPlane = 0.1f;
 	config.farZPlane = 5000.0f;
 	return config;
+}
+
+const bool Camel::isOptimum(const double& fitness)
+{
+	if(fitness <= -1.0316)
+	{
+		return true;
+	}
+	return false;
 }
 
 BenchmarkPositionGenerator *Camel::createPositionGenerator()
@@ -430,6 +630,22 @@ const string Shubert::name()
 	return "Shubert Function ";
 }
 
+const bool Shubert::isSameUID(const int& other_uid)
+{
+	if(this->uid == other_uid)
+	{
+		return true;
+	}
+	return false;
+}
+
+const int Shubert::getUID()
+{
+	return this->uid;
+}
+
+
+
 const BENCHMARK_FUNCTION Shubert::getBenchmarkFunctionType()
 {
 	return SHUBERT;
@@ -443,6 +659,15 @@ const SceneConfig Shubert::getSceneConfigForBenchmark()
 	config.nearZPlane = 0.1f;
 	config.farZPlane = 5000.0f;
 	return config;
+}
+
+const bool Shubert::isOptimum(const double& fitness)
+{
+	if(fitness <= -186.7309)
+	{
+		return true;
+	}
+	return false;
 }
 
 BenchmarkPositionGenerator *Shubert::createPositionGenerator()
@@ -466,6 +691,22 @@ const string Himmelblau::name()
 	return "Himmelblau Function ";
 }
 
+const bool Himmelblau::isSameUID(const int& other_uid)
+{
+	if(this->uid == other_uid)
+	{
+		return true;
+	}
+	return false;
+}
+
+const int Himmelblau::getUID()
+{
+	return this->uid;
+}
+
+
+
 const BENCHMARK_FUNCTION Himmelblau::getBenchmarkFunctionType()
 {
 	return HIMMELBLAU;
@@ -479,6 +720,15 @@ const SceneConfig Himmelblau::getSceneConfigForBenchmark()
 	config.nearZPlane = 0.1f;
 	config.farZPlane = 5000.0f;
 	return config;
+}
+
+const bool Himmelblau::isOptimum(const double& fitness)
+{
+	if(fitness <= 0.000000001)
+	{
+		return true;
+	}
+	return false;
 }
 
 BenchmarkPositionGenerator *Himmelblau::createPositionGenerator()
@@ -504,6 +754,22 @@ const string Rosenbrock::name()
 	return "Rosenbrock Function ";
 }
 
+const bool Rosenbrock::isSameUID(const int& other_uid)
+{
+	if(this->uid == other_uid)
+	{
+		return true;
+	}
+	return false;
+}
+
+const int Rosenbrock::getUID()
+{
+	return this->uid;
+}
+
+
+
 const BENCHMARK_FUNCTION Rosenbrock::getBenchmarkFunctionType()
 {
 	return ROSENBROCK;
@@ -518,6 +784,15 @@ const SceneConfig Rosenbrock::getSceneConfigForBenchmark()
 	config.farZPlane = 100.0f;
 
 	return config;
+}
+
+const bool Rosenbrock::isOptimum(const double& fitness)
+{
+	if(fitness <= 0.000000001)
+	{
+		return true;
+	}
+	return false;
 }
 
 BenchmarkPositionGenerator *Rosenbrock::createPositionGenerator()
@@ -544,6 +819,22 @@ const string DropWave::name()
 	return "DropWave Function ";
 }
 
+const bool DropWave::isSameUID(const int& other_uid)
+{
+	if(this->uid == other_uid)
+	{
+		return true;
+	}
+	return false;
+}
+
+const int DropWave::getUID()
+{
+	return this->uid;
+}
+
+
+
 const BENCHMARK_FUNCTION DropWave::getBenchmarkFunctionType()
 {
 	return DROPWAVE;
@@ -557,6 +848,15 @@ const SceneConfig DropWave::getSceneConfigForBenchmark()
 	config.nearZPlane = 0.1f;
 	config.farZPlane = 100.0f;
 	return config;
+}
+
+const bool DropWave::isOptimum(const double& fitness)
+{
+	if(fitness <= 0.000000001)
+	{
+		return true;
+	}
+	return false;
 }
 
 BenchmarkPositionGenerator *DropWave::createPositionGenerator()
@@ -581,6 +881,22 @@ const string Easom::name()
 	return "Easom Function ";
 }
 
+const bool Easom::isSameUID(const int& other_uid)
+{
+	if(this->uid == other_uid)
+	{
+		return true;
+	}
+	return false;
+}
+
+const int Easom::getUID()
+{
+	return this->uid;
+}
+
+
+
 const BENCHMARK_FUNCTION Easom::getBenchmarkFunctionType()
 {
 	return EASOM;
@@ -594,6 +910,15 @@ const SceneConfig Easom::getSceneConfigForBenchmark()
 	config.nearZPlane = 0.1f;
 	config.farZPlane = 100.0f;
 	return config;
+}
+
+const bool Easom::isOptimum(const double& fitness)
+{
+	if(fitness <= 0.000000001)
+	{
+		return true;
+	}
+	return false;
 }
 
 BenchmarkPositionGenerator *Easom::createPositionGenerator()
@@ -618,6 +943,22 @@ const string Branins::name()
 	return "Branins Function ";
 }
 
+const bool Branins::isSameUID(const int& other_uid)
+{
+	if(this->uid == other_uid)
+	{
+		return true;
+	}
+	return false;
+}
+
+const int Branins::getUID()
+{
+	return this->uid;
+}
+
+
+
 const BENCHMARK_FUNCTION Branins::getBenchmarkFunctionType()
 {
 	return BRANINS;
@@ -631,6 +972,15 @@ const SceneConfig Branins::getSceneConfigForBenchmark()
 	config.nearZPlane = 0.1f;
 	config.farZPlane = 100.0f;
 	return config;
+}
+
+const bool Branins::isOptimum(const double& fitness)
+{
+	if(fitness <= 0.000000001)
+	{
+		return true;
+	}
+	return false;
 }
 
 
@@ -657,6 +1007,22 @@ const string Michalewicz::name()
 	return "Michalewicz Function ";
 }
 
+const bool Michalewicz::isSameUID(const int& other_uid)
+{
+	if(this->uid == other_uid)
+	{
+		return true;
+	}
+	return false;
+}
+
+const int Michalewicz::getUID()
+{
+	return this->uid;
+}
+
+
+
 const BENCHMARK_FUNCTION Michalewicz::getBenchmarkFunctionType()
 {
 	return MICHALEWICZ;
@@ -670,6 +1036,15 @@ const SceneConfig Michalewicz::getSceneConfigForBenchmark()
 	config.nearZPlane = 0.1f;
 	config.farZPlane = 200.0f;
 	return config;
+}
+
+const bool Michalewicz::isOptimum(const double& fitness)
+{
+	if(fitness <= 0.000000001)
+	{
+		return true;
+	}
+	return false;
 }
 
 BenchmarkPositionGenerator* Michalewicz::createPositionGenerator()
@@ -695,6 +1070,22 @@ const string Goldstein::name()
 	return "Goldstein Function ";
 }
 
+const bool Goldstein::isSameUID(const int& other_uid)
+{
+	if(this->uid == other_uid)
+	{
+		return true;
+	}
+	return false;
+}
+
+const int Goldstein::getUID()
+{
+	return this->uid;
+}
+
+
+
 const BENCHMARK_FUNCTION Goldstein::getBenchmarkFunctionType()
 {
 	return GOLDSTEIN;
@@ -708,6 +1099,15 @@ const SceneConfig Goldstein::getSceneConfigForBenchmark()
 	config.nearZPlane = 0.1f;
 	config.farZPlane = 5000.0f;
 	return config;
+}
+
+const bool Goldstein::isOptimum(const double& fitness)
+{
+	if(fitness <= 0.000000001)
+	{
+		return true;
+	}
+	return false;
 }
 
 BenchmarkPositionGenerator *Goldstein::createPositionGenerator()

@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 #include "gfxstructures.h"
-#include "boost/random.hpp"
+#include <boost/random.hpp>
 
 const double PI = 3.14159265358979323846;
 
@@ -57,6 +57,9 @@ public:
 	virtual const std::string name() = 0;
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType() = 0;
 	virtual const SceneConfig getSceneConfigForBenchmark() = 0;
+	virtual const bool isOptimum(const double& fitness) = 0;
+	virtual const bool isSameUID(const int& other_uid) = 0;
+	virtual const int getUID() = 0;
 	virtual BenchmarkPositionGenerator* createPositionGenerator() =0;
 	virtual ~Benchmark(){}
 };
@@ -69,10 +72,14 @@ public:
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const bool isOptimum(const double& fitness);
+	virtual const bool isSameUID(const int& other_uid);
+	virtual const int getUID();
 	virtual BenchmarkPositionGenerator* createPositionGenerator(); 
 	~DeJongF1(){}
 private:
-		std::string info;
+	static const int uid = 0;
+	std::string info;
 };
 
 class DeJongF5:public Benchmark
@@ -83,11 +90,15 @@ public:
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const bool isOptimum(const double& fitness);
+	virtual const bool isSameUID(const int& other_uid);
+	virtual const int getUID();
 	virtual BenchmarkPositionGenerator* createPositionGenerator(); 
 	~DeJongF5(){}
 private:
-		int a[2][25];
-		std::string info;
+	static const int uid = 2;
+	int a[2][25];
+	std::string info;
 };
 
 class Rastrigin:public Benchmark 
@@ -98,10 +109,14 @@ public:
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const bool isOptimum(const double& fitness);
+	virtual const bool isSameUID(const int& other_uid);
+	virtual const int getUID();
 	virtual BenchmarkPositionGenerator* createPositionGenerator(); 
 	~Rastrigin(){}
 private:
-		std::string info;
+	static const int uid = 3;
+	std::string info;
 };
 
 class Schwefel:public Benchmark 
@@ -112,10 +127,14 @@ public:
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const bool isOptimum(const double& fitness);
+	virtual const bool isSameUID(const int& other_uid);
+	virtual const int getUID();
 	virtual BenchmarkPositionGenerator* createPositionGenerator(); 
 	~Schwefel(){}
 private:
-		std::string info;
+	static const int uid = 4;
+	std::string info;
 };
 
 class Griewank:public Benchmark 
@@ -126,10 +145,14 @@ public:
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const bool isOptimum(const double& fitness);
+	virtual const bool isSameUID(const int& other_uid);
+	virtual const int getUID();
 	virtual BenchmarkPositionGenerator *createPositionGenerator(); 
 	~Griewank(){}
 private:
-		std::string info;
+	static const int uid = 5;
+	std::string info;
 };
 
 class Salomon:public Benchmark 
@@ -140,10 +163,14 @@ public:
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const bool isOptimum(const double& fitness);
+	virtual const bool isSameUID(const int& other_uid);
+	virtual const int getUID();
 	virtual BenchmarkPositionGenerator *createPositionGenerator(); 
 	~Salomon(){}
 private:
-		std::string info;
+	static const int uid = 6;
+	std::string info;
 };
 
 class Ackley:public Benchmark 
@@ -154,10 +181,14 @@ public:
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const bool isOptimum(const double& fitness);
+	virtual const bool isSameUID(const int& other_uid);
+	virtual const int getUID();
 	virtual BenchmarkPositionGenerator* createPositionGenerator(); 
 	~Ackley(){}
 private:
-		std::string info;
+	static const int uid = 7;
+	std::string info;
 };
 
 class Camel:public Benchmark 
@@ -168,10 +199,14 @@ public:
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const bool isOptimum(const double& fitness);
+	virtual const bool isSameUID(const int& other_uid);
+	virtual const int getUID();
 	virtual BenchmarkPositionGenerator* createPositionGenerator(); 
 	~Camel(){}
 private:
-		std::string info;
+	static const int uid = 8;
+	std::string info;
 };
 
 class Shubert:public Benchmark 
@@ -182,10 +217,14 @@ public:
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const bool isOptimum(const double& fitness);
+	virtual const bool isSameUID(const int& other_uid);
+	virtual const int getUID();
 	virtual BenchmarkPositionGenerator* createPositionGenerator(); 
 	~Shubert(){}
 private:
-		std::string info;
+	static const int uid = 9;
+	std::string info;
 };
 
 class Himmelblau:public Benchmark 
@@ -196,10 +235,14 @@ public:
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const bool isOptimum(const double& fitness);
+	virtual const bool isSameUID(const int& other_uid);
+	virtual const int getUID();
 	virtual BenchmarkPositionGenerator* createPositionGenerator(); 
 	~Himmelblau(){}
 private:
-		std::string info;
+	static const int uid = 10;
+	std::string info;
 };
 
 class Rosenbrock:public Benchmark 
@@ -210,10 +253,14 @@ public:
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const bool isOptimum(const double& fitness);
+	virtual const bool isSameUID(const int& other_uid);
+	virtual const int getUID();
 	virtual BenchmarkPositionGenerator* createPositionGenerator(); 
 	~Rosenbrock(){}
 private:
-		std::string info;
+	static const int uid = 11;
+	std::string info;
 };
 
 class DropWave:public Benchmark 
@@ -224,10 +271,14 @@ public:
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const bool isOptimum(const double& fitness);
+	virtual const bool isSameUID(const int& other_uid);
+	virtual const int getUID();
 	virtual BenchmarkPositionGenerator* createPositionGenerator(); 
 	~DropWave(){}
 private:
-		std::string info;
+	static const int uid = 12;
+	std::string info;
 };
 
 class Easom:public Benchmark 
@@ -238,10 +289,14 @@ public:
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const bool isOptimum(const double& fitness);
+	virtual const bool isSameUID(const int& other_uid);
+	virtual const int getUID();
 	virtual BenchmarkPositionGenerator* createPositionGenerator(); 
 	~Easom(){}
 private:
-		std::string info;
+	static const int uid = 13;
+	std::string info;
 };
 
 class Branins:public Benchmark 
@@ -252,10 +307,14 @@ public:
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const bool isOptimum(const double& fitness);
+	virtual const bool isSameUID(const int& other_uid);
+	virtual const int getUID();
 	virtual BenchmarkPositionGenerator* createPositionGenerator(); 
 	~Branins(){}
 private:
-		std::string info;
+	static const int uid = 14;
+	std::string info;
 };
 
 class Michalewicz:public Benchmark 
@@ -266,10 +325,14 @@ public:
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const bool isOptimum(const double& fitness);
+	virtual const bool isSameUID(const int& other_uid);
+	virtual const int getUID();
 	virtual BenchmarkPositionGenerator* createPositionGenerator(); 
 	~Michalewicz(){}
 private:
-		std::string info;
+	static const int uid = 15;
+	std::string info;
 };
 
 class Goldstein:public Benchmark 
@@ -280,10 +343,14 @@ public:
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const bool isOptimum(const double& fitness);
+	virtual const bool isSameUID(const int& other_uid);
+	virtual const int getUID();
 	virtual BenchmarkPositionGenerator* createPositionGenerator(); 
 	~Goldstein(){}
 private:
-		std::string info;
+	static const int uid = 16;
+	std::string info;
 };
 
 class BenchmarkFunctionFactory

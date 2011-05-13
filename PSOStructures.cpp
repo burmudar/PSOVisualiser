@@ -220,110 +220,10 @@ void gfxParticle::drawGraphPoint()
 	glVertex3f(pbest.pos.y,pbest.fitness,pbest.pos.x);
 }
 
-ConsolePSO::ConsolePSO()
-{
-	population = 0;
-	c1 = 0.41;
-	c2 = 0.52;
-	inertia = 0.5;
-	swarm = vector<Particle>(population);
-	initializeSwarm();
-	BenchmarkFunctionFactory *functionFactory = new BenchmarkFunctionFactory();
-	function = functionFactory->createDeJongF1();
-	delete functionFactory;
-	evaluateSwarm();
-	global_best = swarm[0].getParticleBest();
-}
-
-ConsolePSO::ConsolePSO(const int &pop,Benchmark* func,const double &c1,const double &c2,const double& inertia)
-{
-	population = pop;
-	this->c1 = c1;
-	this->c2 = c2;
-	this->inertia = inertia;
-	swarm = vector<Particle>(population);
-	initializeSwarm();
-	function = func;
-	evaluateSwarm();
-	global_best = swarm[0].getParticleBest();
-}
-
-ConsolePSO::~ConsolePSO()
-{
-	delete function;
-}
-
-void ConsolePSO::setFunction(Benchmark *func)
-{
-	function = func;
-	initializeSwarm();
-	evaluateSwarm();
-	global_best = swarm[0].getParticleBest();
-}
-
-void ConsolePSO::nextFunction()
-{
-	BenchmarkFunctionFactory *functionFactory = new BenchmarkFunctionFactory();
-	Benchmark *function = functionFactory->createNextFunction(this->function->getBenchmarkFunctionType());
-	delete functionFactory;
-	setFunction(function);
-}
-
-void ConsolePSO::initializeSwarm()
-{
-	BenchmarkPositionGenerator *generator = function->createPositionGenerator();
-	for(int i = 0; i < population; i++)
-	{
-		swarm[i] = Particle(generator->generatePosition(),i);
-	}
-	delete generator;
-}
-
-void ConsolePSO::evaluateSwarm()
-{
-	for(int i = 0;i < population;i++)
-	{
-		evaluateParticle(i);
-	}
-}
-
-/*
-   Evaluate the particle at given index with the current set DeJong Function. Also check
-   if the evaluated particle fitness is beter than the global best fitness
-*/
-void ConsolePSO::evaluateParticle(const int &index)
-{
-	double answ;
-	answ = function->evaluate(swarm[index].getPosition());
-	swarm[index].setFitness(answ);
-	if(swarm[index].getBestFitness() < global_best.fitness || global_best.uid == -1)
-	{
-		global_best = swarm[index].getParticleBest();
-	}
-}
-
-void ConsolePSO::updateSwarmMovement()
-{
-	boost::mt19937 rng(time(0));
-	boost::uniform_real<double> u(0.00,1.00);
-	boost::variate_generator<boost::mt19937&, boost::uniform_real<double> > gen(rng, u);	
-	for(unsigned int i =0; i < swarm.size();i++)
-	{
-		swarm[i].velocity = (inertia * swarm[i].velocity) + c1 * gen() * (swarm[i].getBestPosition() - swarm[i].getPosition()) + c2 * (global_best.pos - swarm[i].getPosition());
-		swarm[i].move();
-		evaluateParticle(i);
-	}
-}
-
-void ConsolePSO::print()
-{
-	for(int i = 0;i < population;i++)
-	{
-		std::cout << swarm[i].info() << endl;	
-	}
-}
-
-GraphicalPSO::GraphicalPSO()
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+//							PSO Class DEFINITIONS
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+BasePSO::BasePSO()
 {
 	population = 0;
 	c1 = 0.41;
@@ -333,98 +233,54 @@ GraphicalPSO::GraphicalPSO()
 	BenchmarkFunctionFactory *functionFactory = new BenchmarkFunctionFactory();
 	function = functionFactory->createDeJongF1();
 	delete functionFactory;
-	draw_normal = true;
-	draw_best = true;
-	selectedParticleUID = 0;
-	evaluateSwarm();
-	global_best = swarm[0].getParticleBest();
 }
 
-GraphicalPSO::GraphicalPSO(const int &pop,Benchmark* benchFunction,const double &c1,const double &c2)
-{
-	population = pop;
-	this->c1 = c1;
-	this->c2 = c2;
-	swarm = vector<gfxParticle>(population);
-	function = benchFunction;
-	draw_normal = true;
-	draw_best = true;
-	selectedParticleUID = 0;
-
-}
-
-GraphicalPSO::~GraphicalPSO()
+BasePSO::~BasePSO()
 {
 	delete function;
 }
 
-void GraphicalPSO::initialize()
+BasePSO::BasePSO(const int &pop,Benchmark* benchFunction,const double &c1,const double &c2,const double &inertia)
 {
-	initializeSwarm();
-	evaluateSwarm();
-	global_best = swarm[0].getParticleBest();
-}
+	this->population = pop;
+	this->c1 = c1;
+	this->c2 = c2;
+	this->swarm = vector<gfxParticle>(population);
+	this->function = benchFunction;
 
-void GraphicalPSO::setFunction(Benchmark *func)
-{
+}
+void BasePSO::setFunction(Benchmark* func)
+{	
 	function = func;
-	initializeSwarm();
-	draw_normal = true;
-	draw_best = true;
-	selectedParticleUID = 0;
-	evaluateSwarm();
-	global_best = swarm[0].getParticleBest();
 }
 
-void GraphicalPSO::nextFunction()
+void BasePSO::nextFunction()
 {
 	BenchmarkFunctionFactory *functionFactory = new BenchmarkFunctionFactory();
 	Benchmark *function = functionFactory->createNextFunction(this->function->getBenchmarkFunctionType());
 	delete functionFactory;
 	setFunction(function);
+	initialize();
 }
 
-Benchmark* GraphicalPSO::getFunction()
+Benchmark* BasePSO::getFunction()
 {
 	return function;
 }
 
-void GraphicalPSO::initializeSwarm()
+string BasePSO::getFunctionName() const
 {
-	BenchmarkPositionGenerator *generator = function->createPositionGenerator();
-
-	for(int i =0; i < population; i++)
-	{
-		Vector3d position = generator->generatePosition();
-		swarm[i] = gfxParticle(position,i);
-	}
-	delete generator;
+	return function->name();
 }
 
-void GraphicalPSO::evaluateSwarm()
+void BasePSO::initialize()
 {
-	for(int i = 0;i < population;i++)
-	{
-		evaluateParticle(i);	
-	}
+	initializeSwarm();
+	evaluateParticle(0);
+	global_best = swarm[0].getParticleBest();
 }
 
-/*
-   Evaluate the particle at given index with the current set DeJong Function. Also check
-   if the evaluated particle fitness is beter than the global best fitness
-*/
-void GraphicalPSO::evaluateParticle(const int &index)
-{
-	double answ;
-	answ = function->evaluate(swarm[index].getPosition());
-	swarm[index].setFitness(answ);
-	if(swarm[index].getBestFitness() < global_best.fitness)
-	{
-		global_best = swarm[index].getParticleBest();
-	}
-}
-
-void GraphicalPSO::updateSwarmMovement()
+void BasePSO::evaluateSwarm()
 {
 	boost::mt19937 rng(time(0));
 	boost::uniform_real<double> u(0.00,1.00);
@@ -437,9 +293,116 @@ void GraphicalPSO::updateSwarmMovement()
 	}
 }
 
-string GraphicalPSO::functionName() const
+void BasePSO::evaluateParticle(const int& index)
 {
-	return function->name();
+	double answ;
+	answ = function->evaluate(swarm[index].getPosition());
+	swarm[index].setFitness(answ);
+	if(swarm[index].getBestFitness() < global_best.fitness)
+	{
+		global_best = swarm[index].getParticleBest();
+	}
+}
+
+void BasePSO::updateSwarmMovement()
+{
+	boost::mt19937 rng(time(0));
+	boost::uniform_real<double> u(0.00,1.00);
+	boost::variate_generator<boost::mt19937&, boost::uniform_real<double> > gen(rng, u);	
+	for(unsigned int i =0; i < swarm.size();i++)
+	{
+		swarm[i].velocity = swarm[i].velocity + c1 * gen() * (swarm[i].getBestPosition() - swarm[i].getPosition()) + c2 * gen() * (global_best.pos - swarm[i].getPosition());
+		swarm[i].move();
+		evaluateParticle(i);
+	}
+}
+
+bool BasePSO::isSwarmBestAtOptimum()
+{
+	bool result = this->function->isOptimum(global_best.fitness);
+	return result;
+}
+
+void BasePSO::initializeSwarm()
+{
+	BenchmarkPositionGenerator *generator = function->createPositionGenerator();
+	for(int i =0; i < population; i++)
+	{
+		Vector3d position = generator->generatePosition();
+		swarm[i] = gfxParticle(position,i);
+	}
+	delete generator;
+}
+
+ConsolePSO::ConsolePSO()
+{
+	
+}
+
+ConsolePSO::ConsolePSO(const int &pop,Benchmark* func,const double &c1,const double &c2,const double& inertia): BasePSO(pop,func,c1,c2,inertia)
+{
+}
+
+ConsolePSO::~ConsolePSO()
+{
+}
+
+void ConsolePSO::initializeSwarm()
+{
+	BasePSO::initializeSwarm();
+}
+
+void ConsolePSO::evaluateSwarm()
+{
+	BasePSO::evaluateSwarm();
+}
+
+/*
+   Evaluate the particle at given index with the current set DeJong Function. Also check
+   if the evaluated particle fitness is beter than the global best fitness
+*/
+void ConsolePSO::evaluateParticle(const int &index)
+{
+	BasePSO::evaluateParticle(index);
+}
+
+void ConsolePSO::updateSwarmMovement()
+{
+	BasePSO::updateSwarmMovement();
+}
+
+void ConsolePSO::print()
+{
+	for(int i = 0;i < population;i++)
+	{
+		std::cout << swarm[i].info() << endl;	
+	}
+}
+
+GraphicalPSO::GraphicalPSO()
+{
+	draw_normal = true;
+	draw_best = true;
+	selectedParticleUID = 0;
+}
+
+GraphicalPSO::GraphicalPSO(const int &pop,Benchmark* func,const double &c1,const double &c2) : BasePSO(pop,func,c1,c2,0.5)
+{
+	draw_normal = true;
+	draw_best = true;
+	selectedParticleUID = 0;
+}
+
+GraphicalPSO::~GraphicalPSO()
+{
+}
+
+void GraphicalPSO::setFunction(Benchmark *func)
+{
+	draw_normal = true;
+	draw_best = true;
+	selectedParticleUID = 0;
+	BasePSO::setFunction(func);
 }
 
 const gfxParticle& GraphicalPSO::getSelectedParticle()
