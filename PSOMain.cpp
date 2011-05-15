@@ -1,5 +1,5 @@
-#include "gfxmath.h"
 #include "PSOStructures.h"
+#include "BenchFunctions.h"
 #include <iostream>
 #include <iomanip>
 #include <sstream>
@@ -10,47 +10,80 @@
 
 using namespace std;
 
-int main(int argc,char* argv[])
+const int PARTICLES = 10;
+BenchmarkFunctionFactory* functionFactory = NULL;
+
+Benchmark* createBenchmarkFunc()
 {
-	int functionnr = 1;
-	if(argc < 2)
+	Benchmark* function = NULL;
+	BenchmarkFunctionFactory* functionFactory = new BenchmarkFunctionFactory();
+	function = functionFactory->createDeJongF1();
+	return function;
+}
+
+void print_benchmark_choices(BenchmarkDescription* benchmarks)
+{
+	cout << "Please choose a function the swarm must find the global optimum for:" << endl;
+	for(int i = 0; i < 16; i++)
 	{
-		cout << "psomain2 functionnumber \n Note: fuctionnumber <= 17" << endl;
-		return 1;
+		cout << benchmarks[i].function_type << " : " << benchmarks[i].benchmark_name << endl;
 	}
-	else
+	cout << "17: Exit" << endl;
+	cout << "Choice: __" << "\033[2D";
+}
+
+void run_pso(BasePSO* pso)
+{
+	PSOPerformanceStats* stats = new PSOPerformanceStats();
+	pso->initialize();
+	cout << endl;
+	cout << "Running Swarm on function: " << pso->getFunctionName() << endl;
+	for(int i = 0; i < 100; i++)
 	{
-		functionnr = atoi(argv[1]);
-		if(functionnr < 1 || functionnr > 17)
+		cout << "\033[0G";
+		pso->updateSwarmMovement();
+		cout << "Global Optimum:" << pso->global_best.fitness;
+		if(pso->isSwarmBestAtOptimum())
 		{
-			cout << "Function number must be in range {1,17}" << endl;
-			return 1;
+			cout << " Optimum: Yes ";
 		}
 		else
 		{
-			DeJong * function = createFunction(functionnr);
-			cout << function->name() << endl;
-			cout << setprecision(3) << function->evaluate(Vector3d(0,-1,0));
-			clock_t timespan = clock();
-			ConsolePSO pso = ConsolePSO(1000,7,0.41,0.52,1.0);	
-			ofstream graphfile;
-			ostringstream filename;
-			string name = function->name();
-			filename << name << ".txt";
-			graphfile.open(filename.str().c_str());
-			for(int i =0; i < 200; i++)
-			{
-				cout << pso.global_best.fitness << endl;
-				cout << pso.global_best.pos << endl;
-				graphfile << i << "\t" << pso.global_best.fitness << "\t" << difftime(clock(),timespan) / 1000<< endl;
-				pso.updateSwarmMovement();
-			}
-			cout << pso.global_best.fitness << endl;
-			cout << filename.str() << endl;
-			graphfile.close();
-			delete(function);
+			cout << " Optimum: No ";
+		}
+		stats->measure(pso);
+	}
+	cout << endl << endl;
+	delete pso;
+	delete stats;
+}
 
+void main_loop()
+{
+	BenchmarkDescription* benchmarks = functionFactory->getBenchmarkDescriptionArray();
+	int choice = 0;
+	PSOFactory* pso_factory = new PSOFactory(0.51,0.42,PARTICLES);
+	while(choice != 17)
+	{
+		print_benchmark_choices(benchmarks);
+		cin >> choice;
+		if(choice < 17)
+		{
+			Benchmark* function = NULL;
+			BenchmarkFunctionFactory* functionFactory = new BenchmarkFunctionFactory();
+			function = functionFactory->createNextFunction(benchmarks[choice--].function_type);
+			run_pso(pso_factory->createNormalPSO(function));
+			//no need to delete function since the pso destructor deletes it in any case
 		}
 	}
-		return 0;
+	delete[] benchmarks;
+	delete pso_factory;
+}
+
+int main(int argc,char* argv[])
+{
+	BenchmarkFunctionFactory* functionFactory = new BenchmarkFunctionFactory();
+	main_loop();
+	delete functionFactory;
+	return 0;
 }

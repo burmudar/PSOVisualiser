@@ -240,7 +240,7 @@ BasePSO::~BasePSO()
 	delete function;
 }
 
-BasePSO::BasePSO(const int &pop,Benchmark* benchFunction,const double &c1,const double &c2,const double &inertia)
+BasePSO::BasePSO(const int &pop,Benchmark* benchFunction,const double &c1,const double &c2)
 {
 	this->population = pop;
 	this->c1 = c1;
@@ -273,6 +273,16 @@ string BasePSO::getFunctionName() const
 	return function->name();
 }
 
+int BasePSO::getSwarmSize()
+{
+	return population;
+}
+
+gfxParticle* BasePSO::getParticle(const int& index)
+{
+	return &swarm[index];
+}
+
 void BasePSO::initialize()
 {
 	initializeSwarm();
@@ -282,13 +292,8 @@ void BasePSO::initialize()
 
 void BasePSO::evaluateSwarm()
 {
-	boost::mt19937 rng(time(0));
-	boost::uniform_real<double> u(0.00,1.00);
-	boost::variate_generator<boost::mt19937&, boost::uniform_real<double> > gen(rng, u);	
 	for(unsigned int i =0; i < swarm.size();i++)
 	{
-		swarm[i].velocity = swarm[i].velocity + c1 * gen() * (swarm[i].getBestPosition() - swarm[i].getPosition()) + c2 * gen() * (global_best.pos - swarm[i].getPosition());
-		swarm[i].move();
 		evaluateParticle(i);
 	}
 }
@@ -334,124 +339,16 @@ void BasePSO::initializeSwarm()
 	delete generator;
 }
 
-ConsolePSO::ConsolePSO()
-{
-	
-}
-
-ConsolePSO::ConsolePSO(const int &pop,Benchmark* func,const double &c1,const double &c2,const double& inertia): BasePSO(pop,func,c1,c2,inertia)
-{
-}
-
-ConsolePSO::~ConsolePSO()
-{
-}
-
-void ConsolePSO::initializeSwarm()
-{
-	BasePSO::initializeSwarm();
-}
-
-void ConsolePSO::evaluateSwarm()
-{
-	BasePSO::evaluateSwarm();
-}
-
-/*
-   Evaluate the particle at given index with the current set DeJong Function. Also check
-   if the evaluated particle fitness is beter than the global best fitness
-*/
-void ConsolePSO::evaluateParticle(const int &index)
-{
-	BasePSO::evaluateParticle(index);
-}
-
-void ConsolePSO::updateSwarmMovement()
-{
-	BasePSO::updateSwarmMovement();
-}
-
-void ConsolePSO::print()
-{
-	for(int i = 0;i < population;i++)
-	{
-		std::cout << swarm[i].info() << endl;	
-	}
-}
-
-GraphicalPSO::GraphicalPSO()
-{
-	draw_normal = true;
-	draw_best = true;
-	selectedParticleUID = 0;
-}
-
-GraphicalPSO::GraphicalPSO(const int &pop,Benchmark* func,const double &c1,const double &c2) : BasePSO(pop,func,c1,c2,0.5)
-{
-	draw_normal = true;
-	draw_best = true;
-	selectedParticleUID = 0;
-}
-
-GraphicalPSO::~GraphicalPSO()
-{
-}
-
-void GraphicalPSO::setFunction(Benchmark *func)
-{
-	draw_normal = true;
-	draw_best = true;
-	selectedParticleUID = 0;
-	BasePSO::setFunction(func);
-}
-
-const gfxParticle& GraphicalPSO::getSelectedParticle()
-{
-	if(selectedParticleUID < 0)
-		return swarm[0];
-	return swarm[selectedParticleUID];
-}
-
-void GraphicalPSO::selectParticle(const int &uid)
-{
-	swarm[selectedParticleUID].selected = false;
-	selectedParticleUID = uid;
-	swarm[selectedParticleUID].selected = true;
-}
-
-const SceneConfig GraphicalPSO::getFunctionSceneConfig()
-{
-	return function->getSceneConfigForBenchmark();
-}
-
-void GraphicalPSO::draw(const int renderMode,const int drawShape)
-{
-	if (drawShape == 3)
-	{
-		glBegin(GL_QUADS);
-		for (int i =0; i < population;i++)
-		{
-			if (swarm[i].getBestFitness() < 50 && (swarm[i].getBestPosition().x <= 4 || swarm[i].getBestPosition().x >= -4) && (swarm[i].getBestPosition().y <= 4 || swarm[i].getBestPosition().y >= -4));
-				swarm[i].drawGraphPoint();
-		}
-		glEnd();
-	}
-	for (int i =0; i < population;i++)
-	{
-		if (draw_normal)
-			swarm[i].draw(renderMode,drawShape);
-		if (draw_best)
-			swarm[i].drawBest(renderMode,drawShape);
-	}
-}
-
-//GRAPHICALINERTIAPSO
-GraphicalInertiaPSO::GraphicalInertiaPSO(const int &pop,Benchmark* func,const double &c1,const double &c2,const double& inertia):GraphicalPSO(pop,func,c1,c2)
+InertiaPSO::InertiaPSO(const int& pop,Benchmark* func, const double& c1,const double& c2, const double& inertia) : BasePSO(pop,func,c1,c2)
 {
 	this->inertia = inertia;
 }
 
-void GraphicalInertiaPSO::updateSwarmMovement()
+InertiaPSO::~InertiaPSO()
+{
+}
+
+void InertiaPSO::updateSwarmMovement()
 {
 	boost::mt19937 rng(time(0));
 	boost::uniform_real<double> u(0.00,1.00);
@@ -464,19 +361,18 @@ void GraphicalInertiaPSO::updateSwarmMovement()
 	}
 }
 
-//GRAPHICAL_CONSTRICTION_PSO
-GraphicalConstrictionPSO::GraphicalConstrictionPSO(const int &pop,Benchmark* func,const double &c1,const double &c2,const double& constriction):GraphicalPSO(pop,func,c1,c2)
+ConstrictionPSO::ConstrictionPSO(const int& pop, Benchmark* func, const double& c1,const double& c2, const double& constriction):BasePSO(pop,func,c1,c2)
 {
 	this->constriction = constriction;
 }
 
-double GraphicalConstrictionPSO::calculateConstrictionCoefficient(const double& r1, const double& r2)
+double ConstrictionPSO::calculateConstrictionCoefficient(const double& r1, const double& r2)
 {
 	double alpha = c1*r1 + c2*r2;
 	return (2 * constriction) / abs(2 - alpha - sqrt(alpha * (alpha - 4)));
 }
 
-void GraphicalConstrictionPSO::updateSwarmMovement()
+void ConstrictionPSO::updateSwarmMovement()
 {	
 	boost::mt19937 rng(time(0));
 	boost::uniform_real<double> u(0.00,1.00);
@@ -500,3 +396,188 @@ void GraphicalConstrictionPSO::updateSwarmMovement()
 		evaluateParticle(i);
 	}
 }
+
+GraphicalPSOVisualizer::GraphicalPSOVisualizer(BasePSO* pso)
+{
+	draw_normal = true;
+	draw_best = true;
+	selectedParticleUID = 0;
+	this->pso = pso;
+	this->pso->initialize();
+}
+
+GraphicalPSOVisualizer::~GraphicalPSOVisualizer()
+{
+	delete pso;
+}
+
+void GraphicalPSOVisualizer::setFunction(Benchmark *func)
+{
+	draw_normal = true;
+	draw_best = true;
+	selectedParticleUID = 0;
+	pso->setFunction(func);
+}
+
+void GraphicalPSOVisualizer::nextFunction()
+{
+	pso->nextFunction();
+}
+
+Benchmark* GraphicalPSOVisualizer::getFunction()
+{
+	return pso->getFunction();
+}
+
+std::string GraphicalPSOVisualizer::getFunctionName() const
+{
+	return pso->getFunctionName();
+}
+
+void GraphicalPSOVisualizer::updateSwarmMovement()
+{
+	pso->updateSwarmMovement();
+}
+
+bool GraphicalPSOVisualizer::isSwarmBestAtOptimum()
+{
+	return pso->isSwarmBestAtOptimum();
+}
+
+ParticleBest GraphicalPSOVisualizer::getPSOGlobalBest()
+{
+	return pso->global_best;
+}
+
+const gfxParticle& GraphicalPSOVisualizer::getSelectedParticle()
+{
+	if(selectedParticleUID < 0)
+		return (*pso->getParticle(0));
+	return (*pso->getParticle(selectedParticleUID));
+}
+
+void GraphicalPSOVisualizer::selectParticle(const int &uid)
+{
+	pso->getParticle(selectedParticleUID)->selected = false;
+	selectedParticleUID = uid;
+	pso->getParticle(selectedParticleUID)->selected = true;
+}
+
+const SceneConfig GraphicalPSOVisualizer::getFunctionSceneConfig()
+{
+	return pso->getFunction()->getSceneConfigForBenchmark();
+}
+
+void GraphicalPSOVisualizer::draw(const int renderMode,const int drawShape)
+{
+	int swarm_size = pso->getSwarmSize();
+	if (drawShape == 3)
+	{
+		glBegin(GL_QUADS);
+		for (int i =0; i < swarm_size;i++)
+		{
+			gfxParticle& particle = (*pso->getParticle(i));
+			if (particle.getBestFitness() < 50 && (particle.getBestPosition().x <= 4 || particle.getBestPosition().x >= -4) && (particle.getBestPosition().y <= 4 || particle.getBestPosition().y >= -4));
+				particle.drawGraphPoint();
+		}
+		glEnd();
+	}
+	for (int i =0; i < swarm_size;i++)
+	{
+		gfxParticle& particle = (*pso->getParticle(i));
+		if (draw_normal)
+			particle.draw(renderMode,drawShape);
+		if (draw_best)
+			particle.drawBest(renderMode,drawShape);
+	}
+}
+
+PSOFactory::PSOFactory(const double& c1,const double& c2,const int& population)
+{
+	this->c1 = c1;
+	this->c2 = c2;
+	this->population = population;
+}
+
+void PSOFactory::setC1(const double& c1)
+{
+	this->c1 = c1;
+}
+
+void PSOFactory::setC2(const double& c2)
+{
+	this->c2 = c2;
+}
+
+void PSOFactory::setPopulation(const int& population)
+{
+	this->population = population;
+}
+
+BasePSO* PSOFactory::createNormalPSO(Benchmark* function)
+{
+	return new BasePSO(population,function,c1,c2);
+}
+
+BasePSO* PSOFactory::createInertiaPSO(const double& inertia,Benchmark* function)
+{
+	return new InertiaPSO(population,function,c1,c2,inertia);
+}
+
+BasePSO* PSOFactory::createConstrictionPSO(const double& constriction,Benchmark* function)
+{
+	return new ConstrictionPSO(population,function,c1,c2,constriction);
+}
+
+void PSOPerformanceStats::measure(BasePSO* pso)
+{
+	cout << "Accuracy: " << accuracy(pso) << " | ";
+	cout << "Diversity:" << diversity(pso) ;
+}
+
+const double PSOPerformanceStats::accuracy(BasePSO* pso)
+{
+	Benchmark* function = pso->getFunction();
+	return abs(pso->global_best.fitness - function->getOptimalFitness());
+}
+
+Vector3d* PSOPerformanceStats::calculateSwarmAvg(BasePSO* pso)
+{
+	Vector3d* avg = new Vector3d();
+	for(int i = 0; i < pso->getSwarmSize(); i++)
+	{
+		Vector3d particle_pos = pso->getParticle(i)->getPosition();
+		avg->x += particle_pos.x; 
+		avg->y += particle_pos.y;
+		avg->z += particle_pos.z;
+	}
+	avg->x = avg->x / pso->getSwarmSize();
+	avg->y = avg->y / pso->getSwarmSize();
+	avg->z = avg->z / pso->getSwarmSize();
+	return avg;
+}
+
+const double PSOPerformanceStats::diversity(BasePSO* pso)
+{
+	double diversity = 0;
+	int swarm_size = pso->getSwarmSize();
+	Vector3d* swarm_avg = calculateSwarmAvg(pso);
+	int dimension = pso->getFunction()->dimensionality();
+	for(int i = 0; i < swarm_size; i++)
+	{
+		Vector3d& pos = pso->getParticle(i)->getPosition();
+		double diff_squared = 0;
+		if(dimension == 2)
+		{
+			 diff_squared = (pow(pos.x - swarm_avg->x,2) + pow(pos.y - swarm_avg->y,2));
+		}
+		else
+		{
+			 diff_squared = (pow(pos.x - swarm_avg->x,2) + pow(pos.y - swarm_avg->y,2) + pow(pos.z - swarm_avg->z,2));
+		}
+		diversity += sqrt(diff_squared);
+	}
+	delete	swarm_avg;
+	return diversity / swarm_size;
+}
+

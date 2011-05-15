@@ -63,12 +63,14 @@ class BasePSO
 {
 public:
 	BasePSO();
-	BasePSO(const int &pop,Benchmark* func,const double &c1,const double &c2,const double& inertia);
+	BasePSO(const int &pop,Benchmark* func,const double &c1,const double &c2);
 	~BasePSO();
 	void setFunction(Benchmark* func);
 	void nextFunction();
 	Benchmark* getFunction();
 	std::string getFunctionName() const;
+	int getSwarmSize();
+	gfxParticle* getParticle(const int& index);
 	virtual void initialize();
 	virtual void evaluateSwarm();
 	virtual void evaluateParticle(const int& index);
@@ -79,33 +81,44 @@ protected:
 	virtual void initializeSwarm();
 	std::vector<gfxParticle> swarm;
 	int population;
-	double c1,c2,inertia;
+	double c1,c2;
 	Benchmark* function;
 };
 
-class ConsolePSO : public BasePSO
+class InertiaPSO : public BasePSO
 {
 public:
-	ConsolePSO();
-	ConsolePSO(const int &pop,Benchmark* func,const double &c1,const double &c2,const double& inertia); 
-	~ConsolePSO();
-	void evaluateSwarm();
-	void evaluateParticle(const int &index);
+	InertiaPSO(const int& pop, Benchmark* func, const double& c1,const double& c2, const double& inertia);
+	~InertiaPSO();
 	void updateSwarmMovement();
-	void print();
-	ParticleBest global_best;
-protected:
-	void initializeSwarm();
+private:
+	double inertia;
 };
 
-class GraphicalPSO: public BasePSO
+class ConstrictionPSO : public BasePSO
 {
 public:
-	GraphicalPSO();
-	GraphicalPSO(const int &pop,Benchmark* func,const double &c1,const double &c2);
-	~GraphicalPSO();
-	//redefinition of inherited function from BasePSO
+	ConstrictionPSO(const int& pop, Benchmark* func, const double& c1,const double& c2, const double& constriction);
+	~ConstrictionPSO();
+	void updateSwarmMovement();
+private:
+	double calculateConstrictionCoefficient(const double& r1, const double& r2);
+	double constriction;
+};
+
+class GraphicalPSOVisualizer
+{
+public:
+	GraphicalPSOVisualizer(BasePSO* pso);
+	~GraphicalPSOVisualizer();
+	//wrapping function calls of pso
 	void setFunction(Benchmark* func);
+	void nextFunction();
+	Benchmark* getFunction();
+	std::string getFunctionName() const;
+	virtual void updateSwarmMovement();
+	virtual bool isSwarmBestAtOptimum();
+	ParticleBest getPSOGlobalBest();
 	//Non-inherited methods i.e new methods
 	const gfxParticle& getSelectedParticle();
 	void selectParticle(const int &uid);
@@ -116,25 +129,34 @@ public:
 protected:
 	bool benchmark_mode;
 	int selectedParticleUID;
+	BasePSO* pso;
 };
 
-class GraphicalInertiaPSO : public GraphicalPSO
+class PSOFactory
 {
 public:
-	GraphicalInertiaPSO(const int &pop,Benchmark* func,const double &c1,const double &c2,const double& inertia);
-	void updateSwarmMovement();
+	PSOFactory(const double& c1,const double& c2,const int& population);
+	void setC1(const double& c1);
+	void setC2(const double& c2);
+	void setPopulation(const int& population);
+	BasePSO* createNormalPSO(Benchmark* function);
+	BasePSO* createInertiaPSO(const double& inertia, Benchmark* function);
+	BasePSO* createConstrictionPSO(const double& constriction, Benchmark* function);
 private:
-	double inertia;
+	double c1,c2;
+	int population;
 };
 
-class GraphicalConstrictionPSO : public GraphicalPSO
+class PSOPerformanceStats
 {
 public:
-	GraphicalConstrictionPSO(const int &pop,Benchmark* func,const double &c1,const double &c2,const double& constriction);
-	void updateSwarmMovement();
+	PSOPerformanceStats(){}
+	~PSOPerformanceStats(){}
+	void measure(BasePSO* pso);
 private:
-	double calculateConstrictionCoefficient(const double& r1, const double& r2);
-	double constriction;
+	Vector3d* calculateSwarmAvg(BasePSO* pso);
+	const double accuracy(BasePSO* pso);
+	const double diversity(BasePSO* pso);
 };
 
 typedef class Particle Particle;

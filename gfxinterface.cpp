@@ -27,7 +27,7 @@ float xtrans = 0.0f;
 float ytrans = 0.0f;
 float dist = 40.0f;
 float tick = 0.05f;
-const int PARTICLES = 65000;
+const int PARTICLES = 10000;
 const bool FULLSCREEN = false;
 const int SCREEN_WIDTH = 1024;
 const int SCREEN_HEIGHT = 768;
@@ -39,8 +39,8 @@ bool benchmark_mode = false;
 int initial_bench_uid = -1;
 //if you take out inertia (the 0.5) the swarm seems to explore more, but then it doens't find
 //the optimum for Schwefel function
-
-GraphicalPSO *pso;  
+PSOFactory* pso_factory;
+GraphicalPSOVisualizer *pso;  
 
 GLuint base;
 GLuint texture[1];
@@ -48,9 +48,7 @@ GLuint texture[1];
 SDL_Surface *surface;
 
 //PROTOTYPES
-GraphicalPSO* initializeNormalPSO();
-GraphicalPSO* initializeInertiaPSO();
-GraphicalPSO* initializeConstrictionPSO();
+Benchmark* setupFunctionForPSO(GraphicalPSOVisualizer* gpso);
 
 GLvoid KillFont()
 {
@@ -218,20 +216,20 @@ void keyPressed(SDL_keysym *keysym)
 			break;
 		case SDLK_F5:
 			{
-				pso = initializeNormalPSO();
-				pso->initialize();
+				Benchmark* function = pso->getFunction();
+				pso = new GraphicalPSOVisualizer(pso_factory->createNormalPSO(function));
 			}
 			break;
 		case SDLK_F6:
 			{
-				pso = initializeInertiaPSO();
-				pso->initialize();
+				Benchmark* function = pso->getFunction();
+				pso = new GraphicalPSOVisualizer(pso_factory->createInertiaPSO(0.5,function));
 			}
 			break;
 		case SDLK_F7:
 			{
-				pso = initializeConstrictionPSO();
-				pso->initialize();
+				Benchmark* function = pso->getFunction();
+				pso = new GraphicalPSOVisualizer(pso_factory->createConstrictionPSO(0.5,function));
 			}
 			break;
 		case SDLK_F8:
@@ -331,7 +329,7 @@ void glPrintHUDInfo(GLint xbound, GLint ybound,int fps)
 	glColor3f(1.0,1.0,1.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
 	out.str("");
-	out <<setprecision(5) <<pso->global_best.fitness;
+	out <<setprecision(5) <<pso->getPSOGlobalBest().fitness;
 	msg = out.str();
 	glColor3f(0.0,0.0,1.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
@@ -343,7 +341,7 @@ void glPrintHUDInfo(GLint xbound, GLint ybound,int fps)
 	glColor3f(1.0,1.0,1.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
 	out.str("");
-	out << pso->global_best.pos;
+	out << pso->getPSOGlobalBest().pos;
 	msg = out.str();
 	glColor3f(0.0,0.0,1.0);
 	glCallLists(strlen(msg.c_str()), GL_BYTE, msg.c_str());
@@ -564,7 +562,7 @@ int doSelect(const double &x,const double &y)
 	return ruid;
 }
 
-Benchmark *setupFunctionForPSO(GraphicalPSO* gpso)
+Benchmark* setupFunctionForPSO(GraphicalPSOVisualizer* gpso)
 {
 	Benchmark *function = NULL;
 	if(gpso == NULL)
@@ -578,21 +576,6 @@ Benchmark *setupFunctionForPSO(GraphicalPSO* gpso)
 		function = gpso->getFunction();	
 	}
 	return function;
-}
-
-GraphicalPSO* initializeNormalPSO()
-{
-	return new GraphicalPSO(PARTICLES,setupFunctionForPSO(pso),0.52,0.41);
-}
-
-GraphicalPSO* initializeInertiaPSO()
-{
-	return new GraphicalInertiaPSO(PARTICLES,setupFunctionForPSO(pso),0.52,1.41,0.25);
-}
-
-GraphicalPSO* initializeConstrictionPSO()
-{
-	return new GraphicalConstrictionPSO(PARTICLES,setupFunctionForPSO(pso),2.52,1.41,0.5);
 }
 
 void doBenchmarkModeLogicProcessing()
@@ -609,11 +592,18 @@ void doBenchmarkModeLogicProcessing()
 	}
 }
 
+void initializeGraphicalPSOVisualizer()
+{
+	pso_factory = new PSOFactory(0.51,0.42,PARTICLES);
+	Benchmark* function = NULL;
+	BenchmarkFunctionFactory* functionFactory = new BenchmarkFunctionFactory();
+	function = functionFactory->createDeJongF1();
+	pso = new GraphicalPSOVisualizer(pso_factory->createNormalPSO(function));
+}
+
 int main(int argc, char** argv)
 {
-	
-	pso = initializeInertiaPSO();
-	pso->initialize();
+	initializeGraphicalPSOVisualizer();
 	int videoFlags;
 	bool done=false;
 	bool calcRotation = false;
@@ -730,11 +720,12 @@ int main(int argc, char** argv)
 				doBenchmarkModeLogicProcessing();
 			}
 			//graphfile << i-1 << "\t" << pso.global_best.fitness << endl;
-			chart.Plot(i++,pso->global_best.fitness);
+			chart.Plot(i++,pso->getPSOGlobalBest().fitness);
 		}
 	}
 	//graphfile.close();
 	delete surface;
+	delete pso_factory;
 	delete pso;
 	return(0);
 }

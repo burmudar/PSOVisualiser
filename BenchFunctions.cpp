@@ -88,6 +88,12 @@ const BENCHMARK_FUNCTION DeJongF1::getBenchmarkFunctionType()
 	return DEJONGF1;
 }
 
+const int DeJongF1::dimensionality()
+{
+	return 2;
+}
+
+
 const SceneConfig DeJongF1::getSceneConfigForBenchmark()
 {
 	SceneConfig config;
@@ -96,6 +102,11 @@ const SceneConfig DeJongF1::getSceneConfigForBenchmark()
 	config.nearZPlane = 0.1f;
 	config.farZPlane = 100.0f;
 	return config;
+}
+
+const double DeJongF1::getOptimalFitness()
+{
+	return 0.0000000001;
 }
 
 const bool DeJongF1::isOptimum(const double& fitness)
@@ -174,6 +185,12 @@ const BENCHMARK_FUNCTION DeJongF5::getBenchmarkFunctionType()
 	return DEJONGF5;
 }
 
+const int DeJongF5::dimensionality()
+{
+	return 2;
+}
+
+
 const SceneConfig DeJongF5::getSceneConfigForBenchmark()
 {
 	SceneConfig config;
@@ -182,6 +199,11 @@ const SceneConfig DeJongF5::getSceneConfigForBenchmark()
 	config.nearZPlane = 0.1f;
 	config.farZPlane = 8000.0f;
 	return config;
+}
+
+const double DeJongF5::getOptimalFitness()
+{
+	return 0.000000001;
 }
 
 const bool DeJongF5::isOptimum(const double& fitness)
@@ -252,6 +274,12 @@ const BENCHMARK_FUNCTION Rastrigin::getBenchmarkFunctionType()
 	return RASTRIGIN;
 }
 
+const int Rastrigin::dimensionality()
+{
+	return 2;
+}
+
+
 const SceneConfig Rastrigin::getSceneConfigForBenchmark()
 {
 	SceneConfig config;
@@ -260,6 +288,11 @@ const SceneConfig Rastrigin::getSceneConfigForBenchmark()
 	config.nearZPlane = 0.1f;
 	config.farZPlane = 8000.0f;
 	return config;
+}
+
+const double Rastrigin::getOptimalFitness()
+{
+	return 0.000000001;
 }
 
 const bool Rastrigin::isOptimum(const double& fitness)
@@ -317,6 +350,12 @@ const BENCHMARK_FUNCTION Schwefel::getBenchmarkFunctionType()
 	return SCHWEFEL;
 }
 
+const int Schwefel::dimensionality()
+{
+	return 2;
+}
+
+
 const SceneConfig Schwefel::getSceneConfigForBenchmark()
 {
 	SceneConfig config;
@@ -325,6 +364,11 @@ const SceneConfig Schwefel::getSceneConfigForBenchmark()
 	config.nearZPlane = 0.1f;
 	config.farZPlane = 8000.0f;
 	return config;
+}
+
+const double Schwefel::getOptimalFitness()
+{
+	return 0.000000001;
 }
 
 const bool Schwefel::isOptimum(const double& fitness)
@@ -385,6 +429,12 @@ const BENCHMARK_FUNCTION Griewank::getBenchmarkFunctionType()
 	return GRIEWANK;
 }
 
+const int Griewank::dimensionality()
+{
+	return 2;
+}
+
+
 const SceneConfig Griewank::getSceneConfigForBenchmark()
 {
 	SceneConfig config;
@@ -393,6 +443,11 @@ const SceneConfig Griewank::getSceneConfigForBenchmark()
 	config.nearZPlane = 0.1f;
 	config.farZPlane = 100.0f;
 	return config;
+}
+
+const double Griewank::getOptimalFitness()
+{
+	return 0.000000001;
 }
 
 const bool Griewank::isOptimum(const double& fitness)
@@ -455,6 +510,12 @@ const BENCHMARK_FUNCTION Salomon::getBenchmarkFunctionType()
 	return SALAMON;
 }
 
+const int Salomon::dimensionality()
+{
+	return 2;
+}
+
+
 const SceneConfig Salomon::getSceneConfigForBenchmark()
 {
 	SceneConfig config;
@@ -463,6 +524,11 @@ const SceneConfig Salomon::getSceneConfigForBenchmark()
 	config.nearZPlane = 0.1f;
 	config.farZPlane = 5000.0f;
 	return config;
+}
+
+const double Salomon::getOptimalFitness()
+{
+	return 0.000000001;
 }
 
 const bool Salomon::isOptimum(const double& fitness)
@@ -484,6 +550,12 @@ const BENCHMARK_FUNCTION Ackley::getBenchmarkFunctionType()
 	return ACKLEY;
 }
 
+const int Ackley::dimensionality()
+{
+	return 2;
+}
+
+
 const SceneConfig Ackley::getSceneConfigForBenchmark()
 {
 	SceneConfig config;
@@ -492,6 +564,11 @@ const SceneConfig Ackley::getSceneConfigForBenchmark()
 	config.nearZPlane = 0.1f;
 	config.farZPlane = 5000.0f;
 	return config;
+}
+
+const double Ackley::getOptimalFitness()
+{
+	return 0.000000001;
 }
 
 const bool Ackley::isOptimum(const double& fitness)
@@ -581,6 +658,12 @@ const BENCHMARK_FUNCTION Camel::getBenchmarkFunctionType()
 	return CAMEL;
 }
 
+const int Camel::dimensionality()
+{
+	return 2;
+}
+
+
 const SceneConfig Camel::getSceneConfigForBenchmark()
 {
 	SceneConfig config;
@@ -589,6 +672,11 @@ const SceneConfig Camel::getSceneConfigForBenchmark()
 	config.nearZPlane = 0.1f;
 	config.farZPlane = 5000.0f;
 	return config;
+}
+
+const double Camel::getOptimalFitness()
+{
+	return -1.0316;
 }
 
 const bool Camel::isOptimum(const double& fitness)
@@ -651,6 +739,12 @@ const BENCHMARK_FUNCTION Shubert::getBenchmarkFunctionType()
 	return SHUBERT;
 }
 
+const int Shubert::dimensionality()
+{
+	return 2;
+}
+
+
 const SceneConfig Shubert::getSceneConfigForBenchmark()
 {
 	SceneConfig config;
@@ -659,6 +753,11 @@ const SceneConfig Shubert::getSceneConfigForBenchmark()
 	config.nearZPlane = 0.1f;
 	config.farZPlane = 5000.0f;
 	return config;
+}
+
+const double Shubert::getOptimalFitness()
+{
+	return -186.7309;
 }
 
 const bool Shubert::isOptimum(const double& fitness)
@@ -712,6 +811,12 @@ const BENCHMARK_FUNCTION Himmelblau::getBenchmarkFunctionType()
 	return HIMMELBLAU;
 }
 
+const int Himmelblau::dimensionality()
+{
+	return 2;
+}
+
+
 const SceneConfig Himmelblau::getSceneConfigForBenchmark()
 {
 	SceneConfig config;
@@ -720,6 +825,11 @@ const SceneConfig Himmelblau::getSceneConfigForBenchmark()
 	config.nearZPlane = 0.1f;
 	config.farZPlane = 5000.0f;
 	return config;
+}
+
+const double Himmelblau::getOptimalFitness()
+{
+	return 0.000000001;
 }
 
 const bool Himmelblau::isOptimum(const double& fitness)
@@ -775,6 +885,12 @@ const BENCHMARK_FUNCTION Rosenbrock::getBenchmarkFunctionType()
 	return ROSENBROCK;
 }
 
+const int Rosenbrock::dimensionality()
+{
+	return 2;
+}
+
+
 const SceneConfig Rosenbrock::getSceneConfigForBenchmark()
 {
 	SceneConfig config;
@@ -784,6 +900,11 @@ const SceneConfig Rosenbrock::getSceneConfigForBenchmark()
 	config.farZPlane = 100.0f;
 
 	return config;
+}
+
+const double Rosenbrock::getOptimalFitness()
+{
+	return 0.000000001;
 }
 
 const bool Rosenbrock::isOptimum(const double& fitness)
@@ -840,6 +961,12 @@ const BENCHMARK_FUNCTION DropWave::getBenchmarkFunctionType()
 	return DROPWAVE;
 }
 
+const int DropWave::dimensionality()
+{
+	return 2;
+}
+
+
 const SceneConfig DropWave::getSceneConfigForBenchmark()
 {
 	SceneConfig config;
@@ -848,6 +975,11 @@ const SceneConfig DropWave::getSceneConfigForBenchmark()
 	config.nearZPlane = 0.1f;
 	config.farZPlane = 100.0f;
 	return config;
+}
+
+const double DropWave::getOptimalFitness()
+{
+	return 0.000000001;
 }
 
 const bool DropWave::isOptimum(const double& fitness)
@@ -902,6 +1034,12 @@ const BENCHMARK_FUNCTION Easom::getBenchmarkFunctionType()
 	return EASOM;
 }
 
+const int Easom::dimensionality()
+{
+	return 2;
+}
+
+
 const SceneConfig Easom::getSceneConfigForBenchmark()
 {
 	SceneConfig config;
@@ -910,6 +1048,11 @@ const SceneConfig Easom::getSceneConfigForBenchmark()
 	config.nearZPlane = 0.1f;
 	config.farZPlane = 100.0f;
 	return config;
+}
+
+const double Easom::getOptimalFitness()
+{
+	return 0.000000001;
 }
 
 const bool Easom::isOptimum(const double& fitness)
@@ -964,6 +1107,12 @@ const BENCHMARK_FUNCTION Branins::getBenchmarkFunctionType()
 	return BRANINS;
 }
 
+const int Branins::dimensionality()
+{
+	return 2;
+}
+
+
 const SceneConfig Branins::getSceneConfigForBenchmark()
 {
 	SceneConfig config;
@@ -972,6 +1121,11 @@ const SceneConfig Branins::getSceneConfigForBenchmark()
 	config.nearZPlane = 0.1f;
 	config.farZPlane = 100.0f;
 	return config;
+}
+
+const double Branins::getOptimalFitness()
+{
+	return 0.000000001;
 }
 
 const bool Branins::isOptimum(const double& fitness)
@@ -1028,6 +1182,12 @@ const BENCHMARK_FUNCTION Michalewicz::getBenchmarkFunctionType()
 	return MICHALEWICZ;
 }
 
+const int Michalewicz::dimensionality()
+{
+	return 3;
+}
+
+
 const SceneConfig Michalewicz::getSceneConfigForBenchmark()
 {
 	SceneConfig config;
@@ -1036,6 +1196,11 @@ const SceneConfig Michalewicz::getSceneConfigForBenchmark()
 	config.nearZPlane = 0.1f;
 	config.farZPlane = 200.0f;
 	return config;
+}
+
+const double Michalewicz::getOptimalFitness()
+{
+	return 0.000000001;
 }
 
 const bool Michalewicz::isOptimum(const double& fitness)
@@ -1091,6 +1256,12 @@ const BENCHMARK_FUNCTION Goldstein::getBenchmarkFunctionType()
 	return GOLDSTEIN;
 }
 
+const int Goldstein::dimensionality()
+{
+	return 2;
+}
+
+
 const SceneConfig Goldstein::getSceneConfigForBenchmark()
 {
 	SceneConfig config;
@@ -1099,6 +1270,11 @@ const SceneConfig Goldstein::getSceneConfigForBenchmark()
 	config.nearZPlane = 0.1f;
 	config.farZPlane = 5000.0f;
 	return config;
+}
+
+const double Goldstein::getOptimalFitness()
+{
+	return 0.000000001;
 }
 
 const bool Goldstein::isOptimum(const double& fitness)
@@ -1116,6 +1292,36 @@ BenchmarkPositionGenerator *Goldstein::createPositionGenerator()
 }
 
 BenchmarkFunctionFactory::BenchmarkFunctionFactory(){}
+
+BenchmarkDescription* BenchmarkFunctionFactory::getBenchmarkDescriptionArray()
+{
+	BenchmarkDescription* benchmarks = new BenchmarkDescription[16];
+	benchmarks[0] = createBenchmarkDescription(DEJONGF1,"Dejong f1");
+	benchmarks[1] = createBenchmarkDescription(DEJONGF5,"Dejong f5");
+	benchmarks[2] = createBenchmarkDescription(RASTRIGIN,"Astrigin");
+	benchmarks[3] = createBenchmarkDescription(SCHWEFEL,"Schwefel");
+	benchmarks[4] = createBenchmarkDescription(GRIEWANK,"Griewank");
+	benchmarks[5] = createBenchmarkDescription(SALAMON,"Salamon");
+	benchmarks[6] = createBenchmarkDescription(ACKLEY,"Ackley");
+	benchmarks[7] = createBenchmarkDescription(CAMEL,"CameL");
+	benchmarks[8] = createBenchmarkDescription(SHUBERT,"Shubert");
+	benchmarks[9] = createBenchmarkDescription(HIMMELBLAU,"Himmelblau");
+	benchmarks[10] = createBenchmarkDescription(ROSENBROCK,"Rosenbrock");
+	benchmarks[11] = createBenchmarkDescription(DROPWAVE,"Dropwave");
+	benchmarks[12] = createBenchmarkDescription(EASOM,"Easom");
+	benchmarks[13] = createBenchmarkDescription(BRANINS,"Branins");
+	benchmarks[14] = createBenchmarkDescription(MICHALEWICZ,"Michalewicz");
+	benchmarks[15] = createBenchmarkDescription(GOLDSTEIN,"Goldstein");
+	return benchmarks;
+}
+
+BenchmarkDescription BenchmarkFunctionFactory::createBenchmarkDescription(BENCHMARK_FUNCTION type,string name)
+{
+	BenchmarkDescription description;
+	description.function_type = type;
+	description.benchmark_name = name;
+	return description;
+}
 
 Benchmark* BenchmarkFunctionFactory::createNextFunction(BENCHMARK_FUNCTION currentFunction)
 {

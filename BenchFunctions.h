@@ -12,6 +12,12 @@ const double PI = 3.14159265358979323846;
 
 enum BENCHMARK_FUNCTION {DEJONGF1,DEJONGF5,RASTRIGIN,SCHWEFEL,GRIEWANK,SALAMON,ACKLEY,CAMEL,SHUBERT,HIMMELBLAU,ROSENBROCK,DROPWAVE,EASOM,BRANINS,MICHALEWICZ,GOLDSTEIN};
 
+struct BenchmarkDescription
+{
+	BENCHMARK_FUNCTION function_type;
+	std::string benchmark_name;
+};
+
 class BenchmarkPositionGenerator
 {
 public:
@@ -56,7 +62,9 @@ public:
 	virtual double evaluate(const Vector3d& pos) = 0;
 	virtual const std::string name() = 0;
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType() = 0;
+	virtual const int dimensionality() = 0;
 	virtual const SceneConfig getSceneConfigForBenchmark() = 0;
+	virtual const double getOptimalFitness() = 0;
 	virtual const bool isOptimum(const double& fitness) = 0;
 	virtual const bool isSameUID(const int& other_uid) = 0;
 	virtual const int getUID() = 0;
@@ -71,7 +79,9 @@ public:
 	virtual double evaluate(const Vector3d& pos);
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
+	virtual const int dimensionality();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const double getOptimalFitness();
 	virtual const bool isOptimum(const double& fitness);
 	virtual const bool isSameUID(const int& other_uid);
 	virtual const int getUID();
@@ -89,7 +99,9 @@ public:
 	virtual double evaluate(const Vector3d& pos);
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
+	virtual const int dimensionality();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const double getOptimalFitness();
 	virtual const bool isOptimum(const double& fitness);
 	virtual const bool isSameUID(const int& other_uid);
 	virtual const int getUID();
@@ -108,7 +120,9 @@ public:
 	virtual double evaluate(const Vector3d& pos);
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
+	virtual const int dimensionality();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const double getOptimalFitness();
 	virtual const bool isOptimum(const double& fitness);
 	virtual const bool isSameUID(const int& other_uid);
 	virtual const int getUID();
@@ -126,7 +140,9 @@ public:
 	virtual double evaluate(const Vector3d& pos);
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
+	virtual const int dimensionality();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const double getOptimalFitness();
 	virtual const bool isOptimum(const double& fitness);
 	virtual const bool isSameUID(const int& other_uid);
 	virtual const int getUID();
@@ -144,7 +160,9 @@ public:
 	virtual double evaluate(const Vector3d& pos);
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
+	virtual const int dimensionality();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const double getOptimalFitness();
 	virtual const bool isOptimum(const double& fitness);
 	virtual const bool isSameUID(const int& other_uid);
 	virtual const int getUID();
@@ -162,7 +180,9 @@ public:
 	virtual double evaluate(const Vector3d& pos);
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
+	virtual const int dimensionality();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const double getOptimalFitness();
 	virtual const bool isOptimum(const double& fitness);
 	virtual const bool isSameUID(const int& other_uid);
 	virtual const int getUID();
@@ -180,7 +200,9 @@ public:
 	virtual double evaluate(const Vector3d& pos);
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
+	virtual const int dimensionality();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const double getOptimalFitness();
 	virtual const bool isOptimum(const double& fitness);
 	virtual const bool isSameUID(const int& other_uid);
 	virtual const int getUID();
@@ -198,7 +220,9 @@ public:
 	virtual double evaluate(const Vector3d& pos);
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
+	virtual const int dimensionality();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const double getOptimalFitness();
 	virtual const bool isOptimum(const double& fitness);
 	virtual const bool isSameUID(const int& other_uid);
 	virtual const int getUID();
@@ -216,7 +240,9 @@ public:
 	virtual double evaluate(const Vector3d& pos);
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
+	virtual const int dimensionality();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const double getOptimalFitness();
 	virtual const bool isOptimum(const double& fitness);
 	virtual const bool isSameUID(const int& other_uid);
 	virtual const int getUID();
@@ -234,7 +260,9 @@ public:
 	virtual double evaluate(const Vector3d& pos);
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
+	virtual const int dimensionality();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const double getOptimalFitness();
 	virtual const bool isOptimum(const double& fitness);
 	virtual const bool isSameUID(const int& other_uid);
 	virtual const int getUID();
@@ -252,7 +280,9 @@ public:
 	virtual double evaluate(const Vector3d& pos);
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
+	virtual const int dimensionality();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const double getOptimalFitness();
 	virtual const bool isOptimum(const double& fitness);
 	virtual const bool isSameUID(const int& other_uid);
 	virtual const int getUID();
@@ -270,7 +300,9 @@ public:
 	virtual double evaluate(const Vector3d& pos);
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
+	virtual const int dimensionality();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const double getOptimalFitness();
 	virtual const bool isOptimum(const double& fitness);
 	virtual const bool isSameUID(const int& other_uid);
 	virtual const int getUID();
@@ -288,7 +320,9 @@ public:
 	virtual double evaluate(const Vector3d& pos);
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
+	virtual const int dimensionality();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const double getOptimalFitness();
 	virtual const bool isOptimum(const double& fitness);
 	virtual const bool isSameUID(const int& other_uid);
 	virtual const int getUID();
@@ -306,7 +340,9 @@ public:
 	virtual double evaluate(const Vector3d& pos);
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
+	virtual const int dimensionality();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const double getOptimalFitness();
 	virtual const bool isOptimum(const double& fitness);
 	virtual const bool isSameUID(const int& other_uid);
 	virtual const int getUID();
@@ -324,7 +360,9 @@ public:
 	virtual double evaluate(const Vector3d& pos);
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
+	virtual const int dimensionality();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const double getOptimalFitness();
 	virtual const bool isOptimum(const double& fitness);
 	virtual const bool isSameUID(const int& other_uid);
 	virtual const int getUID();
@@ -342,7 +380,9 @@ public:
 	virtual double evaluate(const Vector3d& pos);
 	virtual const std::string name();
 	virtual const BENCHMARK_FUNCTION getBenchmarkFunctionType();
+	virtual const int dimensionality();
 	virtual const SceneConfig getSceneConfigForBenchmark();
+	virtual const double getOptimalFitness();
 	virtual const bool isOptimum(const double& fitness);
 	virtual const bool isSameUID(const int& other_uid);
 	virtual const int getUID();
@@ -358,6 +398,7 @@ class BenchmarkFunctionFactory
 public:
 	BenchmarkFunctionFactory();
 	~BenchmarkFunctionFactory(){}
+	BenchmarkDescription* getBenchmarkDescriptionArray();
 	Benchmark* createNextFunction(BENCHMARK_FUNCTION currentFunction);
 	Benchmark* createDeJongF1();
 	Benchmark* createDeJongF5();
@@ -375,6 +416,8 @@ public:
 	Benchmark* createBranins();
 	Benchmark* createMichalewicz();
 	Benchmark* createGoldstein();
+private:
+	BenchmarkDescription createBenchmarkDescription(BENCHMARK_FUNCTION type, std::string name);
 };
 
 #endif
