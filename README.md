@@ -21,3 +21,21 @@ The algorithm has the following dependances on Mac which can be installed with H
 To compile the source execute _make mac_ in the root of the directory. After compilation has completed with no errors, the algorithm can be started by executing _./gfx_mac_
 
 Program can be compiled on Linux and Mac OS X 10.8. Tested **2013-04-20**
+
+The program responds to the following keyboard shortcuts:
+
+- **F1** : Clears the chart and disables/enables drawing of the particles
+- **F2** : Disables/Enables the drawing the personal best of each particle (best particles are coloured white)
+- **F3** : Disables/Enables the drawing the current position of each particle
+- **F4** : Reset the algorithm and advances to the next function
+- **F5** : Reinitialises the algorithm with the standard PSO
+- **F6** : Reinitialises the algorithm with the PSO that uses Inertia
+- **F7** : Reinitialises the algorithm with the PSO that uses Constriction Coefficient
+- **F8** : Resets the view perspective to the default for the current benchmark
+- **F12**: Changes the shape the particles use
+- **a** : Moves view point left
+- **d** : Moves view point right
+- **w** : Moves view point forward
+- **s** : Moves view point backward
+
+In addtion to the keyboard the mouse can be used the "Look around". One can also zoom in and out with the mousewheel.
