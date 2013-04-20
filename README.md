@@ -20,4 +20,4 @@ The algorithm has the following dependances on Mac which can be installed with H
 
 To compile the source execute _make mac_ in the root of the directory. After compilation has completed with no errors, the algorithm can be started by executing _./gfx_mac_
 
-As of **2013-04-20** the algorithm is Linux specific. Next order of business it to get it to run on Mac Os X
+Program can be compiled on Linux and Mac OS X 10.8. Tested **2013-04-20**
