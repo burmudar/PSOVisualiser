@@ -6,9 +6,10 @@ The algorithm might not be entirely correct in finding some of the optimums, but
 
 The algorithm has the following dependances:
 
-    __libsdl-dev__
-    __libboost-dev__
+- **libsdl-dev**
+
+- **libboost-dev**
 
 To compile the source execute _make_ in the root of the directory. After compilation has completed with no errors, the algorithm can be started by executing _./gfxinterface_
 
-As of 2013-04-20 the algorithm is Linux specific. Next order of business it to get it to run on Mac Os X
+As of **2013-04-20** the algorithm is Linux specific. Next order of business it to get it to run on Mac Os X
