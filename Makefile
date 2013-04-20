@@ -1,19 +1,23 @@
-CC = gcc -Wall -ansi
+CC = gcc -Wall -ansi -lstdc++
 
 all:
-	$(CC) gfxinterface.cpp PSOStructures.cpp gfxstructures.cpp BenchFunctions.cpp -g -o gfxinterface -lGL -lGLU `sdl-config --cflags --libs`
+	@echo Building Graphical PSO for Linux
+	$(CC) gfxinterface.cpp PSOStructures.cpp gfxstructures.cpp BenchFunctions.cpp -g -o gfx_unix -lGL -lGLU `sdl-config --cflags --libs`
+	@echo Building Graphical PSO for Linux Complete
 
 console:
 	@echo Building Console version
-	$(CC) PSOMain.cpp PSOStructures.cpp gfxstructures.cpp BenchFunctions.cpp -g -o psomain -lGL -lGLU `sdl-config --cflags --libs`
+	$(CC) PSOMain.cpp PSOStructures.cpp gfxstructures.cpp BenchFunctions.cpp -g -o pso_console_unix -lGL -lGLU `sdl-config --cflags --libs`
 	@echo Building Console version Complete
 
 mac:
-	@echo Building for Mac
-	$(CC) gfxinterface.cpp -g -o gfxinterface `sdl-config --cflags --libs` -I /opt/local/include/ -I . -framework OpenGL
-	@echo Building for Mac Complete
+	@echo Building for Graphical PSO for Mac
+	$(CC) -Wall -ansi -lstdc++ gfxinterface.cpp PSOStructures.cpp gfxstructures.cpp BenchFunctions.cpp -g -o gfx_mac `sdl-config --cflags --libs` -framework OpenGL
+	@echo Building for Graphical PSO for Mac Complete
 
 clean:
 	@echo Cleaning up...
-	@rm gfxinterface
+	@rm gfx_mac
+	@rm gfx_unix
+	@rm pso_console_unix
 	@echo Done.

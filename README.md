@@ -4,12 +4,20 @@ The aim of this program was just to visually see how the algorithm operates on a
 
 The algorithm might not be entirely correct in finding some of the optimums, but the visual effect is cool.
 
-The algorithm has the following dependances:
+The algorithm has the following dependances on Linux which can be installed via apt-get:
 
 - **libsdl-dev**
 
 - **libboost-dev**
 
 To compile the source execute _make_ in the root of the directory. After compilation has completed with no errors, the algorithm can be started by executing _./gfxinterface_
+
+The algorithm has the following dependances on Mac which can be installed with Homebrew:
+
+- **brew install sdl**
+
+- **brew install boost**
+
+To compile the source execute _make mac_ in the root of the directory. After compilation has completed with no errors, the algorithm can be started by executing _./gfx_mac_
 
 As of **2013-04-20** the algorithm is Linux specific. Next order of business it to get it to run on Mac Os X
