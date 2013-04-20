@@ -3,7 +3,7 @@
 #include "gfxstructures.h"
 #include "BenchFunctions.h"
 #include "PSOStructures.h"
-#include "../ChartPlotter/Chart2DPlotter.cpp"
+#include "ChartPlotter/Chart2DPlotter.cpp"
 #include <sstream>
 #include <fstream>
 #include <vector>
@@ -40,7 +40,7 @@ int initial_bench_uid = -1;
 //if you take out inertia (the 0.5) the swarm seems to explore more, but then it doens't find
 //the optimum for Schwefel function
 PSOFactory* pso_factory;
-GraphicalPSOVisualizer *pso;  
+GraphicalPSOVisualizer *pso;
 
 GLuint base;
 GLuint texture[1];
@@ -73,7 +73,7 @@ void ReSizeGLScene(int width,int height)
 	glLoadIdentity();
 
 	gluPerspective(45.0f,ratio,0.1f,100.0f);
-	
+
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
@@ -170,7 +170,7 @@ int InitGL()
 
     glBlendFunc( GL_SRC_ALPHA, GL_ONE );
 	glShadeModel(GL_SMOOTH);
-	
+
 	setPerspective();
 
 	return TRUE;
@@ -199,7 +199,7 @@ void keyPressed(SDL_keysym *keysym)
 			Quit(0);
 			break;
 		case SDLK_F1:
-			draw = !draw;	
+			draw = !draw;
 			chart.Clear();
 			break;
 		case SDLK_F2:
@@ -234,7 +234,7 @@ void keyPressed(SDL_keysym *keysym)
 			break;
 		case SDLK_F8:
 			{
-				doBenchmarkSetup();	
+				doBenchmarkSetup();
 			}
 			break;
 		case SDLK_F12:
@@ -472,9 +472,9 @@ void DrawGLScene()
 	//curSize = sizes[0]+5;
 	//glPointSize(curSize);
 	//Draw the particles
-	pso->draw(mode,shape);	
+	pso->draw(mode,shape);
 	//draw HUD
-	
+
 	if (mode == GL_RENDER)
 	{
 		HUDMode(true);
@@ -528,7 +528,7 @@ int doSelect(const double &x,const double &y)
 {
 	GLuint buff[64] = {0};
 	GLint hits,view[4];
-	
+
 	glSelectBuffer(64,buff);
 
 	glRenderMode(GL_SELECT);
@@ -547,10 +547,10 @@ int doSelect(const double &x,const double &y)
 		DrawGLScene();
 		glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
-    hits = glRenderMode(GL_RENDER);	
+    hits = glRenderMode(GL_RENDER);
 	//get nearest hit
-	float minz = buff[0*4+1];	
-	int ruid = buff[0*4+3];   
+	float minz = buff[0*4+1];
+	int ruid = buff[0*4+3];
 	for(int i = 0; i < hits;i++)
 	{
 		if (minz > buff[i*4+1])
@@ -573,7 +573,7 @@ Benchmark* setupFunctionForPSO(GraphicalPSOVisualizer* gpso)
 	}
 	else
 	{
-		function = gpso->getFunction();	
+		function = gpso->getFunction();
 	}
 	return function;
 }
@@ -659,7 +659,7 @@ int main(int argc, char** argv)
 		cout << "Error initializing OpenGL" << endl;
 		Quit(1);
 	}
-	int i = 1;	
+	int i = 1;
 	chart.Plot(1,1);
 	//ofstream graphfile;
 	//graphfile.open("function.txt");
