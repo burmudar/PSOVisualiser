@@ -39,3 +39,9 @@ The program responds to the following keyboard shortcuts:
 - **s** : Moves view point backward
 
 In addtion to the keyboard the mouse can be used the "Look around". One can also zoom in and out with the mousewheel.
+
+TODO:
+=====
+
+- Rewrite gfxinterface.cpp to be more OO and less procedural
+- Add test cases
